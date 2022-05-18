@@ -8,3 +8,23 @@ input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
     transition: background-color 5000s ease-in-out 0s;
 }
+
+.bg-green-1000 {
+    background: rgba(0, 70, 0, 1);
+}
+
+.border-green-1000{
+    border-color: rgba(0, 70, 0, 1)
+}
+
+.text-green-1000{
+    color: rgba(0, 70, 0, 1);
+}
+
+.bg-yellow-navbar{
+    background: rgba(255, 255, 58, 1);
+}
+
+.text-yellow-navbar {
+    color: rgba(255, 255, 58, 1);
+}
