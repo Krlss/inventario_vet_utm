@@ -1,4 +1,4 @@
-<div :class="{'md:w-16': !open}" class="min-h-screen bg-green-1000 md:w-16 w-72 hidden md:flex transition-all absolute z-10" x-data="{ open: false }">
+<div :class="{'md:w-16': !open}" class="min-h-screen bg-green-1000 md:w-16 w-72 hidden md:flex sidebar" x-data="{ open: false }">
 
     <!-- Open sidebar -->
     <div :class="{'items-center': !open}" class="flex flex-col items-center w-full p-2">

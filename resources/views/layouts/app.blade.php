@@ -1,41 +1,28 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+@extends('adminlte::page')
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+@section('title', 'Dashboard')
 
-    <title>{{ config('app.name', 'SINVET') }}</title>
-    <link rel="shortcut icon" href="{{ asset('favicons/favicon.ico') }}" />
+@section('content_header')
+@yield('content_header')
+@stop
 
-    <!-- Fonts -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
+@section('content')
+@yield('content')
+@stop
 
-    <!-- Styles -->
-    <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+@section('footer')
+<div class="float-right d-none d-md-block">
+    <b>Version</b> 1.0.0
+</div>
+<strong>Copyright © Facultad de Ciencias informáticas UTM.</strong> Todos los derechos reservados.
+@endsection
 
-    <!-- Scripts -->
-    <script src="{{ mix('js/app.js') }}" defer></script>
-</head>
+@section('css')
+<link rel="stylesheet" href="/css/admin_custom.css">
+@stop
 
-<body>
-
-    @include('layouts.navbar')
-
-    <div class="flex flex-row">
-        @include('layouts.sidebar')
-
-        <div class="py-5 pr-5 md:pl-20 pl-5 w-full">
-            <!-- Content page -->
-            @yield('content')
-        </div>
-
-    </div>
-
-
-</body>
-
-@stack('scripts_lib')
-
-</html>
+@section('js')
+<script>
+    console.log('Hi!');
+</script>
+@stop
