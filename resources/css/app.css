@@ -10,15 +10,15 @@ input:-webkit-autofill:active {
 }
 
 .bg-green-1000 {
-    background: rgba(0, 70, 0, 1);
+    background: #016831;
 }
 
 .border-green-1000 {
-    border-color: rgba(0, 70, 0, 1)
+    border-color: #016831;
 }
 
 .text-green-1000 {
-    color: rgba(0, 70, 0, 1);
+    color: #016831;
 }
 
 .bg-yellow-navbar {
@@ -31,7 +31,7 @@ input:-webkit-autofill:active {
 
 .turbolinks-progress-bar {
     height: 2px;
-    background-color: rgba(0, 70, 0, 1)
+    background-color: #016831;
 }
 
 .tab-active {

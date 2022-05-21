@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->timestamp('expire')->nullable()->after('id_type');
+            $table->timestamp('expire')->nullable()->after('stock_min');
         });
     }
 

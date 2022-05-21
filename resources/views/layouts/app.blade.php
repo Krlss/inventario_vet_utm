@@ -18,11 +18,9 @@
 @endsection
 
 @section('css')
-<link rel="stylesheet" href="/css/admin_custom.css">
+@stack('css_lib')
 @stop
 
 @section('js')
-<script>
-    console.log('Hi!');
-</script>
+@stack('scripts_lib')
 @stop

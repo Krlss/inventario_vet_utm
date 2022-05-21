@@ -4787,8 +4787,7 @@ input[type=submit].btn-block {
 
 .nav-pills .nav-link.active,
 .nav-pills .show>.nav-link {
-    color: #000;
-    background-color: #ffff3ae6;
+    color: #fff; 
 }
 
 .nav-fill .nav-item,

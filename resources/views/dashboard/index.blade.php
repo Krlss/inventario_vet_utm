@@ -8,10 +8,12 @@
 <div class="flex flex-col items-center">
     <div class="grid md:grid-cols-2 grid-cols-1 gap-5 w-full">
 
-        <div class="p-4 bg-gray-100 border border-gray-400 flex flex-col">
+        <div class="p-4 bg-gray-100 border border-gray-400">
             <div class="text-2xl font-bold mb-4">{{ __('Modules') }}</div>
-            <x-link-module name="{{__('Inventory')}}" desc="{{__('Manage products and equipment')}}" route="{{ route('dashboard.inventory.index') }}" />
-            <x-link-module name="{{__('Reports')}}" desc="{{ __('Information for decision making')}}" route="#" />
+            <div class="flex flex-wrap gap-2">
+                <x-link-module name="{{__('Inventory')}}" desc="{{__('Manage products and equipment')}}" route="{{ route('dashboard.inventory.index') }}" />
+                <x-link-module name="{{__('Reports')}}" desc="{{ __('Information for decision making')}}" route="#" />
+            </div>
         </div>
 
         <div class="bg-gray-100 border border-gray-400 p-4">
@@ -23,7 +25,7 @@
                 <x-metric-home title="{{__('Total Income')}}" value="45654" />
                 <x-metric-home title="{{__('Total Egress')}}" value="321345" />
                 <x-metric-home title="{{__('Total receipts generated')}}" value="45678974563" />
-            </div> 
+            </div>
 
         </div>
     </div>

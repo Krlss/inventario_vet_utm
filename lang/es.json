@@ -1,4 +1,9 @@
 {
+    "Category": "Categoría",
+    "Type": "Tipo",
+    "All": "Todo",
+    "Product name": "Nombre del producto",
+    "Search to product name": "Buscar por el nombre del producto...",
     "Title Home": "SISTEMA DE INVENTARIO Y FARMACIA",
     "Total Products": "Total de productos",
     "Recived Today": "Recibos de Hoy",

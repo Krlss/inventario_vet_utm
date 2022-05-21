@@ -1,3 +1,3 @@
-<li class="{{ Request::is($routeCurrent) ? '' : '' }} mr-1">
-    <a class="{{ Request::is($routeCurrent) ? 'font-bold cursor-default' : '' }} bg-white inline-block py-2 px-4" @if(!Request::is($routeCurrent)) href="{{ route($routeTo) }}" @endif>{{$title}}</a>
+<li class="{{ Request::is($routeCurrent) ? '' : '' }} md:w-full w-auto">
+    <a class="{{ Request::is($routeCurrent) ? 'font-bold cursor-default bg-green-1000 text-white' : 'hover:bg-gray-100 hover:text-black' }} text-black inline-block py-2 px-4 hover:no-underline w-full" @if(!Request::is($routeCurrent)) href="{{ route($routeTo) }}" @endif>{{$title}}</a>
 </li>

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Models\Categories;
 use App\Models\Products;
+use App\Models\Types;
 use Illuminate\Http\Request;
 
 class InventoryController extends Controller
@@ -11,9 +13,13 @@ class InventoryController extends Controller
 
     public function index()
     {
-
         $products = Products::all();
-        return view('dashboard.inventory.index', compact('products'));
+
+        $types = Types::all();
+
+        $categories = Categories::all();
+
+        return view('dashboard.inventory.index', compact('products', 'types', 'categories'));
     }
 
     public function create()
@@ -44,5 +50,9 @@ class InventoryController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function LoadData()
+    {
     }
 }
