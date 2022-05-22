@@ -24,6 +24,7 @@
         @endif
         <span @if(config('adminlte.usermenu_image')) class="d-none d-md-inline" @endif>
             {{ Auth::user()->name }} {{Auth()->user()->last_name1}}
+        <li></li>
         </span>
     </a>
 

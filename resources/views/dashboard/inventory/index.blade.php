@@ -36,33 +36,20 @@
 
         </div>
 
-        <table id="table" class="table table-striped table-bordered table-hover rounded-lg">
+        <table id="table" class="table table-hover">
             <thead class="bg-black text-white">
                 <tr>
-                    <th>id</th>
-                    <th>name</th>
-                    <th>amount</th>
-                    <th>cost</th>
-                    <th>stock</th>
-                    <th>stock min</th>
-                    <th>expire</th>
-                    <th>created_at</th>
+                    <th>{{__('Code')}}</th>
+                    <th>{{__('Name')}}</th>
+                    <th>{{__('Amount')}}</th>
+                    <th>{{__('Cost')}}</th>
+                    <th>{{__('Categories')}}</th>
+                    <th>{{__('Types')}}</th>
+                    <th>{{__('Expire')}}</th>
+                    <th>{{__('created_at')}}</th>
                 </tr>
             </thead>
-            <tbody>
-                @foreach($products as $product)
-                <tr>
-                    <td>{!! $product->id !!}</td>
-                    <td>{!! $product->name !!}</td>
-                    <td>{!! $product->amount !!}</td>
-                    <td>{!! $product->cost !!}</td>
-                    <td>{!! $product->stock !!}</td>
-                    <td>{!! $product->stock_min !!}</td>
-                    <td>{!! $product->expire !!}</td>
-                    <td>{!! $product->created_at !!}</td>
-                </tr>
-                @endforeach
-            </tbody>
+            <tbody></tbody>
         </table>
     </div>
 </div>
@@ -76,20 +63,145 @@
 <script src="{{ asset('plugins/datatable/responsive.bootstrap4.min.js') }}"></script>
 <script src="{{ asset('json/table.json') }}"></script>
 <script type="text/javascript">
-    $('#table').DataTable({
-        columnDefs: [{
-            orderable: false,
-            targets: -1,
-        }],
-        lengthChange: false,
-        processing: true,
-        searching: false,
-        responsive: true,
-        autoWidth: false,
-        "language": len,
-        "ajax": {
-            "url": "{{route('dashboard.inventory.index')}}",
-        }
+    fetch_data({
+        type: '',
+        category: '',
+        search: ''
     });
+
+    function fetch_data(params) {
+        $('#table').DataTable({
+            processing: true,
+            serverSide: true,
+            searching: false,
+            responsive: true,
+            autoWidth: false,
+            lengthChange: false,
+            dom: 'lrtip',
+            columnDefs: [{
+                orderable: false,
+                targets: -1,
+            }],
+            language: len,
+            ajax: {
+                url: "{{ route('dashboard.inventory.index') }}",
+                data: {
+                    type: params.type,
+                    category: params.category,
+                    search: params.search
+                }
+            },
+            columns: [{
+                    data: 'id',
+                },
+                {
+                    data: 'name',
+                },
+                {
+                    data: 'amount',
+                },
+                {
+                    data: 'cost',
+                },
+                {
+                    data: 'categories',
+                    orderable: false,
+                    render: function(data, type, row, meta) {
+                        var small = '';
+                        data.forEach(e => {
+                            small += `<span class='badge badge-primary truncate max-w-100px text-left'>${e.name}</span><br>`;
+                        })
+                        return small;
+                    }
+                },
+                {
+                    data: 'types',
+                    orderable: false,
+                    render: function(data, type, row, meta) {
+                        var small = '';
+                        data.forEach(e => {
+                            small += `<span class='badge badge-primary truncate max-w-100px text-left'>${e.name}</span><br>`;
+                        })
+                        return small;
+                    }
+                },
+                {
+                    data: 'expire',
+                },
+                {
+                    data: 'created_at',
+                }
+            ]
+        });
+    }
+
+    $('#type').change(function() {
+        var type_id = $('#type').val();
+        var category_id = $('#category').val();
+        $('#search').val('');
+        $('#table').DataTable().destroy();
+        fetch_data({
+            search: '',
+            category: category_id,
+            type: type_id
+        })
+    })
+
+    $('#category').change(function() {
+        var type_id = $('#type').val();
+        var category_id = $('#category').val();
+        $('#search').val('');
+        $('#table').DataTable().destroy();
+        fetch_data({
+            search: '',
+            category: category_id,
+            type: type_id
+        })
+    })
+
+    $('#search').keyup(function() {
+        var type_id = $('#type').val();
+        var category_id = $('#category').val();
+        var search = $('#search').val();
+        $('#table').DataTable().destroy();
+        fetch_data({
+            search: search,
+            category: category_id,
+            type: type_id
+        })
+    })
+
+    /*  $('.filter-input').keyup(function() {
+         table.column($(this).data('column'))
+             .search($(this).val())
+             .draw();
+     });
+     // dropdown
+     $('.filter-select').change(function() {
+         table.column($(this).data('column'))
+             .search($(this).val())
+             .draw();
+     }); */
 </script>
 @endpush
+
+<!-- @foreach($products as $product)
+<tr>
+    <td>{!! $product->id !!}</td>
+    <td>{!! $product->name !!}</td>
+    <td>{!! $product->amount !!}</td>
+    <td>{!! $product->cost !!}</td>
+    <td>{!! $product->categories->map(function($category) {
+        return "<span class='badge badge-primary truncate max-w-100px text-left'>".$category->name."</span>";
+        })->implode('<br>') !!}</td>
+    </td>
+
+    <td>{!! $product->types->map(function($type) {
+        return "<span class='badge badge-primary truncate max-w-100px text-left'>".$type->name."</span>";
+        })->implode('<br>') !!}</td>
+    </td>
+
+    <td>{!! $product->expire !!}</td>
+    <td>{!! $product->created_at !!}</td>
+</tr>
+@endforeach -->

@@ -22,4 +22,5 @@ Route::middleware([
     Route::resource('/products-ingress', ProductsIngress::class)->names('dashboard.products-ingress');
     Route::resource('/products-egress', ProductsEgress::class)->names('dashboard.products-egress');
     Route::resource('/products', Products::class)->names('dashboard.products');
+    //Route::get('dataTableProducts', [InventoryController::class, 'dataTable'])->name('dataTableProducts');
 });

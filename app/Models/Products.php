@@ -10,9 +10,9 @@ class Products extends Model
     use HasFactory;
 
 
-    public function categorys()
+    public function categories()
     {
-        return $this->hasMany(Categories::class);
+        return $this->belongsToMany(Categories::class, 'products_categories')->withPivot('categories_id');
     }
 
     public function types()
