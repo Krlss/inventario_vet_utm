@@ -1,4 +1,13 @@
-{
+{ 
+    "Amount": "Cantidad",
+    "Cost": "Precio",
+    "Stock": "Stock",
+    "Min Stock": "Stock mínimo",
+    "Categories": "Categorías",
+    "Types": "Tipos",
+    "Expire": "Expiración",
+    "Created_at": "Creado hace",
+    "Updated_at": "Actualizado hace",
     "Category": "Categoría",
     "Type": "Tipo",
     "All": "Todo",

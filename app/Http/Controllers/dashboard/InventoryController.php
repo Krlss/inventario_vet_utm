@@ -7,17 +7,41 @@ use App\Models\Products;
 use App\Models\Categories;
 use App\Models\Types;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Yajra\DataTables\DataTables;
 
 class InventoryController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $products = Products::all();
 
-        $types = Types::all();
+        if ($request->ajax()) {
+            $data = Products::with('categories', 'types')
+                ->when($request->category, function ($query) use ($request) {
+                    $query->whereRelation('categories', 'categories.id', '=', $request->category);
+                })
+                ->when($request->type, function ($query) use ($request) {
+                    $query->orWhereRelation('types', 'types.id', '=', $request->type);
+                })
+                ->when($request->search, function ($query) use ($request) {
+                    $query->where('name', 'LIKE', '%' .  ucwords(strtolower($request->search)) . '%');
+                })
+                ->get();
+            return datatables()->of($data)
+                ->editColumn('created_at', function (Products $product) {
+                    return $product->created_at->diffForHumans();
+                })->editColumn('expire', function (Products $product) {
+                    $date = date_create($product->expire);
+                    return date_format($date, "d/m/Y");
+                })->toJson();
+        } else {
+            $products = [];
 
-        $categories = Categories::all();
+            $types = Types::orderBy('name', 'asc')->get();
+
+            $categories = Categories::orderBy('name', 'asc')->get();
+        }
 
         return view('dashboard.inventory.index', compact('products', 'types', 'categories'));
     }
