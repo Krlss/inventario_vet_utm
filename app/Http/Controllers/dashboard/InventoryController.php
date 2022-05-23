@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\dashboard;
 
 use App\Http\Controllers\Controller;
-use App\Models\Categories;
 use App\Models\Products;
+use App\Models\Categories;
 use App\Models\Types;
 use Illuminate\Http\Request;
 
