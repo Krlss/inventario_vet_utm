@@ -19,4 +19,9 @@ class Products extends Model
     {
         return $this->belongsToMany(Types::class, 'products_types');
     }
+
+    public function kardexes()
+    {
+        return $this->belongsToMany(Kardexes::class, 'products_kardexes')->withPivot('kardexes_id');
+    }
 }
