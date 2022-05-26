@@ -1346,7 +1346,7 @@ input:-webkit-autofill:active {
 .filter-select {
     max-width: 200px;
 }
-.max-w-100px{
+.max-w-100px {
     max-width: 100px;
 }
 .hover\:border-gray-300:hover {
