@@ -1,4 +1,11 @@
 { 
+    "Detail": "Detalle",
+    "Date": "Fecha",
+    "Undefined": "Sin definir",
+    "Unit": "Unidad de Medida",
+    "N° transition": "N° Transacción",
+    "Access a deposit order registered in the system": "Acceda a una orden de ingreso registrada en el sistema",
+    "Income Visualization": "Visualización de ingresos",
     "Search for the products and equipment registered in the system": "Busque los productos y equipamientos registrados en el sistema",
     "History of realized income and creation of new income from medical products and equipment": "Historial de ingresos realizados y creación de nuevos ingresos de productos y equipamiento médico",
     "New Income": "Nuevo Ingreso",

@@ -44,11 +44,11 @@
                     <th>{{__('Code')}}</th>
                     <th>{{__('Name')}}</th>
                     <th>{{__('Amount')}}</th>
+                    <th>{{__('Unit')}}</th>
                     <th>{{__('Cost')}}</th>
                     <th>{{__('Types')}}</th>
                     <th>{{__('Categories')}}</th>
                     <th>{{__('Expire')}}</th>
-                    <th>{{__('Created_at')}}</th>
                 </tr>
             </thead>
             <tbody></tbody>
@@ -103,6 +103,9 @@
                     data: 'amount',
                 },
                 {
+                    data: 'unit',
+                },
+                {
                     data: 'cost',
                 },
                 {
@@ -130,9 +133,6 @@
                 {
                     data: 'expire',
                 },
-                {
-                    data: 'created_at',
-                }
             ]
         });
     }

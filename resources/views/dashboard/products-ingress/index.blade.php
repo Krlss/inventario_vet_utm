@@ -89,7 +89,8 @@
                 data: {
                     search: params.search,
                     date: params.date
-                }
+                },
+                type: 'GET'
             },
             columns: [{
                     data: 'id',
@@ -107,10 +108,7 @@
                     }
                 },
                 {
-                    data: null,
-                    render: function(data, type, row, meta) {
-                        return 'Ver'
-                    }
+                    data: 'link'
                 }
             ]
         });
