@@ -42,4 +42,11 @@ class ProductsIngress extends Controller
         $kardex = kardexes::with('products')->find($id);
         return view('dashboard.products-ingress.show', compact('kardex'));
     }
+
+    function create()
+    {
+        $count = kardexes::where('type', 'income')->count();
+
+        return view('dashboard.products-ingress.create', compact('count'));
+    }
 }

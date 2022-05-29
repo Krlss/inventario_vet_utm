@@ -18,7 +18,7 @@
 
 @section('content')
 
-<x-card-kardex id="{{$kardex->id}}" date="{{$kardex->created_at}}" detail="{{$kardex->detail}}" />
+<x-card-kardex id="{{$kardex->id}}" date="{{$kardex->created_at}}" detail="{{$kardex->detail}}" readonly />
 
 <table id="table" class="table table-hover table-striped">
     <thead class="bg-black text-white">

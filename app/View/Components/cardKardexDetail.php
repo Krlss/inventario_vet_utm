@@ -12,13 +12,20 @@ class cardKardexDetail extends Component
     public $full;
     public $two;
 
-    public function __construct($label, $value, $class = null, $full = null, $two = null)
+    public $date;
+    public $readonly;
+    public $autofocus;
+
+    public function __construct($label, $value, $class = null, $full = null, $two = null, $date = null, $readonly = null, $autofocus = null)
     {
         $this->label = $label;
         $this->value = $value;
         $this->class = $class ?? '';
         $this->full = $full ?? false;
         $this->two = $two ?? false;
+        $this->date = $date ?? false;
+        $this->readonly = $readonly ?? false;
+        $this->autofocus = $autofocus ?? false;
     }
 
     public function render()
