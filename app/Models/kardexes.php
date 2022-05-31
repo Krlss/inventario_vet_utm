@@ -17,6 +17,6 @@ class kardexes extends Model
 
     public function products()
     {
-        return $this->belongsToMany(Products::class, 'products_kardexes');
+        return $this->belongsToMany(Products::class, 'products_kardexes')->withPivot('quantity');
     }
 }

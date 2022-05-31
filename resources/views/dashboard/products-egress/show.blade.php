@@ -9,18 +9,16 @@
 @section('content_header')
 <div class="flex flex-col justify-between md:items-center items-start md:flex-row gap-2">
     <div class="flex flex-col">
-        <div class="text-2xl font-extrabold">{{ __('Income Visualization') }}</div>
-        <span class="text-bold">{{__('Access a deposit order registered in the system')}}</span>
+        <div class="text-2xl font-extrabold">{{ __('Expense Visualization') }}</div>
+        <span class="text-bold">{{__('Access a discharge order registered in the system')}}</span>
     </div>
 
     <div class="flex items-center justify-center gap-1">
-        <a href="{{route('dashboard.products-ingress.create')}}" class="bg-green-1000 py-2 px-4 hover:bg-green-900 rounded-md text-white font-medium hover:no-underline">
-            {{__('New Income')}}
+        <a href="{{route('dashboard.products-egress.create')}}" class="bg-green-1000 py-2 px-4 hover:bg-green-900 rounded-md text-white font-medium hover:no-underline">
+            {{__('New Expenses')}}
         </a>
-        <a href="{{route('dashboard.products-ingress.index')}}" class="bg-red-700 text-white py-2 px-4 hover:bg-red-800 rounded-md font-medium hover:no-underline">{{__('Back')}}</a>
+        <a href="{{route('dashboard.products-egress.index')}}" class="bg-red-700 text-white py-2 px-4 hover:bg-red-800 rounded-md font-medium hover:no-underline">{{__('Back')}}</a>
     </div>
-
-
 </div>
 @endsection
 
@@ -42,7 +40,7 @@
             <th>{{__('Name')}}</th>
             <th>{{__('Unit')}}</th>
             <th>{{__('Amount')}}</th>
-            <th>{{__('Amount')}}+</th>
+            <th>{{__('Amount')}}-</th>
             <th>{{__('Stock')}}</th>
             <th>{{__('Type')}}</th>
             <th>{{__('Category')}}</th>

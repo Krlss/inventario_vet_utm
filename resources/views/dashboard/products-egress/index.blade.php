@@ -24,7 +24,7 @@
     <div class="card-body pt-0 mt-0">
 
         <div class="text-center">
-            <span>{{__('History of realized income and creation of new income from medical products and equipment')}}</span>
+            <span>{{__('History of expenses made and creation of new expenses of products and medical equipment')}}</span>
         </div>
 
         <div class="flex md:flex-row flex-col justify-between md:items-end items-start gap-2 mb-2">
@@ -33,17 +33,18 @@
 
             <div class="flex xs:items-end items-start justify-between w-full xs:flex-row flex-col gap-2">
                 <x-input-date label="Fecha" element="date" />
-                <a href="{{ route('dashboard.products-ingress.create') }}" class="bg-green-1000 text-white py-2 px-4 hover:bg-green-900 rounded-md font-medium hover:no-underline">
-                    {{__('New Income')}}
+                <a href="{{ route('dashboard.products-egress.create') }}" class="bg-green-1000 text-white py-2 px-4 hover:bg-green-900 rounded-md font-medium hover:no-underline">
+                    {{__('New Expenses')}}
                 </a>
             </div>
+
 
         </div>
 
         <table id="table" class="table table-hover table-striped">
             <thead class="bg-black text-white">
                 <tr>
-                    <th>{{__('N° Income')}}</th>
+                    <th>{{__('N° Expenses')}}</th>
                     <th>{{__('Date/Time')}}</th>
                     <th>{{__('Reason')}}</th>
                     <th>{{__('N° Products')}}</th>
@@ -87,7 +88,7 @@
             }],
             language: len,
             ajax: {
-                url: "{{ route('dashboard.products-ingress.index') }}",
+                url: "{{ route('dashboard.products-egress.index') }}",
                 data: {
                     search: params.search,
                     date: params.date

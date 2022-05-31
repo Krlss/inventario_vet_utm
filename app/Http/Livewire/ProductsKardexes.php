@@ -14,9 +14,13 @@ class ProductsKardexes extends Component
     public function mount($products, $type)
     {
 
-
-        $this->allProducts = Products::where('stock', '>', 0)->orderBy('name', 'asc')->get();
-
+        if ($type == 'egress') {
+            $this->allProducts = Products::where('stock', '>', 0)->orderBy('name', 'asc')->get();
+        } elseif ($type == 'ingress') {
+            $this->allProducts = Products::orderBy('name', 'asc')->get();
+        } else {
+            $this->allProducts = [];
+        }
 
         /* products tiene la cantidad de productos agregados 
             tengan o no datos (Haber seleccionado el producto o poner una cantidad válida).

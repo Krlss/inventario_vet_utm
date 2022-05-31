@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\dashboard;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\KardexesRequest;
+use App\Http\Requests\KardexesIngressRequest;
 use App\Models\kardexes;
 use App\Models\Products;
 use Illuminate\Http\Request;
@@ -54,8 +54,7 @@ class ProductsIngress extends Controller
         return view('dashboard.products-ingress.create', compact('count'));
     }
 
-    //store function
-    function store(KardexesRequest $request)
+    function store(KardexesIngressRequest $request)
     {
         try {
 
@@ -79,14 +78,14 @@ class ProductsIngress extends Controller
                 }
 
                 $product->save();
-                $kardex->products()->attach($product_id);
+                $kardex->products()->attach($product_id, ['quantity' => $quantity]);
             }
 
             DB::commit();
 
-            return redirect()->route('dashboard.products-ingress.index')->with('success', __('The entry of products has been registered'));
+            return redirect()->route('dashboard.products-ingress.show', $kardex)->with('success', __('The entry of products has been registered'));
         } catch (\Exception $e) {
-            return redirect()->route('dashboard.products-ingress.index')->with('error', __('Unable to register product entry'));
+            return redirect()->route('dashboard.products-ingress.create')->with('error', __('Unable to register product entry'));
         }
     }
 }
