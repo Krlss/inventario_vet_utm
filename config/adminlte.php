@@ -128,7 +128,7 @@ return [
     'classes_content_header' => '',
     'classes_content' => '',
     'classes_sidebar' => '',
-    'classes_sidebar_nav' => '',
+    'classes_sidebar_nav' => 'fixed',
     'classes_topnav' => 'navbar-yellow navbar-light',
     'classes_topnav_nav' => 'navbar-expand',
     'classes_topnav_container' => 'container',
@@ -240,17 +240,17 @@ return [
         ],
 
         // Sidebar items:
-         [
-             'text' => 'Menú',
-             'icon' => 'fa fa-home',
-             'route' => 'dashboard',
-             'active' => ['']    
-         ],
-         [
-             'text' => 'Productos por expirar',
-             'icon' => 'fa fa-info-circle',
-             'url' => '#'
-         ]
+        [
+            'text' => 'Menú',
+            'icon' => 'fa fa-home',
+            'route' => 'dashboard',
+            'active' => ['']
+        ],
+        [
+            'text' => 'Productos por expirar',
+            'icon' => 'fa fa-info-circle',
+            'url' => '#'
+        ]
     ],
 
     /*
