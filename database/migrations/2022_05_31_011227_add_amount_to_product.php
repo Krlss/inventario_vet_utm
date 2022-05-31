@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->string('unit')->nullable()->after('name');
+            $table->integer('amount')->nullable()->before('stock_min');
         });
     }
 

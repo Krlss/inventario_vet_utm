@@ -71,7 +71,13 @@ class ProductsIngress extends Controller
                 $product_id = $product['product_id'];
                 $quantity = $product['quantity'];
                 $product = Products::find($product_id);
-                $product->stock += $quantity;
+
+                if ($product->amount > 0) {
+                    $product->stock += $quantity * $product->amount;
+                } else {
+                    $product->stock += $quantity;
+                }
+
                 $product->save();
                 $kardex->products()->attach($product_id);
             }
@@ -80,7 +86,7 @@ class ProductsIngress extends Controller
 
             return redirect()->route('dashboard.products-ingress.index')->with('success', __('The entry of products has been registered'));
         } catch (\Exception $e) {
-            return redirect()->route('dashboard.products-ingress.index')->with('error', 'No se ha podido registrar el ingreso de productos');
+            return redirect()->route('dashboard.products-ingress.index')->with('error', __('Unable to register product entry'));
         }
     }
 }

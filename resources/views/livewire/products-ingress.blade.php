@@ -11,7 +11,7 @@
         <table class="table" id="products_table">
             <thead>
                 <tr>
-                    <th>{{__('Product Name || Stock')}}</th>
+                    <th>{{__('Product Name | Stock | Unit | Amount')}}</th>
                     <th>{{__('Quantity')}}</th>
                     <th></th>
                 </tr>
@@ -24,7 +24,7 @@
                             <option value="">{{__('Choose a product')}}</option>
                             @foreach ($allProducts as $product)
                             <option value="{{ $product->id }}">
-                                {{ $product->name }} x({{ $product->stock }})
+                                {{ $product->name }}, {{ $product->stock }}, {{ $product->unit }}, {{ $product->amount }}
                             </option>
                             @endforeach
                         </select>
