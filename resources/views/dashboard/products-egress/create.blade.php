@@ -35,7 +35,7 @@
     @endif
 
     @csrf
-    <x-card-kardex id="{{$count}}" date="{{ old('created_at') ?? date('Y-m-d') }}" detail="{{ old('detail') ?? '' }}" />
+    <x-card-kardex id="{{$count}}" date="{{ old('created_at') ?? date('Y-m-d') }}" detail="{{ old('detail') ?? '' }}" readonly={{false}} />
 
     @livewire('products-kardexes', ['products' => old('products') ? old('products') : [], 'type' => 'egress'])
 

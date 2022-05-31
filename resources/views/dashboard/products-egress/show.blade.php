@@ -24,7 +24,7 @@
 
 @section('content')
 
-<x-card-kardex id="{{$kardex->id}}" date="{{$kardex->created_at}}" detail="{{$kardex->detail}}" readonly />
+<x-card-kardex id="{{$kardex->id}}" date="{{$kardex->created_at}}" detail="{{$kardex->detail}}" readonly={{true}} />
 
 @if (session('success'))
 <div class="alert alert-success alert-dismissible fade show">

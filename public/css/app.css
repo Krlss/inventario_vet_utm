@@ -597,6 +597,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .mt-0 {
   margin-top: 0px;
 }
+.mb-10 {
+  margin-bottom: 2.5rem;
+}
 .-mr-1 {
   margin-right: -0.25rem;
 }
@@ -626,9 +629,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .ml-auto {
   margin-left: auto;
-}
-.mb-10 {
-  margin-bottom: 2.5rem;
 }
 .block {
   display: block;
@@ -735,17 +735,8 @@ Ensure the default browser behavior of the `hidden` attribute.
 .flex-1 {
   flex: 1 1 0%;
 }
-.flex-shrink {
-  flex-shrink: 1;
-}
 .flex-shrink-0 {
   flex-shrink: 0;
-}
-.flex-grow {
-  flex-grow: 1;
-}
-.basis-48 {
-  flex-basis: 12rem;
 }
 .origin-top-left {
   transform-origin: top left;
@@ -963,6 +954,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
+.bg-red-50 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(254 242 242 / var(--tw-bg-opacity));
+}
 .bg-gray-200 {
   --tw-bg-opacity: 1;
   background-color: rgb(229 231 235 / var(--tw-bg-opacity));
@@ -1147,6 +1142,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   font-size: 1rem;
   line-height: 1.5rem;
 }
+.text-xs {
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
 .text-lg {
   font-size: 1.125rem;
   line-height: 1.75rem;
@@ -1154,10 +1153,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .text-2xl {
   font-size: 1.5rem;
   line-height: 2rem;
-}
-.text-xs {
-  font-size: 0.75rem;
-  line-height: 1rem;
 }
 .font-semibold {
   font-weight: 600;
@@ -1236,6 +1231,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-text-opacity: 1;
   color: rgb(34 197 94 / var(--tw-text-opacity));
 }
+.text-red-400 {
+  --tw-text-opacity: 1;
+  color: rgb(248 113 113 / var(--tw-text-opacity));
+}
+.text-blue-400 {
+  --tw-text-opacity: 1;
+  color: rgb(96 165 250 / var(--tw-text-opacity));
+}
 .text-indigo-600 {
   --tw-text-opacity: 1;
   color: rgb(79 70 229 / var(--tw-text-opacity));
@@ -1255,14 +1258,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .text-indigo-500 {
   --tw-text-opacity: 1;
   color: rgb(99 102 241 / var(--tw-text-opacity));
-}
-.text-blue-400 {
-  --tw-text-opacity: 1;
-  color: rgb(96 165 250 / var(--tw-text-opacity));
-}
-.text-red-400 {
-  --tw-text-opacity: 1;
-  color: rgb(248 113 113 / var(--tw-text-opacity));
 }
 .underline {
   -webkit-text-decoration-line: underline;
@@ -1461,10 +1456,6 @@ input:-webkit-autofill:active {
 .hover\:bg-gray-50:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(249 250 251 / var(--tw-bg-opacity));
-}
-.hover\:bg-red-900:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(127 29 29 / var(--tw-bg-opacity));
 }
 .hover\:font-bold:hover {
   font-weight: 700;

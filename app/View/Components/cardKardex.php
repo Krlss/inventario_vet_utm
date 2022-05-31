@@ -11,12 +11,12 @@ class cardKardex extends Component
     public $detail;
     public $readonly;
 
-    public function __construct($id, $date, $detail, $readonly = null)
+    public function __construct($id, $date, $detail, $readonly)
     {
         $this->id = $id;
         $this->date = $date;
         $this->detail = $detail;
-        $this->readonly = $readonly ?? false;
+        $this->readonly = $readonly;
     }
 
     /**

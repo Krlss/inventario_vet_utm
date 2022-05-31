@@ -19,7 +19,7 @@
     <div class="flex items-start justify-start gap-2">
         <label>{{__('Detail')}}{{$readonly ? '' : '*'}}: </label>
         <div class="w-full">
-            <textarea name="detail" id="detail" class="px-2 py-1 border rounded-md bg-white w-full resize-none {{ $readonly ? 'bg-gray-50 outline-none cursor-default' : 'bg-white' }}" @if($readonly) readonly @endif autofocus>{{$detail}}</textarea>
+            <textarea name="detail" id="detail" class="px-2 py-1 border rounded-md w-full resize-none {{ $readonly ? 'bg-gray-50 outline-none cursor-default' : 'bg-white' }}" @if($readonly) readonly @endif autofocus>{{$detail}}</textarea>
             @if($errors->has('detail'))
             <span class="text-red-500 text-xs italic">{{$errors->first('detail')}}</span>
             @endif
