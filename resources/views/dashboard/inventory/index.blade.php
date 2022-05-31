@@ -43,7 +43,7 @@
                 <tr>
                     <th>{{__('Code')}}</th>
                     <th>{{__('Name')}}</th>
-                    <th>{{__('Amount')}}</th>
+                    <th>{{__('Stock')}}</th>
                     <th>{{__('Unit')}}</th>
                     <th>{{__('Cost')}}</th>
                     <th>{{__('Types')}}</th>
@@ -100,7 +100,7 @@
                     data: 'name',
                 },
                 {
-                    data: 'amount',
+                    data: 'stock',
                 },
                 {
                     data: 'unit',

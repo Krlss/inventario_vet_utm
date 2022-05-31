@@ -26,7 +26,7 @@
             <th>{{__('Code')}}</th>
             <th>{{__('Description')}}</th>
             <th>{{__('Unit')}}</th>
-            <th>{{__('Amount')}}</th>
+            <th>{{__('Stock')}}</th>
             <th>{{__('Type')}}</th>
             <th>{{__('Category')}}</th>
             <th>{{__('Expire')}}</th>
@@ -38,7 +38,7 @@
             <td>{{$product->id}}</td>
             <td>{{$product->name}}</td>
             <td>{{$product->unit}}</td>
-            <td>{{$product->amount}}</td>
+            <td>{{$product->stock}}</td>
 
             <td>
                 @forelse ($product->types as $type)

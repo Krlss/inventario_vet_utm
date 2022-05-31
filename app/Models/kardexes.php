@@ -9,6 +9,11 @@ class kardexes extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'created_at',
+        'detail',
+        'type'
+    ];
 
     public function products()
     {

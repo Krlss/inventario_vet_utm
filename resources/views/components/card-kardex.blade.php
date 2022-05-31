@@ -1,10 +1,29 @@
-<div class="w-full bg-gray-200 rounded-md shadow-sm p-4 flex flex-col gap-2 mb-3">
+<div class="w-full bg-gray-100 rounded-md shadow-sm p-4 mb-3">
+    <div class="grid grid-cols-2 mb-2">
+        <div>
+            <label>{{__('N° transition')}}: </label>
+            <span>{{$id}}</span>
+        </div>
 
-    <x-card-kardex-detail label="{{__('N° transition')}}" value="{{$id}}" readonly />
+        <div class="flex items-center justify-start gap-2">
+            <label>{{__('Date')}}*: </label>
+            <div class="flex flex-col">
+                <input max="{{date('Y-m-d')}}" value="{{date('Y-m-d',strtotime($date))}}" type="date" class="px-2 py-1 border rounded-md {{ $readonly ? 'bg-gray-50 outline-none' : 'bg-white' }}" @if($readonly) readonly @endif name="created_at" id="created_at" />
+                @if($errors->has('created_at'))
+                <span class="text-red-500 text-xs italic">{{$errors->first('created_at')}}</span>
+                @endif
+            </div>
+        </div>
+    </div>
 
-    <div class="flex lg:flex-row flex-col lg:items-center items-start gap-2 lg:justify-between justify-start w-full">
-        <x-card-kardex-detail label="{{__('Date')}}" value="{{$date}}" two date readonly="{{$readonly}}" />
-        <x-card-kardex-detail class="w-full lg:max-w-3xl max-w-none" label="{{__('Detail')}}" value="{{$detail}}" full two readonly="{{$readonly}}" autofocus />
+    <div class="flex items-start justify-start gap-2">
+        <label>{{__('Detail')}}*: </label>
+        <div class="w-full">
+            <textarea name="detail" id="detail" class="px-2 py-1 border rounded-md bg-white w-full resize-none {{ $readonly ? 'bg-gray-50 outline-none cursor-default' : 'bg-white' }}" @if($readonly) readonly @endif autofocus>{{$detail}}</textarea>
+            @if($errors->has('detail'))
+            <span class="text-red-500 text-xs italic">{{$errors->first('detail')}}</span>
+            @endif
+        </div>
     </div>
 
 </div>

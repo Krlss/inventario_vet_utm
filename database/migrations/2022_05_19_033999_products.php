@@ -16,13 +16,11 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id(); //Auto incrementable
             $table->string('name');
-            $table->integer('amount');
             $table->float('cost');
             $table->integer('stock');
-            $table->integer('stock_min'); 
-            
-            $table->timestamps();
+            $table->integer('stock_min');
 
+            $table->timestamps();
         });
     }
 

@@ -14,9 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::create('kardexes', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('detail');
-            $table->string('type');
+            $table->id('id');
+            $table->longText('detail');
+            $table->enum('type', ['income', 'outcome']);
             $table->timestamps();
         });
     }

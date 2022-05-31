@@ -23,4 +23,5 @@
 
 @section('js')
 @stack('scripts_lib')
+@livewireScripts
 @stop

@@ -1,4 +1,11 @@
 { 
+    "Unable to register product entry": "No se ha podido registrar el ingreso de productos",
+    "The entry of products has been registered": "Se ha registrado el ingreso de productos",
+    "Products": "Productos",
+    "Add Another Product": "Agregar otro producto",
+    "Choose a product": "Elige un producto",
+    "Product Name || Stock": "Nombre del producto || Stock",
+    "Quantity": "Cantidad",
     "Register an entry order for your products": "Registre una orden de ingreso de sus productos",
     "Product revenue": "Ingreso de Productos",
     "Detail": "Detalle",

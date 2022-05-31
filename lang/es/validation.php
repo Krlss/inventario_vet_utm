@@ -135,5 +135,23 @@ return [
         'password' => [
             'min' => 'La :attribute debe contener más de :min caracteres',
         ],
+        'products' => [
+            'required' => 'Debe tener al menos un producto.',
+        ],
+        'products.*.product_id' => [
+            'required' => 'Debe seleccionar un producto.',
+            'exists'   => 'El producto seleccionado no existe.',
+        ],
+        'products.*.quantity' => [
+            'required' => 'Debe ingresar una cantidad.',
+            'numeric'  => 'La cantidad debe ser numérica.',
+            'integer'  => 'La cantidad debe ser un número entero.',
+            'min'      => 'La cantidad debe ser mayor a 0.',
+        ],
+    ],
+    'attributes' => [
+        'detail' => 'Detalle',
+        'created_at' => 'Fecha de creación',
+        'quantity' => 'Cantidad',
     ],
 ];

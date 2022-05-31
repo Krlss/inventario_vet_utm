@@ -41,6 +41,20 @@
 
         </div>
 
+        @if (session('error'))
+        <div class="alert alert-danger alert-dismissible fade show">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            {{ session('error') }}
+        </div>
+        @endif
+
+        @if (session('success'))
+        <div class="alert alert-success alert-dismissible fade show">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            {{ session('success') }}
+        </div>
+        @endif
+
         <table id="table" class="table table-hover table-striped">
             <thead class="bg-black text-white">
                 <tr>

@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\KardexesRequest;
 use App\Models\kardexes;
+use App\Models\Products;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProductsIngress extends Controller
 {
@@ -45,8 +48,39 @@ class ProductsIngress extends Controller
 
     function create()
     {
-        $count = kardexes::where('type', 'income')->count();
+        $last_id = kardexes::orderBy('id', 'desc')->first();
+        $count = $last_id ? $last_id->id + 1 : 1;
 
         return view('dashboard.products-ingress.create', compact('count'));
+    }
+
+    //store function
+    function store(KardexesRequest $request)
+    {
+        try {
+
+            DB::beginTransaction();
+
+            $kardex = kardexes::create([
+                'created_at' => $request->created_at,
+                'detail' => $request->detail,
+                'type' => 'income',
+            ]);
+
+            foreach ($request->products as $product) {
+                $product_id = $product['product_id'];
+                $quantity = $product['quantity'];
+                $product = Products::find($product_id);
+                $product->stock += $quantity;
+                $product->save();
+                $kardex->products()->attach($product_id);
+            }
+
+            DB::commit();
+
+            return redirect()->route('dashboard.products-ingress.index')->with('success', __('The entry of products has been registered'));
+        } catch (\Exception $e) {
+            return redirect()->route('dashboard.products-ingress.index')->with('error', 'No se ha podido registrar el ingreso de productos');
+        }
     }
 }
