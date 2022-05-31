@@ -42,7 +42,7 @@
             <th>{{__('Name')}}</th>
             <th>{{__('Unit')}}</th>
             <th>{{__('Amount')}}</th>
-            <th>{{__('Amount')}}+</th>
+            <th>+ {{__('Stock')}}</th>
             <th>{{__('Stock')}}</th>
             <th>{{__('Type')}}</th>
             <th>{{__('Category')}}</th>
@@ -56,7 +56,7 @@
             <td>{{$product->name}}</td>
             <td>{{$product->unit}}</td>
             <td>{{$product->amount}}</td>
-            <td>{{$product->pivot->quantity}}</td>
+            <td class="text-blue-400">+ {{$product->pivot->stock_diff}}</td>
             <td>{{$product->stock}}</td>
 
             <td>

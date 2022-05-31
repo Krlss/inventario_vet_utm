@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('products_kardexes', function (Blueprint $table) {
-            $table->integer('quantity')->default(0)->before('kardexes_id');
+            $table->integer('stock_diff')->default(0)->before('kardexes_id');
         });
     }
 

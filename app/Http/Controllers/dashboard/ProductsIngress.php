@@ -70,15 +70,18 @@ class ProductsIngress extends Controller
                 $product_id = $product['product_id'];
                 $quantity = $product['quantity'];
                 $product = Products::find($product_id);
+                $stock_diff = 0;
 
                 if ($product->amount > 0) {
-                    $product->stock += $quantity * $product->amount;
+                    $stock_diff = $quantity * $product->amount;
+                    $product->stock += $stock_diff;
                 } else {
+                    $stock_diff = $quantity;
                     $product->stock += $quantity;
                 }
 
                 $product->save();
-                $kardex->products()->attach($product_id, ['quantity' => $quantity]);
+                $kardex->products()->attach($product_id, ['quantity' => $quantity, 'stock_diff' => $stock_diff]);
             }
 
             DB::commit();
