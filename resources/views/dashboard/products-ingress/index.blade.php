@@ -92,6 +92,9 @@
             responsive: true,
             autoWidth: false,
             lengthChange: false,
+            order: [
+                [0, "desc"]
+            ],
             "dom": 'lrtip',
             columnDefs: [{
                 orderable: false,

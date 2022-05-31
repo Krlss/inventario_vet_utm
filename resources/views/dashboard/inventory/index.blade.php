@@ -45,6 +45,7 @@
                     <th>{{__('Name')}}</th>
                     <th>{{__('Stock')}}</th>
                     <th>{{__('Unit')}}</th>
+                    <th>{{__('Amount')}}</th>
                     <th>{{__('Cost')}}</th>
                     <th>{{__('Types')}}</th>
                     <th>{{__('Categories')}}</th>
@@ -79,6 +80,9 @@
             responsive: true,
             autoWidth: false,
             lengthChange: false,
+            order: [
+                [0, "desc"]
+            ],
             "dom": 'lrtip',
             columnDefs: [{
                 orderable: false,
@@ -104,6 +108,9 @@
                 },
                 {
                     data: 'unit',
+                },
+                {
+                    data: 'amount',
                 },
                 {
                     data: 'cost',
