@@ -22,7 +22,7 @@ class ProductsIngress extends Controller
                 ->when($request->date, function ($query) use ($request) {
                     $query->orWhere('created_at', $request->date);
                 })
-                ->where('type', 'income')
+                ->where('type', 'ingress')
                 ->get();
             return datatables()->of($data)
                 ->editColumn('created_at', function ($kardexes) {
@@ -64,7 +64,7 @@ class ProductsIngress extends Controller
             $kardex = kardexes::create([
                 'created_at' => $request->created_at,
                 'detail' => $request->detail,
-                'type' => 'income',
+                'type' => 'ingress',
             ]);
 
             foreach ($request->products as $product) {

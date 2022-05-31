@@ -5,13 +5,13 @@ namespace App\Http\Livewire;
 use App\Models\Products;
 use Livewire\Component;
 
-class ProductsIngress extends Component
+class ProductsKardexes extends Component
 {
 
     public $products = [];
     public $allProducts = [];
 
-    public function mount($products)
+    public function mount($products, $type)
     {
 
 
@@ -48,6 +48,6 @@ class ProductsIngress extends Component
 
     public function render()
     {
-        return view('livewire.products-ingress');
+        return view('livewire.products-kardexes');
     }
 }

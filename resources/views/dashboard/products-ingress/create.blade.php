@@ -27,7 +27,7 @@
     @csrf
     <x-card-kardex id="{{$count}}" date="{{ old('created_at') ?? date('Y-m-d') }}" detail="{{ old('detail') ?? '' }}" />
 
-    @livewire('products-ingress', ['products' => old('products') ? old('products') : []])
+    @livewire('products-kardexes', ['products' => old('products') ? old('products') : [], 'type' => 'ingress'])
 
 </form>
 

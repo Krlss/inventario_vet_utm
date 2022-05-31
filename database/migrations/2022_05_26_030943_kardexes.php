@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('kardexes', function (Blueprint $table) {
             $table->id('id');
             $table->longText('detail');
-            $table->enum('type', ['income', 'outcome']);
+            $table->enum('type', ['ingress', 'egress']);
             $table->timestamps();
         });
     }
