@@ -13,7 +13,7 @@ class inputDate extends Component
 
     public function __construct($label, $element)
     {
-        $this->max_date = date('Y-m-d');
+        $this->max_date = date('Y-m-d') ?? null;
         $this->label = $label;
         $this->element = $element;
     }
