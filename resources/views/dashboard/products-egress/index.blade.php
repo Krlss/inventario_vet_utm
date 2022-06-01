@@ -24,32 +24,31 @@
     <div class="card-body pt-0 mt-0">
 
         <div class="text-center">
-            <span>{{__('Search for the products and equipment registered in the system')}}</span>
+            <span>{{__('History of expenses made and creation of new expenses of products and medical equipment')}}</span>
         </div>
 
         <div class="flex md:flex-row flex-col justify-between md:items-end items-start gap-2 mb-2">
 
-            <x-input-search element="search" placeholder="{{__('Search by product name')}}" label="{{__('Product name')}}" />
+            <x-input-search element="search" placeholder="{{__('Search by reason')}}" label="{{__('Reason')}}" />
 
-            <div class="flex md:flex-row flex-col gap-2">
-                <x-select-search :array="$types" label="{{__('Type')}}" optionDefault="{{__('All')}}" element="type" />
-                <x-select-search :array="$categories" label="{{__('Category')}}" optionDefault="{{__('All')}}" element="category" />
+            <div class="flex xs:items-end items-start justify-between w-full xs:flex-row flex-col gap-2">
+                <x-input-date label="Fecha" element="date" />
+                <a href="{{ route('dashboard.products-egress.create') }}" class="bg-green-1000 text-white py-2 px-4 hover:bg-green-900 rounded-md font-medium hover:no-underline">
+                    {{__('New Expenses')}}
+                </a>
             </div>
+
 
         </div>
 
         <table id="table" class="table table-hover table-striped">
             <thead class="bg-black text-white">
                 <tr>
-                    <th>{{__('Code')}}</th>
-                    <th>{{__('Name')}}</th>
-                    <th>{{__('Stock')}}</th>
-                    <th>{{__('Unit')}}</th>
-                    <th>{{__('Amount')}}</th>
-                    <th>{{__('Cost')}}</th>
-                    <th>{{__('Types')}}</th>
-                    <th>{{__('Categories')}}</th>
-                    <th>{{__('Expire')}}</th>
+                    <th>{{__('N° Expenses')}}</th>
+                    <th>{{__('Date/Time')}}</th>
+                    <th>{{__('Reason')}}</th>
+                    <th>{{__('N° Products')}}</th>
+                    <th>{{__('View Log')}}</th>
                 </tr>
             </thead>
             <tbody></tbody>
@@ -67,9 +66,8 @@
 <script src="{{ asset('json/table.json') }}"></script>
 <script type="text/javascript">
     fetch_data({
-        type: '',
-        category: '',
-        search: ''
+        search: '',
+        date: null
     });
 
     function fetch_data(params) {
@@ -90,82 +88,56 @@
             }],
             language: len,
             ajax: {
-                url: "{{ route('dashboard.inventory.index') }}",
+                url: "{{ route('dashboard.products-egress.index') }}",
                 data: {
-                    type: params.type,
-                    category: params.category,
-                    search: params.search
-                }
+                    search: params.search,
+                    date: params.date
+                },
+                type: 'GET'
             },
             columns: [{
                     data: 'id',
                 },
                 {
-                    data: 'name',
+                    data: 'created_at'
                 },
                 {
-                    data: 'stock',
+                    data: 'detail',
                 },
                 {
-                    data: 'unit',
-                },
-                {
-                    data: 'amount',
-                },
-                {
-                    data: 'cost',
-                },
-                {
-                    data: 'types',
-                    orderable: false,
+                    data: 'products',
                     render: function(data, type, row, meta) {
-                        var small = '';
-                        data.forEach(e => {
-                            small += `<span class='badge badge-primary truncate max-w-100px text-left'>${e.name}</span><br>`;
-                        })
-                        return small;
+                        return data.length
                     }
                 },
                 {
-                    data: 'categories',
-                    orderable: false,
-                    render: function(data, type, row, meta) {
-                        var small = '';
-                        data.forEach(e => {
-                            small += `<span class='badge badge-primary truncate max-w-100px text-left'>${e.name}</span><br>`;
-                        })
-                        return small;
-                    }
-                },
-                {
-                    data: 'expire',
-                },
+                    data: 'link'
+                }
             ]
         });
     }
 
     $('.filter-input').keyup(function() {
-        var type_id = $('#type').val();
-        var category_id = $('#category').val();
         var search = $('#search').val();
+        var date = $('#date').val();
         $('#table').DataTable().clear().draw();
         $('#table').DataTable().destroy();
         fetch_data({
-            search: search,
-            category: category_id,
-            type: type_id
+            search,
+            date
         })
     });
-    // dropdown
+
+
     $('.filter-select').change(function() {
-        var type_id = $('#type').val();
-        var category_id = $('#category').val();
+        var search = $('#search').val();
+        var date = $('#date').val();
+        console.log(date)
         $('#table').DataTable().clear().draw();
         $('#table').DataTable().destroy();
         fetch_data({
-            search: '',
-            category: category_id,
-            type: type_id
+            search,
+            date
         })
     });
 </script>

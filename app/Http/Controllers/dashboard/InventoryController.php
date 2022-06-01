@@ -29,12 +29,10 @@ class InventoryController extends Controller
                 })
                 ->get();
             return datatables()->of($data)
-                ->editColumn('created_at', function (Products $product) {
-                    return $product->created_at->diffForHumans();
-                })->editColumn('expire', function (Products $product) {
+                ->editColumn('expire', function (Products $product) {
                     $date = date_create($product->expire);
                     return date_format($date, "d/m/Y");
-                })->toJson();
+                })->make();
         } else {
             $products = [];
 

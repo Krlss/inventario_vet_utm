@@ -13,14 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('products', function (Blueprint $table) {
-            $table->id(); //Auto incrementable
-            $table->string('name');
-            $table->float('cost');
-            $table->integer('stock');
-            $table->integer('stock_min');
-
-            $table->timestamps();
+        Schema::table('products', function (Blueprint $table) {
+            $table->integer('amount')->nullable()->before('stock_min');
         });
     }
 
@@ -31,6 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('products', function (Blueprint $table) {
+            //
+        });
     }
 };

@@ -13,13 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('products', function (Blueprint $table) {
-            $table->id(); //Auto incrementable
-            $table->string('name');
-            $table->float('cost');
-            $table->integer('stock');
-            $table->integer('stock_min');
-
+        Schema::create('kardexes', function (Blueprint $table) {
+            $table->id('id');
+            $table->longText('detail');
+            $table->enum('type', ['ingress', 'egress']);
             $table->timestamps();
         });
     }

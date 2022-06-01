@@ -6,14 +6,16 @@ use Illuminate\View\Component;
 
 class MetricHome extends Component
 {
-    
+
     public $title;
     public $value;
+    public $url;
 
-    public function __construct($title, $value)
+    public function __construct($title, $value, $url = null)
     {
         $this->title = $title;
         $this->value = $value;
+        $this->url = $url ?? false;
     }
 
     /**

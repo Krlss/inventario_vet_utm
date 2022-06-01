@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('products_types', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id('id');
             $table->unsignedInteger('products_id');
             $table->unsignedInteger('types_id');
             $table->timestamps();

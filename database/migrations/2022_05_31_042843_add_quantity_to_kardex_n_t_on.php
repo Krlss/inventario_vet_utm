@@ -13,14 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('products', function (Blueprint $table) {
-            $table->id(); //Auto incrementable
-            $table->string('name');
-            $table->float('cost');
-            $table->integer('stock');
-            $table->integer('stock_min');
-
-            $table->timestamps();
+        Schema::table('products_kardexes', function (Blueprint $table) {
+            $table->integer('quantity')->default(0)->before('kardexes_id');
         });
     }
 
@@ -31,6 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('products_kardexes', function (Blueprint $table) {
+            //
+        });
     }
 };
