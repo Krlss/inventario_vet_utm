@@ -1,3 +1,4 @@
+@include('sweetalert::alert')
 @extends('adminlte::page')
 
 @section('title', 'Dashboard')
