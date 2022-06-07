@@ -11,6 +11,7 @@
 @endsection
 
 @section('content')
+<<<<<<< HEAD
 <div class="card">
     <div class="card-head">
         <ul class="flex md:flex-row flex-col border-b">
@@ -39,6 +40,54 @@
                             <div class="mt-1 relative rounded-md shadow-sm">
                                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                     <span class="text-gray-500 sm:text-sm"></span>
+=======
+
+@if ($errors->any())
+@foreach ($errors->all() as $error)
+<div class="alert alert-danger alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert">
+            <i class="fa fa-times"></i>
+        </button>
+        <strong>{{ $error }} </strong> 
+    </div>
+    @endforeach
+
+@endif
+    <div class="card">
+        <div class="card-head">
+            <ul class="flex md:flex-row flex-col border-b">
+                <x-tabs routeTo='dashboard.inventory.index' routeCurrent='inventory*' title='Busqueda' />
+                <x-tabs routeTo='dashboard.products-ingress.index' routeCurrent='products-ingress*'
+                    title='Ingreso Productos' />
+                <x-tabs routeTo='dashboard.products-egress.index' routeCurrent='products-egress*'
+                    title='Egreso Productos' />
+                <x-tabs routeTo='dashboard.products.index' routeCurrent='products*' title='Crear Producto' />
+            </ul>
+        </div>
+        <div class="card-body pt-0 mt-0">
+            <div class="grid grid-rows-4 divide-y divide-gray-100">
+                <form action="/products" method="POST">
+                    @csrf
+                    <div class="py-1">
+                        <h2 class="text-lg font-semibold">
+                            Producto
+                        </h2>
+                        <p class="text-gray-500">
+                            Completa la informacion e ingresa un nuevo producto al almacen.
+                        </p>
+                    </div>
+                    <div class="py-1">
+                        <div class="flex flex-col md:flex-row  justify-between ">
+                            <div class="sm:my-4">
+                                <label for="name" class="block text-sm font-medium text-gray-700">Nombre</label>
+                                <div class="mt-1 relative rounded-md shadow-sm">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <span class="text-gray-500 sm:text-sm"></span>
+                                    </div>
+                                    <input type="text" name="name" id="name"
+                                        class="focus:ring-indigo-100 focus:border-indigo-100 block w-full pl-7 h-12 pr-12 sm:text-sm border-gray-300 rounded-md"
+                                        placeholder="Nombre del Producto">
+>>>>>>> 508bfbb406eceb5c88ab99fa166b53db0195b7c4
                                 </div>
                                 <input type="text" name="name" id="name" class="focus:ring-indigo-100 focus:border-indigo-100 block w-full pl-7 h-12 pr-12 sm:text-sm border-gray-300 rounded-md" placeholder="Nombre del Producto">
                             </div>

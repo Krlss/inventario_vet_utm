@@ -31,6 +31,16 @@ class ProductsNew extends Controller
 
     public function store(Request $request)
     {
+
+        $validatedData = $request->validate([
+            'name' => ['required', 'unique:posts', 'max:255'],
+            'amount' => ['required', 'numeric'],
+            'cost' => ['required', 'numeric'],
+            'unit' => ['required', 'numeric'],
+            'stock_min' => ['required', 'numeric'],
+            'categoria' => ['required'],
+            'tipo' => ['required'],
+        ]);
         try {
             $product_save = new Products();
             $product_save->name = $request->input("name");
@@ -42,11 +52,9 @@ class ProductsNew extends Controller
             $product_save->save();
             $product_save->categories()->attach($request->input("categoria"));
             $product_save->types()->attach($request->input("tipo"));
-            Alert::success('Producto nuevo', 'Has ingresado un nuevo producto');
-            return redirect('/inventory');
+            return redirect()->route('dashboard.inventory.index')->with('success', 'Producto almacenado correctamente');
         } catch (\Throwable $th) {
-            Alert::error('Producto nuevo', 'Ha ocurrido un error al ingresar el producto');
-            return redirect('/products');
+            return redirect()->route('dashboard.products.index')->with('error', 'Hubo un problema al almacenar el nuevo prodcuto');
         }
     }
 
