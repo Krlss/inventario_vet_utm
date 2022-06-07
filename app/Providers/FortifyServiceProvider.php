@@ -6,6 +6,7 @@ use App\Actions\Fortify\CreateNewUser;
 use App\Actions\Fortify\ResetUserPassword;
 use App\Actions\Fortify\UpdateUserPassword;
 use App\Actions\Fortify\UpdateUserProfileInformation;
+use App\Models\Province;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
@@ -15,6 +16,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\ServiceProvider;
 use App\Models\User;
 use Laravel\Fortify\Fortify;
+
 class FortifyServiceProvider extends ServiceProvider
 {
     /**
@@ -34,7 +36,7 @@ class FortifyServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-       
+
         Fortify::authenticateUsing(function (Request $request) {
 
             if (strpos($request->email, "utm.edu.ec")) {
@@ -53,6 +55,17 @@ class FortifyServiceProvider extends ServiceProvider
                         /* Crea el usuario utm en la base de datos */
                         $usuario_utm = $output["value"];
                         $nombres_utm = explode(" ", $usuario_utm["nombres"], 3);
+                        $PhotoPath = generateProfilePhotoPath($nombres_utm["2"]);
+
+                        $id_province = Province::where('name', 'Manabi')
+                            ->orWhere('name', 'Manabí')
+                            ->orWhere('name', 'manabí')
+                            ->orWhere('name', 'manabi')
+                            ->orWhere('name', 'MANABI')
+                            ->orWhere('name', 'MANABÍ')
+                            ->first()
+                            ->id;
+
                         $new_user = User::create([
                             'user_id' => $usuario_utm["cedula"],
                             'name' => $nombres_utm["2"],
@@ -62,15 +75,17 @@ class FortifyServiceProvider extends ServiceProvider
                             'password' => Hash::make($request->password),
                             'email_verified_at' => date('Y-m-d h:i:s'),
                             'profile_photo_path' => '',
-                            'id_province' => '13',
-                            'api_token' => Str::random(25)
+                            'id_province' => $id_province ?? 1,
+                            'api_token' => Str::random(25),
+                            'profile_photo_path' => $PhotoPath,
                         ]);
+
                         return $new_user;
                     } else {
                         return $user;
                     }
-                }else{
-                   return null;
+                } else {
+                    return null;
                 }
             } else {
                 /* No es usuario utm */

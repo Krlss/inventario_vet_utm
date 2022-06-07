@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
@@ -17,10 +18,14 @@ class User extends Authenticatable
     use HasProfilePhoto;
     use Notifiable;
     use TwoFactorAuthenticatable;
-
+    use HasRoles;
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var string[]
+     */
     protected $primaryKey = 'user_id';
     public $incrementing = false;
-
     protected $fillable = [
         'user_id',
         'name',
@@ -38,47 +43,51 @@ class User extends Authenticatable
         'main_street',
         'street_1_sec',
         'street_2_sec',
-        'address_ref'
+        'address_ref',
+        'profile_photo_path'
     ];
 
+    /**
+     * 
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array
+     */
     protected $hidden = [
         'password',
         'remember_token'
     ];
 
+
     public static $rules = [
-        'user_id' => 'required|max:13|min:10|unique:users',
+        'user_id' => 'required|digits_between:10,13|unique:users|numeric',
         'name' => 'required|max:75',
         'last_name1' => 'required|max:50',
         'last_name2' => 'required|max:50',
-        'email' => 'required|max:100|unique:users',
+        'email' => 'required|max:100|unique:users|email',
         'address' => 'max:2500',
-        'phone' => 'digits:10|unique:users',
-        'id_province' => 'required'
+        'phone' => 'numeric|nullable|digits:10',
+        'id_province' => 'required|numeric',
     ];
 
     public static $rules_create_movil = [
-        'user_id' => 'required|max:13|min:10|unique:users',
+        'user_id' => 'required|digits_between:10,13|unique:users|numeric',
         'name' => 'required|max:75',
         'last_name1' => 'required|max:50',
         'last_name2' => 'required|max:50',
-        'email' => 'required|max:100|unique:users',
-        'phone' => 'digits:10|unique:users'
+        'email' => 'required|max:100|unique:users|email',
+        'phone' => 'numeric|nullable|digits:10',
     ];
 
     public static $rules_updated = [
-        'user_id' => 'required|max:13|min:10',
+        'user_id' => 'required|digits_between:10,13|numeric',
         'name' => 'required|max:75',
         'last_name1' => 'required|max:50',
         'last_name2' => 'required|max:50',
-        'email' => 'required|max:100',
+        'email' => 'required|max:100|email',
         'address' => 'max:2500',
-        'phone' => 'digits:10',
-        'id_province' => 'required'
-    ];
-
-    protected $casts = [
-        'email_verified_at' => 'datetime',
+        'phone' => 'digits:10|numeric|nullable',
+        'id_province' => 'required|numeric',
     ];
 
     /**
@@ -89,4 +98,13 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::created(function ($user) {
+            $user->assignRole(config('role.auth.default'));
+        });
+    }
 }
