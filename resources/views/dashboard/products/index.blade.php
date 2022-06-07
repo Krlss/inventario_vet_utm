@@ -11,6 +11,18 @@
 @endsection
 
 @section('content')
+
+@if ($errors->any())
+@foreach ($errors->all() as $error)
+<div class="alert alert-danger alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert">
+            <i class="fa fa-times"></i>
+        </button>
+        <strong>{{ $error }} </strong> 
+    </div>
+    @endforeach
+
+@endif
     <div class="card">
         <div class="card-head">
             <ul class="flex md:flex-row flex-col border-b">

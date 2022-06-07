@@ -8,7 +8,10 @@ use App\Models\Categories;
 use App\Models\Types;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use PhpParser\Node\Expr\Cast\Object_;
 use Yajra\DataTables\DataTables;
+
+use function PHPSTORM_META\map;
 
 class InventoryController extends Controller
 {
@@ -39,9 +42,10 @@ class InventoryController extends Controller
             $types = Types::orderBy('name', 'asc')->get();
 
             $categories = Categories::orderBy('name', 'asc')->get();
-        }
+            $expire = Products::all('id','expire');
 
-        return view('dashboard.inventory.index', compact('products', 'types', 'categories'));
+        }
+        return view('dashboard.inventory.index', compact('products', 'types', 'categories', 'expire'));
     }
 
     public function create()

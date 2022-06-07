@@ -11,7 +11,25 @@
 @endsection
 
 @section('content')
+{{-- message --}}
+@if (Session::has('success'))
+    <div class="alert alert-success alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert">
+            <i class="fa fa-times"></i>
+        </button>
+        <strong>Success !</strong> {{ session('success') }}
+    </div>
+@endif
 
+@if (Session::has('error'))
+    <div class="alert alert-danger alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert">
+            <i class="fa fa-times"></i>
+        </button>
+        <strong>Error !</strong> {{ session('error') }}
+    </div>
+@endif
+{{-- prueba alerta --}}
 <div class="card">
     <div class="card-head">
         <ul class="flex md:flex-row flex-col border-b">
@@ -28,12 +46,12 @@
         </div>
 
         <div class="flex md:flex-row flex-col justify-between md:items-end items-start gap-2 mb-2">
-
+            {{$expire[0]}}
             <x-input-search element="search" placeholder="{{__('Search by product name')}}" label="{{__('Product name')}}" />
 
             <div class="flex md:flex-row flex-col gap-2">
                 <x-select-search :array="$types" label="{{__('Type')}}" optionDefault="{{__('All')}}" element="type" />
-                <x-select-search :array="$categories" label="{{__('Category')}}" optionDefault="{{__('All')}}" element="category" />
+                <x-select-search :array="$expire" label="{{__('Expire')}}" optionDefault="{{__('All')}}" element="expire" />
             </div>
 
         </div>
