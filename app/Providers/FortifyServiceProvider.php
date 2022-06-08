@@ -39,20 +39,25 @@ class FortifyServiceProvider extends ServiceProvider
 
         Fortify::authenticateUsing(function (Request $request) {
 
-            if (strpos($request->email, "utm.edu.ec")) {
-                /* usuario utm */
-                $response = Http::withHeaders([
-                    'X-API-KEY' => '3ecbcb4e62a00d2bc58080218a4376f24a8079e1',
-                ])->withOptions(["verify" => false])->post('https://app.utm.edu.ec/becas/api/publico/IniciaSesion', [
-                    'usuario' => $request->email,
-                    'clave' => $request->password,
-                ]);
-                $output = $response->json();
-                if ($output["state"] == "success") {
-                    $user = User::where('email', $request->email)->first();
-                    /* No existe usuario utm en base de datos? */
-                    if (!$user) {
-                        /* Crea el usuario utm en la base de datos */
+            $user = User::where('email', $request->email)->first();
+            if (!$user) {
+                if (strpos($request->email, "utm.edu.ec")) {
+                    /* usuario utm */
+                    try {
+                        $response = Http::withHeaders([
+                            'X-API-KEY' => '3ecbcb4e62a00d2bc58080218a4376f24a8079e1',
+                        ])->withOptions(["verify" => false])->post('https://app.utm.edu.ec/becas/api/publico/IniciaSesion', [
+                            'usuario' => $request->email,
+                            'clave' => $request->password,
+                        ]);
+                        $output = $response->json();
+                    } catch (\Throwable $th) {
+                        return null;
+                    }
+                    if ($output["state"] == "success") {
+                        $user = User::where('email', $request->email)->first();
+                        /* No existe usuario utm en base de datos? */
+
                         $usuario_utm = $output["value"];
                         $nombres_utm = explode(" ", $usuario_utm["nombres"], 3);
                         $PhotoPath = generateProfilePhotoPath($nombres_utm["2"]);
@@ -66,6 +71,7 @@ class FortifyServiceProvider extends ServiceProvider
                             ->first()
                             ->id;
 
+
                         $new_user = User::create([
                             'user_id' => $usuario_utm["cedula"],
                             'name' => $nombres_utm["2"],
@@ -74,22 +80,18 @@ class FortifyServiceProvider extends ServiceProvider
                             'email' => $request->email,
                             'password' => Hash::make($request->password),
                             'email_verified_at' => date('Y-m-d h:i:s'),
-                            'profile_photo_path' => '',
                             'id_province' => $id_province ?? 1,
                             'api_token' => Str::random(25),
                             'profile_photo_path' => $PhotoPath,
                         ]);
-
                         return $new_user;
                     } else {
-                        return $user;
+                        return null;
                     }
                 } else {
                     return null;
                 }
-            } else {
-                /* No es usuario utm */
-                $user = User::where('email', $request->email)->first();
+            } else{
                 if (
                     $user &&
                     Hash::check($request->password, $user->password)
@@ -98,6 +100,7 @@ class FortifyServiceProvider extends ServiceProvider
                 }
             }
         });
+
 
         /* RateLimiter::for('two-factor', function (Request $request) {
             return Limit::perMinute(5)->by($request->session()->get('login.id'));
