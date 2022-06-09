@@ -27,12 +27,7 @@
 
 <form id="form-kardex" class="md:mb-0 mb-10" action="{{ route('dashboard.products-egress.store') }}" method="POST">
 
-    @if (session('error'))
-    <div class="alert alert-danger alert-dismissible fade show">
-        <button type="button" class="close" data-dismiss="alert">×</button>
-        {{ session('error') }}
-    </div>
-    @endif
+    <x-flash-messages />
 
     @csrf
     <x-card-kardex id="{{$count}}" date="{{ old('created_at') ?? date('Y-m-d') }}" detail="{{ old('detail') ?? '' }}" readonly={{false}} />

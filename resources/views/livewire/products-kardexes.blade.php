@@ -24,7 +24,7 @@
                             <option value="">{{__('Choose a product')}}</option>
                             @foreach ($allProducts as $product)
                             <option value="{{ $product->id }}">
-                                {{ $product->name }}, {{ $product->stock }}, {{ $product->unit }}, {{ $product->amount }}
+                                {{ $product->name }}, {{ $product->stock }}, {{ $product->unit->name }}, {{ $product->amount }}
                             </option>
                             @endforeach
                         </select>

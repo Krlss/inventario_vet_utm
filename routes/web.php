@@ -1,10 +1,13 @@
 <?php
 
+use App\Http\Controllers\dashboard\CategoryController;
 use App\Http\Controllers\dashboard\HomeController;
 use App\Http\Controllers\dashboard\InventoryController;
 use App\Http\Controllers\dashboard\ProductsNew;
 use App\Http\Controllers\dashboard\ProductsEgress;
 use App\Http\Controllers\dashboard\ProductsIngress;
+use App\Http\Controllers\dashboard\TypeController;
+use App\Http\Controllers\dashboard\UnitController;
 use Illuminate\Support\Facades\Route;
 
 require_once __DIR__ . '/jetstream.php';
@@ -23,5 +26,9 @@ Route::middleware([
     Route::resource('/products-ingress', ProductsIngress::class)->names('dashboard.products-ingress');
     Route::resource('/products-egress', ProductsEgress::class)->names('dashboard.products-egress');
     Route::resource('/products', ProductsNew::class)->names('dashboard.products');
+
+    Route::post('add-unit-modal', [UnitController::class, 'addUnitModal']);
+    Route::post('add-category-modal', [CategoryController::class, 'addCategoryModal']);
+    Route::post('add-type-modal', [TypeController::class, 'addTypeModal']);
     //Route::get('dataTableProducts', [InventoryController::class, 'dataTable'])->name('dataTableProducts');
 });

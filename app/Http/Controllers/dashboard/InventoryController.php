@@ -20,7 +20,7 @@ class InventoryController extends Controller
     {
 
         if ($request->ajax()) {
-            $data = Products::with('categories', 'types')
+            $data = Products::with('categories', 'types', 'unit')
                 ->when($request->category, function ($query) use ($request) {
                     $query->whereRelation('categories', 'categories.id', '=', $request->category);
                 })
@@ -35,15 +35,18 @@ class InventoryController extends Controller
                 ->editColumn('expire', function (Products $product) {
                     $date = date_create($product->expire);
                     return date_format($date, "d/m/Y");
-                })->make();
+                })
+                ->editColumn('unit', function (Products $product) {
+                    return $product->unit->name;
+                })
+                ->make();
         } else {
             $products = [];
 
             $types = Types::orderBy('name', 'asc')->get();
 
             $categories = Categories::orderBy('name', 'asc')->get();
-            $expire = Products::all('id','expire');
-
+            $expire = Products::all('id', 'expire');
         }
         return view('dashboard.inventory.index', compact('products', 'types', 'categories', 'expire'));
     }

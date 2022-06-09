@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@push('css_lib')
+@push('css')
 <link rel="stylesheet" href="{{ asset('plugins/datatable/bootstrap.css') }}">
 <link rel="stylesheet" href="{{ asset('plugins/datatable/dataTables.bootstrap4.min.css') }}">
 <link rel="stylesheet" href="{{ asset('plugins/datatable/responsive.bootstrap4.min.css') }}">
@@ -11,32 +11,14 @@
 @endsection
 
 @section('content')
-{{-- message --}}
-@if (Session::has('success'))
-    <div class="alert alert-success alert-dismissible" role="alert">
-        <button type="button" class="close" data-dismiss="alert">
-            <i class="fa fa-times"></i>
-        </button>
-        <strong>Success !</strong> {{ session('success') }}
-    </div>
-@endif
 
-@if (Session::has('error'))
-    <div class="alert alert-danger alert-dismissible" role="alert">
-        <button type="button" class="close" data-dismiss="alert">
-            <i class="fa fa-times"></i>
-        </button>
-        <strong>Error !</strong> {{ session('error') }}
-    </div>
-@endif
-{{-- prueba alerta --}}
 <div class="card">
     <div class="card-head">
         <ul class="flex md:flex-row flex-col border-b">
             <x-tabs routeTo='dashboard.inventory.index' routeCurrent='inventory*' title='Busqueda' />
             <x-tabs routeTo='dashboard.products-ingress.index' routeCurrent='products-ingress*' title='Ingreso Productos' />
             <x-tabs routeTo='dashboard.products-egress.index' routeCurrent='products-egress*' title='Egreso Productos' />
-            <x-tabs routeTo='dashboard.products.index' routeCurrent='products/*' title='Crear Producto' />
+            <x-tabs routeTo='dashboard.products.create' routeCurrent='products/*' title='Crear Producto' />
         </ul>
     </div>
     <div class="card-body pt-0 mt-0">
@@ -46,7 +28,6 @@
         </div>
 
         <div class="flex md:flex-row flex-col justify-between md:items-end items-start gap-2 mb-2">
-            {{$expire[0]}}
             <x-input-search element="search" placeholder="{{__('Search by product name')}}" label="{{__('Product name')}}" />
 
             <div class="flex md:flex-row flex-col gap-2">
@@ -77,7 +58,7 @@
 
 @endsection
 
-@push('scripts_lib')
+@push('js')
 <script src="{{ asset('plugins/datatable/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('plugins/datatable/dataTables.bootstrap4.min.js') }}"></script>
 <script src="{{ asset('plugins/datatable/dataTables.responsive.min.js') }}"></script>

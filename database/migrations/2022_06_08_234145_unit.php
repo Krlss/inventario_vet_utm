@@ -13,9 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        //
-        Schema::table('products', function (Blueprint $table) {
-            $table->enum('unit', ['ML', 'MG'])->nullable();
+        Schema::create('units', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name');
+            $table->timestamps();
         });
     }
 
