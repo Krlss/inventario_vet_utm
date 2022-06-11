@@ -46,7 +46,6 @@
         </div>
 
         <div class="flex md:flex-row flex-col justify-between md:items-end items-start gap-2 mb-2">
-            {{$expire[0]}}
             <x-input-search element="search" placeholder="{{__('Search by product name')}}" label="{{__('Product name')}}" />
 
             <div class="flex md:flex-row flex-col gap-2">
