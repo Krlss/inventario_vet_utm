@@ -22,7 +22,7 @@
         </li>
         <li class="nav-item" role="presentation">
             <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab"
-                aria-controls="pills-profile" aria-selected="false">Productos con poco Stock</a>
+                aria-controls="pills-profile" aria-selected="false">Productos con poco Stock </a>
         </li>
 
     </ul>
