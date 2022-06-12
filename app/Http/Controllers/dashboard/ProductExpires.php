@@ -6,12 +6,19 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Products;
 use App\Models\kardexes;
-
-class ProductsExpire extends Controller
+class ProductExpires extends Controller
 {
     public function index(Request $request)
     {
-        return view('dashboard.products-expire.index');
+
+        if ($request->search == "") {
+            $data = Products::select('id', 'name', 'stock', 'expire', 'amount')->get();
+        } else {
+            $data = Products::select('id', 'name', 'stock', 'expire', 'amount')->when($request->search, function ($query) use ($request) {
+                $query->where('name', 'LIKE', '%' .  ucwords(strtolower($request->search)) . '%');
+            })->get();
+        }
+        return datatables()->of($data)->make();
     }
 
     public function create()

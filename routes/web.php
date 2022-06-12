@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\dashboard\HomeController;
 use App\Http\Controllers\dashboard\InventoryController;
+use App\Http\Controllers\dashboard\ProductExpires;
 use App\Http\Controllers\dashboard\ProductsNew;
 use App\Http\Controllers\dashboard\ProductsEgress;
 use App\Http\Controllers\dashboard\ProductsExpire;
@@ -20,6 +21,7 @@ Route::middleware([
     Route::get('/', [HomeController::class, 'index'])->name('dashboard');
     Route::get('/dashboard', [HomeController::class, 'index']);
     Route::get('/products_minstock', [ProductsMinStock::class, 'index'])->name("dashboard.products-minstock");
+    Route::get('/products_expire', [ProductExpires::class, 'index'])->name("dashboard.products-expire");
     Route::post('/products', [ProductsNew::class, 'store']);
 
     Route::resource('/inventory', InventoryController::class)->names('dashboard.inventory');
