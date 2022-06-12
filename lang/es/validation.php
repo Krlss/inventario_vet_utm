@@ -148,10 +148,15 @@ return [
             'integer'  => 'La cantidad debe ser un número entero.',
             'min'      => 'La cantidad debe ser mayor a 0.',
         ],
+        'name' => [
+            'required' => 'Debe ingresar un nombre.',
+            'unique'   => 'El nombre ya ha sido registrado.',
+        ]
     ],
     'attributes' => [
         'detail' => 'Detalle',
         'created_at' => 'Fecha de creación',
         'quantity' => 'Cantidad',
+        'name' => 'Nombre',
     ],
 ];

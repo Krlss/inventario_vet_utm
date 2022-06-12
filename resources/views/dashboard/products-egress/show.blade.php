@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@push('css_lib')
+@push('css')
 <link rel="stylesheet" href="{{ asset('plugins/datatable/bootstrap.css') }}">
 <link rel="stylesheet" href="{{ asset('plugins/datatable/dataTables.bootstrap4.min.css') }}">
 <link rel="stylesheet" href="{{ asset('plugins/datatable/responsive.bootstrap4.min.css') }}">
@@ -26,12 +26,7 @@
 
 <x-card-kardex id="{{$kardex->id}}" date="{{$kardex->created_at}}" detail="{{$kardex->detail}}" readonly={{true}} />
 
-@if (session('success'))
-<div class="alert alert-success alert-dismissible fade show">
-    <button type="button" class="close" data-dismiss="alert">×</button>
-    {{ session('success') }}
-</div>
-@endif
+<x-flash-messages />
 
 <table id="table" class="table table-hover table-striped">
     <thead class="bg-black text-white">
@@ -52,7 +47,7 @@
         <tr>
             <td>{{$product->id}}</td>
             <td>{{$product->name}}</td>
-            <td>{{$product->unit}}</td>
+            <td>{{$product->unit->name}}</td>
             <td>{{$product->amount}}</td>
             <td class="text-red-400">-{{$product->pivot->stock_diff}}</td>
             <td>{{$product->stock}}</td>
@@ -80,7 +75,7 @@
 
 @endsection
 
-@push('scripts_lib')
+@push('js')
 <script src="{{ asset('plugins/datatable/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('plugins/datatable/dataTables.bootstrap4.min.js') }}"></script>
 <script src="{{ asset('plugins/datatable/dataTables.responsive.min.js') }}"></script>

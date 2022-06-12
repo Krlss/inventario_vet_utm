@@ -19,10 +19,8 @@
 @endsection
 
 @section('css')
-@stack('css_lib')
 @stop
 
 @section('js')
-@stack('scripts_lib')
 @livewireScripts
 @stop
