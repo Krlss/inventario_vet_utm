@@ -23,4 +23,20 @@
 
 @section('js')
 @livewireScripts
+<script>
+    $('form').submit(function(event) {
+        console.log('submit');
+        if ($(this).hasClass('submitted')) {
+            event.preventDefault();
+        } else {
+            if ($(this).find(':submit').hasClass('save')) {
+                $(this).find(':submit').html('Cargando... <i class="fa fa-spinner fa-spin"></i>');
+            } else {
+                //find input type submit and change text
+                $(this).find(':submit').html('<i class="fa fa-spinner fa-spin"></i>');
+            }
+            $(this).find(':submit').prop('disabled', true);
+        }
+    });
+</script>
 @stop

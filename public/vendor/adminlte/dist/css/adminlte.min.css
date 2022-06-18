@@ -4787,7 +4787,7 @@ input[type=submit].btn-block {
 
 .nav-pills .nav-link.active,
 .nav-pills .show>.nav-link {
-    color: #fff; 
+    color: #fff;
 }
 
 .nav-fill .nav-item,
@@ -22194,7 +22194,7 @@ body.text-sm .control-sidebar {
 .dark-mode .navbar-yellow {
     background-color: #ffff3a;
     color: #1f2d3d
-} 
+}
 
 .dark-mode .navbar-yellow.navbar-light .form-control-navbar::-webkit-input-placeholder {
     color: rgba(52, 58, 64, .8)
