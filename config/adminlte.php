@@ -249,7 +249,8 @@ return [
         [
             'text' => 'Productos por expirar',
             'icon' => 'fa fa-info-circle',
-            'url' => '#'
+            'route' => 'dashboard.products-expires.index',
+            'active' => ['dashboard.products-expires.*']
         ],
         [
             'text' => 'Adm. de la pág.',

@@ -32,7 +32,7 @@
 
             <div class="flex md:flex-row flex-col gap-2">
                 <x-select-search :array="$types" label="{{__('Type')}}" optionDefault="{{__('All')}}" element="type" />
-                <x-select-search :array="$expire" label="{{__('Expire')}}" optionDefault="{{__('All')}}" element="expire" />
+                <x-select-search :array="$categories" label="{{__('Category')}}" optionDefault="{{__('All')}}" element="category" />
             </div>
 
         </div>
@@ -98,6 +98,9 @@
             },
             columns: [{
                     data: 'id',
+                    render: function(data, type, row, meta) {
+                        console.log(row);
+                    }
                 },
                 {
                     data: 'name',
@@ -114,7 +117,7 @@
                 {
                     data: 'cost',
                 },
-                {
+                /* {
                     data: 'types',
                     orderable: false,
                     render: function(data, type, row, meta) {
@@ -135,7 +138,7 @@
                         })
                         return small;
                     }
-                },
+                }, */
                 {
                     data: 'expire',
                 },
