@@ -22,7 +22,7 @@
                 <x-icon icon="home-sidebar" width=30 height=30 viewBox="1024 1024" strokeWidth=0 fill="{{ Request::is('/') ? '#FFFF3A' : 'white' }}" />
                 <span :class="{'hidden': !open}" class="hidden ml-2  {{ Request::is('/') ? 'text-yellow-navbar' : 'text-white' }}">{{__('Home')}}</span>
             </a>
-            <a class="flex flex-row items-center">
+            <a class="flex flex-row items-center" href="{{ route('dashboard.products-expires') }}">
                 <x-icon icon="warning" width=30 height=30 viewBox="1024 1024" strokeWidth=0 fill="white" />
                 <span :class="{'hidden': !open}" class="hidden ml-2">{{__('Products for expire')}}</span>
             </a>

@@ -1177,6 +1177,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .font-extrabold {
   font-weight: 800;
 }
+.font-normal {
+  font-weight: 400;
+}
 .uppercase {
   text-transform: uppercase;
 }
