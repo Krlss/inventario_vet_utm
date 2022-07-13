@@ -37,7 +37,7 @@ class InventoryController extends Controller
                     return date_format($date, "d/m/Y");
                 })
                 ->editColumn('unit', function (Products $product) {
-                    return $product->unit->name;
+                    return $product->unit ? $product->unit->name : '';
                 })
                 ->make();
         } else {
