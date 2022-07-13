@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Products;
 use App\Models\kardexes;
-class ProductExpires extends Controller
+
+
+class ProductExpires
 {
     public function index(Request $request)
     {
@@ -18,6 +20,7 @@ class ProductExpires extends Controller
                 $query->where('name', 'LIKE', '%' .  ucwords(strtolower($request->search)) . '%');
             })->get();
         }
+        dd($data);
         return datatables()->of($data)->make();
     }
 

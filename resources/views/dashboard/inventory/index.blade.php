@@ -117,7 +117,7 @@
                 {
                     data: 'cost',
                 },
-                /* {
+                 {
                     data: 'types',
                     orderable: false,
                     render: function(data, type, row, meta) {
@@ -138,7 +138,7 @@
                         })
                         return small;
                     }
-                }, */
+                }, 
                 {
                     data: 'expire',
                 },
