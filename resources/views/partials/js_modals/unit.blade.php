@@ -18,8 +18,8 @@
                     if (data.error) {
                         $('.error_unit').html(data.error?.name);
                     } else {
-                        $('#unit').append(`<option value="${data.id}" selected>${data.name}</option>`);
-                        $('#unit').trigger('change');
+                        $('#id_unit').append(`<option value="${data.id}" selected>${data.name}</option>`);
+                        $('#id_unit').trigger('change');
                         $('#name_unit').val('');
                         $('.error_unit').html('');
                         $('#Modalunit').modal('hide');

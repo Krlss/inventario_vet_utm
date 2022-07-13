@@ -46,9 +46,8 @@ class InventoryController extends Controller
             $types = Types::orderBy('name', 'asc')->get();
 
             $categories = Categories::orderBy('name', 'asc')->get();
-            $expire = Products::all('id', 'expire');
         }
-        return view('dashboard.inventory.index', compact('products', 'types', 'categories', 'expire'));
+        return view('dashboard.inventory.index', compact('products', 'types', 'categories'));
     }
 
     public function create()

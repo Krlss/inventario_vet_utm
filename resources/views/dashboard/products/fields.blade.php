@@ -51,7 +51,7 @@
 
         <div>
             <label for="cost">{{ __('Cost') }}*</label>
-            <input min="0" pattern="[0-9]+" type="number" class="form-control" id="cost" name="cost" placeholder="{{ __('Cost') }}" value="{{old('cost') ?? 0}}" required>
+            <input min="0" pattern="[0-9]+" step=0.01 type="number" class="form-control" id="cost" name="cost" placeholder="{{ __('Cost') }}" value="{{old('cost') ?? 0}}" required>
 
             @error('cost')
             <span class="text-danger">{{ $message }}</span>
