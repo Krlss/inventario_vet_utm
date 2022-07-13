@@ -8,16 +8,8 @@ use App\Http\Controllers\dashboard\ProductsNew;
 use App\Http\Controllers\dashboard\ProductsEgress;
 use App\Http\Controllers\dashboard\ProductsExpire;
 use App\Http\Controllers\dashboard\ProductsIngress;
-<<<<<<< HEAD
-use App\Http\Controllers\dashboard\ProductsMinStock;
-=======
-use App\Http\Controllers\dashboard\TypeController;
-use App\Http\Controllers\dashboard\UnitController;
->>>>>>> 7667676ef866d1dea736f225212fee1051e8895b
-use Illuminate\Support\Facades\Route;
 
 require_once __DIR__ . '/jetstream.php';
-require_once __DIR__ . '/fortify.php';
 
 Route::middleware([
     'auth:sanctum',
@@ -34,13 +26,9 @@ Route::middleware([
     Route::resource('/products-ingress', ProductsIngress::class)->names('dashboard.products-ingress');
     Route::resource('/products-egress', ProductsEgress::class)->names('dashboard.products-egress');
     Route::resource('/products', ProductsNew::class)->names('dashboard.products');
-<<<<<<< HEAD
-    Route::resource('/products-expires', ProductsExpire::class)->names('dashboard.products-expires');
-=======
 
     Route::post('add-unit-modal', [UnitController::class, 'addUnitModal']);
     Route::post('add-category-modal', [CategoryController::class, 'addCategoryModal']);
     Route::post('add-type-modal', [TypeController::class, 'addTypeModal']);
->>>>>>> 7667676ef866d1dea736f225212fee1051e8895b
     //Route::get('dataTableProducts', [InventoryController::class, 'dataTable'])->name('dataTableProducts');
 });
