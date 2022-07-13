@@ -41,19 +41,19 @@ class Controller extends BaseController
                             Categories::create([
                                 'name' => $request->name,
                             ]);
-                            $success_output = "<div class='alert alert-success'>" . __('Category created successfully') . "</div>";
+                            $success_output = flashMessage(__('Category created successfully'), 'success');
                             $modal_title = __('Creating a new category');
                         } else if ($request->modal_class == 'types') {
                             Types::create([
                                 'name' => $request->name,
                             ]);
-                            $success_output = "<div class='alert alert-success'>" . __('Type created successfully') . "</div>";
+                            $success_output = flashMessage(__('Type created successfully'), 'success');
                             $modal_title = __('Creating a new type');
                         } else if ($request->modal_class == 'units') {
                             Unit::create([
                                 'name' => $request->name,
                             ]);
-                            $success_output = "<div class='alert alert-success'>" . __('Unit created successfully') . "</div>";
+                            $success_output = flashMessage(__('Unit created successfully'), 'success');
                             $modal_title = __('Creating a new unit');
                         }
                         break;
@@ -62,19 +62,19 @@ class Controller extends BaseController
                             Categories::where('id', $request->modal_id)->update([
                                 'name' => $request->name,
                             ]);
-                            $success_output = "<div class='alert alert-success'>" . __('Category updated successfully') . "</div>";
+                            $success_output = flashMessage(__('Category updated successfully'), 'success');
                             $modal_title = __('Updating a category');
                         } else if ($request->modal_class == 'types') {
                             Types::where('id', $request->modal_id)->update([
                                 'name' => $request->name,
                             ]);
-                            $success_output = "<div class='alert alert-success'>" . __('Type updated successfully') . "</div>";
+                            $success_output = flashMessage(__('Type updated successfully'), 'success');
                             $modal_title = __('Updating a type');
                         } else if ($request->modal_class == 'units') {
                             Unit::where('id', $request->modal_id)->update([
                                 'name' => $request->name,
                             ]);
-                            $success_output = "<div class='alert alert-success'>" . __('Unit updated successfully') . "</div>";
+                            $success_output = flashMessage(__('Unit updated successfully'), 'success');
                             $modal_title = __('Updating a unit');
                         }
                         break;
