@@ -18,20 +18,19 @@ class ProductExpires extends Controller
             $data = Products::with('lotes')->when($request->search, function ($query) use ($request) {
                 $query->where('name', 'LIKE', '%' .  ucwords(strtolower($request->search)) . '%');
             })->where('stock', '!=', 0)->get();
-        
-           
+
+
             return datatables()->of($data)->make();
 
 
 
-           /*  $data = Products::join('lotes', 'products.id', '=', 'lotes.products_id')->select('products.id', 'products.name', 'products.stock', 'lotes.name', 'lotes.expire', 'products.amount')->where('products.stock', '!=', 0)->get(); */
+            /*  $data = Products::join('lotes', 'products.id', '=', 'lotes.products_id')->select('products.id', 'products.name', 'products.stock', 'lotes.name', 'lotes.expire', 'products.amount')->where('products.stock', '!=', 0)->get(); */
         }/* else {
              $data = Products::select('id', 'name', 'stock', 'expire', 'amount')->where('stock', '!=', 0)->when($request->search, function ($query) use ($request) {
                 $query->where('name', 'LIKE', '%' .  ucwords(strtolower($request->search)) . '%');
             })->get(); 
 
         }*/
-      
     }
 
     public function create()

@@ -48,4 +48,9 @@ class Products extends Model
     {
         return $this->belongsTo(Unit::class, 'id_unit');
     }
+
+    public function lotes()
+    {
+        return $this->hasMany(Lote::class);
+    }
 }
