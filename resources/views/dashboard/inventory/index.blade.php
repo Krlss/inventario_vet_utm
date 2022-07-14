@@ -97,10 +97,7 @@
                 }
             },
             columns: [{
-                    data: 'id',
-                    render: function(data, type, row, meta) {
-                        console.log(row);
-                    }
+                    data: 'id'
                 },
                 {
                     data: 'name',
@@ -117,7 +114,7 @@
                 {
                     data: 'cost',
                 },
-                 {
+                {
                     data: 'types',
                     orderable: false,
                     render: function(data, type, row, meta) {
@@ -138,7 +135,7 @@
                         })
                         return small;
                     }
-                }, 
+                },
                 {
                     data: 'expire',
                 },

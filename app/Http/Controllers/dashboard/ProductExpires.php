@@ -8,20 +8,30 @@ use App\Models\Products;
 use App\Models\kardexes;
 
 
-class ProductExpires
+class ProductExpires extends Controller
 {
     public function index(Request $request)
     {
 
-        if ($request->search == "") {
-            $data = Products::select('id', 'name', 'stock', 'expire', 'amount')->get();
-        } else {
-            $data = Products::select('id', 'name', 'stock', 'expire', 'amount')->when($request->search, function ($query) use ($request) {
+        if ($request->ajax()) {
+
+            $data = Products::with('lotes')->when($request->search, function ($query) use ($request) {
                 $query->where('name', 'LIKE', '%' .  ucwords(strtolower($request->search)) . '%');
-            })->get();
-        }
-        dd($data);
-        return datatables()->of($data)->make();
+            })->where('stock', '!=', 0)->get();
+        
+           
+            return datatables()->of($data)->make();
+
+
+
+           /*  $data = Products::join('lotes', 'products.id', '=', 'lotes.products_id')->select('products.id', 'products.name', 'products.stock', 'lotes.name', 'lotes.expire', 'products.amount')->where('products.stock', '!=', 0)->get(); */
+        }/* else {
+             $data = Products::select('id', 'name', 'stock', 'expire', 'amount')->where('stock', '!=', 0)->when($request->search, function ($query) use ($request) {
+                $query->where('name', 'LIKE', '%' .  ucwords(strtolower($request->search)) . '%');
+            })->get(); 
+
+        }*/
+      
     }
 
     public function create()
