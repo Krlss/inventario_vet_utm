@@ -21,8 +21,8 @@ class Lote extends Model
         'products_id' => 'required|numeric',
     ];
 
-    public function products()
+    public function product()
     {
-        return $this->belongsTo(Products::class, 'products_id');
+        return $this->belongsTo(Products::class);
     }
 }

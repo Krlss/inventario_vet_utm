@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Products;
 use App\Models\kardexes;
-
+use App\Models\Lote;
 
 class ProductExpires extends Controller
 {
@@ -15,12 +15,17 @@ class ProductExpires extends Controller
 
         if ($request->ajax()) {
 
-            $data = Products::with('lotes')->when($request->search, function ($query) use ($request) {
+
+            $data = Lote::with(['product'=> function($query){
+                $query->where('stock', '!=', 0) ;
+            }])->when($request->search, function ($query) use ($request) {
                 $query->where('name', 'LIKE', '%' .  ucwords(strtolower($request->search)) . '%');
-            })->where('stock', '!=', 0)->get();
+            })->get();
+        
 
-
-            return datatables()->of($data)->make();
+            return datatables()->of($data)->addColumn('name', function(Lote $lote){
+                return $lote->product->name;
+            })->make();
 
 
 

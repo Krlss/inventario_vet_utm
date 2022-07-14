@@ -189,10 +189,13 @@
                     data: 'name',
                 },
                 {
-                    data: 'stock'
-                },
+                    data: 'lote'
+                }, /*
                 {
-                    data: 'name'
+                    data: 'lotes', 
+                    render: function(data, type, row) {
+                        return `<span class="badge badge-primary">${data}</span> `;
+                    }
                 },
                 {
                     data: 'expire',
@@ -218,7 +221,7 @@
                         }
                         return span;
                     } 
-                },
+                }, */
 
             ]
         });
