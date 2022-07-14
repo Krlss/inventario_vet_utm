@@ -37,7 +37,7 @@
                     <th>{{ __('Code') }}</th>
                     <th>{{ __('Name') }}</th>
                     <th>{{ __('Stock') }}</th>
-                    <th>{{ __('Lotes') }}</th>
+                    <th>{{ __('Lote') }}</th>
                     <th>{{ __('Expire') }}</th>
                     <th>{{ __('State') }}</th>
                 </tr>
@@ -189,10 +189,10 @@
                     data: 'name',
                 },
                 {
-                    data: 'lote'
-                }, /*
+                    data: 'stock'
+                },
                 {
-                    data: 'lotes', 
+                    data: 'lote',
                     render: function(data, type, row) {
                         return `<span class="badge badge-primary">${data}</span> `;
                     }
@@ -214,14 +214,14 @@
                         var fecha1 = moment(expire);
                         var fecha2 = moment();
                         var dias = fecha1.diff(fecha2, 'days');
-                        if (dias <= 0){
+                        if (dias <= 0) {
                             span = '<span class="badge badge-danger">Producto caducado</span>';
-                        }else{
+                        } else {
                             span = `<span class="badge badge-success"> Faltan ${dias} días </span>`;
                         }
                         return span;
-                    } 
-                }, */
+                    }
+                },
 
             ]
         });

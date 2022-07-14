@@ -16,16 +16,20 @@ class ProductExpires extends Controller
         if ($request->ajax()) {
 
 
-            $data = Lote::with(['product'=> function($query){
-                $query->where('stock', '!=', 0) ;
+            $data = Lote::with(['product' => function ($query) {
+                $query->where('stock', '!=', 0);
             }])->when($request->search, function ($query) use ($request) {
                 $query->where('name', 'LIKE', '%' .  ucwords(strtolower($request->search)) . '%');
             })->get();
-        
 
-            return datatables()->of($data)->addColumn('name', function(Lote $lote){
-                return $lote->product->name;
-            })->make();
+            return datatables()->of($data)
+                ->addColumn('name', function ($data) {
+                    return $data->product->name ?? '';
+                })->addColumn('stock', function ($data) {
+                    return $data->product->stock ?? '';
+                })->addColumn('amount', function ($data) {
+                    return $data->product->amount ?? '';
+                })->make();
 
 
 
