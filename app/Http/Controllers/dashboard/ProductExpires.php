@@ -14,13 +14,14 @@ class ProductExpires extends Controller
     {
 
         if ($request->ajax()) {
-
-
             $data = Lote::with(['product' => function ($query) {
                 $query->where('stock', '!=', 0);
-            }])->when($request->search, function ($query) use ($request) {
-                $query->where('name', 'LIKE', '%' .  ucwords(strtolower($request->search)) . '%');
+            }])->when($request->year, function ($query) use ($request) {
+                $query->whereYear('expire', strtolower($request->year));
+            })->when($request->month, function($query) use ($request){
+                $query->whereMonth('expire', strtolower($request->month));
             })->get();
+
 
             return datatables()->of($data)
                 ->addColumn('name', function ($data) {
@@ -30,16 +31,7 @@ class ProductExpires extends Controller
                 })->addColumn('amount', function ($data) {
                     return $data->product->amount ?? '';
                 })->make();
-
-
-
-            /*  $data = Products::join('lotes', 'products.id', '=', 'lotes.products_id')->select('products.id', 'products.name', 'products.stock', 'lotes.name', 'lotes.expire', 'products.amount')->where('products.stock', '!=', 0)->get(); */
-        }/* else {
-             $data = Products::select('id', 'name', 'stock', 'expire', 'amount')->where('stock', '!=', 0)->when($request->search, function ($query) use ($request) {
-                $query->where('name', 'LIKE', '%' .  ucwords(strtolower($request->search)) . '%');
-            })->get(); 
-
-        }*/
+        }
     }
 
     public function create()

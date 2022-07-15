@@ -28,7 +28,7 @@
     <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
 
         <div class="flex md:flex-row flex-col justify-between md:items-end items-start gap-2 mb-2">
-            <x-input-search element="search-expire" placeholder="{{ __('Search by product name') }}" label="{{ __('Product name') }}" />
+            <x-input-select-date element="search-expire" :dates="$dates" placeholder="{{ __('Search by product name') }}" label="{{ __('Expire-date') }}" />
 
         </div>
         <table id="tablesexpire" class="table table-hover table-striped">
@@ -80,8 +80,10 @@
     });
 
     fetch_data_expire({
-        search: ''
+        month: '',
+        year: ''
     })
+   
 
     function fetch_data_stock(params) {
         $('#tablestock').DataTable({
@@ -145,21 +147,6 @@
     }
 
     function fetch_data_expire(params) {
-
-        month = {
-            '1': 'Enero',
-            '2': 'Febrero',
-            '3': 'Marzo',
-            '4': 'Abril',
-            '5': 'Mayo',
-            '6': 'Junio',
-            '7': 'Julio',
-            '8': 'Agosto',
-            '9': 'Septiembre',
-            '10': 'Octubre',
-            '11': 'Noviembre',
-            '12': 'Diciembre'
-        }
         $('#tablesexpire').DataTable({
             processing: true,
             serverSide: true,
@@ -179,7 +166,8 @@
             ajax: {
                 url: "{{ route('dashboard.products-expire') }}",
                 data: {
-                    search: params.search
+                    year: params.year,
+                    month: params.month
                 }
             },
             columns: [{
@@ -200,8 +188,7 @@
                 {
                     data: 'expire',
                     render: function(data, type, row) {
-                        let date = new Date(data);
-                        return `${date.getDate()} de  ${month[date.getMonth()+1]} del ${date.getFullYear()}`;
+                        return moment(data).format("MMMM Do YYYY");
                     }
                 },
                 {
@@ -210,16 +197,8 @@
                         const {
                             expire
                         } = row;
-                        var span = '';
-                        var fecha1 = moment(expire);
-                        var fecha2 = moment();
-                        var dias = fecha1.diff(fecha2, 'days');
-                        if (dias <= 0) {
-                            span = '<span class="badge badge-danger">Producto caducado</span>';
-                        } else {
-                            span = `<span class="badge badge-success"> Faltan ${dias} días </span>`;
-                        }
-                        return span;
+                        if (moment(expire).diff(moment(), 'days') <= 0)  return '<span class="badge badge-danger">Producto caducado</span>';
+                        return  `<span class="badge badge-success">${moment(expire).toNow(true)}</span>`;
                     }
                 },
 
@@ -235,12 +214,34 @@
             search: search
         })
     });
-    $('#search-expire').keyup(function() {
+    var month_name = {
+        'Enero': '01',
+        'Febrero': '02',
+        'Marzo': '03',
+        'Abril': '04',
+        'Mayo': '05',
+        'Junio': '06',
+        'Julio': '07',
+        'Agosto': '08',
+        'Septiembre': '09',
+        'Octubre': '10',
+        'Noviembre': '11',
+        'Diciembre': '12'        
+    }
+    $('#search-expire').on('change', function() {
         var search = $('#search-expire').val();
+        var month = '';
+        var year = '';
+        if( search !== 0) {
+            month = search.split(' ')[1];
+            year = search.split(' ')[0];
+        };
+        console.log(month, "---", year);
         $('#tablesexpire').DataTable().clear().draw();
         $('#tablesexpire').DataTable().destroy();
         fetch_data_expire({
-            search: search
+            month:  month_name[month], 
+            year: year
         })
     });
 </script>
