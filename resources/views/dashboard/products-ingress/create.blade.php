@@ -26,7 +26,6 @@
 <form id="form-kardex" class="md:mb-0 mb-10" action="{{ route('dashboard.products-ingress.store') }}" method="POST">
 
     <x-flash-messages />
-
     @csrf
     <x-card-kardex id="{{$count}}" date="{{ old('created_at') ?? date('Y-m-d') }}" detail="{{ old('detail') ?? '' }}" readonly={{false}} />
 

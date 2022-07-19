@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\KardexesIngressRequest;
 use App\Models\kardexes;
 use App\Models\Products;
+use App\Models\Lote;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -69,8 +70,24 @@ class ProductsIngress extends Controller
             foreach ($request->products as $product) {
                 $product_id = $product['product_id'];
                 $quantity = $product['quantity'];
+                $_lote = $product['lote'];
+                $expire = $product['expire'];
                 $product = Products::find($product_id);
                 $stock_diff = 0;
+
+
+                $lote_existe = Lote::where('lote', $_lote)->where('products_id', intval($product_id))->first();
+                   
+
+                if(!$lote_existe){ 
+                    $lote = Lote::create([
+                        'products_id' => $product_id,
+                        'lote' => $_lote,
+                        'expire' =>  date('Y/m/d h:i:s', strtotime($expire)),
+    
+                    ]);
+                    $lote->save();
+                }
 
                 if ($product->amount > 0) {
                     $stock_diff = $quantity * $product->amount;
@@ -92,3 +109,4 @@ class ProductsIngress extends Controller
         }
     }
 }
+

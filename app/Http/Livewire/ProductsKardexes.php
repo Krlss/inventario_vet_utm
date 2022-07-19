@@ -10,9 +10,13 @@ class ProductsKardexes extends Component
 
     public $products = [];
     public $allProducts = [];
+    public $expire = true;
+    public $type = "";
 
-    public function mount($products, $type)
+    public function mount($products, $type, $expire = true)
     {
+        $this->expire = $expire;
+        $this->type = $type;
 
         if ($type == 'egress') {
             $this->allProducts = Products::where('stock', '>', 0)->orderBy('name', 'asc')->get();

@@ -10,13 +10,13 @@ class Lote extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
+        'lote',
         'expire',
         'products_id',
     ];
 
     static $rules = [
-        'name' => 'required|string|max:255',
+        'lote' => 'required|string|max:255',
         'expire' => 'required|date',
         'products_id' => 'required|numeric',
     ];
