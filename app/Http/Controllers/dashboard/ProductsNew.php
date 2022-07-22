@@ -64,19 +64,54 @@ class ProductsNew extends Controller
         //
     }
 
-    public function edit($id)
+    public function edit(Products $product)
     {
-        //
+        $types = Types::pluck('name', 'id');
+
+        $categories = Categories::pluck('name', 'id');
+
+        $units = Unit::pluck('name', 'id');
+
+        $typesSelected = $product->types->pluck('id')->toArray();
+        $categoriesSelected = $product->categories->pluck('id')->toArray();
+
+        return view('dashboard.products.edit', compact('product', 'types', 'categories', 'units', 'typesSelected', 'categoriesSelected'));
     }
 
-    public function update(Request $request, $id)
+    public function update(CreateNewProduct $request, Products $product)
     {
-        //
+
+        $input = $request->all();
+        try {
+            DB::beginTransaction();
+
+            $product->update($input);
+
+            $product->types()->sync($request->id_type);
+            $product->categories()->sync($request->id_category);
+
+            DB::commit();
+            return redirect()->route('dashboard.inventory.index')->with('success', __('Product updated successfully'));
+        } catch (\Throwable $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error', __('Error updating product') . ' ' . $e->getMessage())->withInput();
+        }
     }
 
     public function destroy($id)
     {
-        //
+
+        DB::beginTransaction();
+        try {
+            $specie = Products::find($id);
+            $specie->delete();
+
+            DB::commit();
+            return redirect()->route('dashboard.inventory.index')->with('success', __('Product deleted successfully'));
+        } catch (\Throwable $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error', __('Error in delete product') . ' ' . $e->getMessage());
+        }
     }
 
     public function LoadData()

@@ -40,8 +40,8 @@ class InventoryController extends Controller
                     return $product->unit ? $product->unit->name : '';
                 })->addColumn(
                     'actions',
-                    function ($product) {
-                        return view('dashboard.inventory.partials.actions', compact('product'));      
+                    function (Products $product) {
+                        return view('dashboard.inventory.partials.actions', compact('product'));
                     }
                 )
                 ->make();
@@ -70,9 +70,8 @@ class InventoryController extends Controller
         //
     }
 
-    public function edit($id)
+    public function edit()
     {
-        //
     }
 
     public function update(Request $request, $id)
@@ -82,12 +81,6 @@ class InventoryController extends Controller
 
     public function destroy($id)
     {
-        try {
-          $id = $id;
-
-        } catch (\Throwable $th) {
-            //throw $th;
-        }
     }
 
     public function LoadData()
