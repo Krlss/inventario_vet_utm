@@ -3,7 +3,7 @@
         {{ __('Products') }}
     </div>
 
-    <div wire:loading wire:target="removeProduct,addProduct" class="progress-bar hidden">
+    <div wire:loading wire:target="removeProduct,addProduct,changeProducts" class="progress-bar hidden">
         <div class="progress-bar-value"></div>
     </div>
 
@@ -21,11 +21,14 @@
                 </tr>
             </thead>
             <tbody id='body'>
+                {{-- {{echo $products[0]['lotes'];}} --}}
                 @foreach ($products as $index => $product)
                     <tr>
                         <td>
-                            <select name="products[{{ $index }}][product_id]" id="product_input{{ $index }}"
-                                wire:model="products.{{ $index }}.product_id" class="form-control">
+                            <select name="products[{{ $index }}][product_id]"
+                                id="product_input{{ $index }}"
+                                wire:model="products.{{ $index }}.product_id"
+                                wire:change="changeProducts($event.target.value)" class="form-control">
                                 <option value="">{{ __('Choose a product') }}</option>
                                 @foreach ($allProducts as $product)
                                     <option value="{{ $product->id }}">
@@ -61,21 +64,23 @@
                                     wire:model="products.{{ $index }}.lote" />
                                 @if ($errors->has('products.' . $index . '.lote'))
                                     <span
-                                        class="text-red-500 text-xs italic">{{ $errors->first('products.' . $index . '.lote') }}</span>
+                                        class="text-red-500 text-xs italic ">{{ $errors->first('products.' . $index . '.lote') }}</span>
                                 @endif
                             @else
-                                <select name="lote[]" class="form-control">
-                                    <option value="">{{ __('Choose a product') }}</option>
+                                <select wire:model="products.{{ $index }}.lote"
+                                    name="products[{{ $index }}][lote]" class="form-control">
+                                    <option value="">{{ __('Choose a lote') }}</option>
+                                    @if ($products[$index]['lotes'])
+                                        @foreach ($products[$index]['lotes'] as $lote)
+                                            <option value="{{ $lote['id'] }}">
+                                                {{ $lote['lote'] }}
+                                            </option>
+                                        @endforeach
+                                    @endif
                                 </select>
-
-                                <!-- Errores... -->
-                                {{-- @if ($errors->has('products'))
-                                    <span class="text-red-500 text-xs italic">{{ $errors->first('products') }}</span>
-                                @endif
-
-                                @if ($errors->has('products.' . $index . '.product_id'))
+                               {{--  @if ($errors->has('products.' . $index . '.lote'))
                                     <span
-                                        class="text-red-500 text-xs italic">{{ $errors->first('products.' . $index . '.product_id') }}</span>
+                                        class="text-red-500 text-xs italic">{{ $errors->first('products.' . $index . '.lote') }}</span>
                                 @endif --}}
                             @endif
 
@@ -110,14 +115,14 @@
         </div>
     </div>
 </div>
-@push('js')
+{{-- @push('js')
     <script>
-        /* $("select[id^=\'product_input\']").each(function(){
+         $("select[id^=\'product_input\']").each(function(){
             console.log(this)
-        }) */
+        }) 
 
         $('#body').on('change', function(){
             console.log('change')
         })
     </script>
-@endpush
+@endpush --}}

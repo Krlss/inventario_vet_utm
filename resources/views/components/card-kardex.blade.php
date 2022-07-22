@@ -6,13 +6,13 @@
         </div>
 
         <div class="flex items-center justify-start gap-2">
-            <label>{{__('Date')}}{{$readonly ? '' : '*'}}: </label>
+           {{-- <label>{{__('Date')}}{{$readonly ? '' : '*'}}: </label>
             <div class="flex flex-col">
-                <input max="{{date('Y-m-d')}}" value="{{date('Y-m-d',strtotime($date))}}" type="date" class="px-2 py-1 border rounded-md {{ $readonly ? 'bg-gray-50 outline-none' : 'bg-white' }}" @if($readonly) readonly @endif name="created_at" id="created_at" />
+                 <input max="{{date('Y-m-d')}}" value="{{date('Y-m-d',strtotime($date))}}" type="date" class="px-2 py-1 border rounded-md {{ $readonly ? 'bg-gray-50 outline-none' : 'bg-white' }}" @if($readonly) readonly @endif name="created_at" id="created_at" />
                 @if($errors->has('created_at'))
                 <span class="text-red-500 text-xs italic">{{$errors->first('created_at')}}</span>
-                @endif
-            </div>
+                @endif 
+            </div>--}}
         </div>
     </div>
 

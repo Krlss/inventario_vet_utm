@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Products;
+use App\Models\Lote;
 use Livewire\Component;
 
 class ProductsKardexes extends Component
@@ -31,21 +32,28 @@ class ProductsKardexes extends Component
             Simplemente cargan los datos que previamente se guardaron 
             para que no haga todo el proceso de nuevo
         */
-
-        if (count($products) > 0) {
-            foreach ($products as $index => $product) {
-                $this->products[$index] = [
-                    'product_id' => $product['product_id'],
-                    'quantity' => $product['quantity'],
-                ];
+        try {
+            //code...
+            if (count($products) > 0) {
+                foreach ($products as $index => $product) {
+                    $this->products[$index] = [
+                        'product_id' => $product['product_id'],
+                        'quantity' => $product['quantity'],
+                        'lote' => $product['lote'],
+                        'lotes' => [],
+                        'expire' => ''
+                    ];
+                }
+            } else {
+                $this->products = [['product_id' => '', 'quantity' => 1, 'lote' => '', 'lotes' => [], 'expire' => '']];
             }
-        } else {
-            $this->products = [['product_id' => '', 'quantity' => 1]];
+        } catch (\Throwable $th) {
+            $error = $th;
         }
     }
     public function addProduct()
     {
-        $this->products[] = ['product_id' => '', 'quantity' => 1];
+        $this->products[] = ['product_id' => '', 'quantity' => 1, 'lote' => '', 'lotes' => [], 'expire' => ''];
     }
 
     public function removeProduct($index)
@@ -54,6 +62,12 @@ class ProductsKardexes extends Component
         $this->products = array_values($this->products);
     }
 
+    public function changeProducts($value)
+    {
+        $lote = Lote::where('products_id', $value)->get();
+        $key = array_search($value, array_column($this->products, 'product_id'));
+        $this->products[$key]['lotes'] = $lote;
+    }
     public function render()
     {
         return view('livewire.products-kardexes');

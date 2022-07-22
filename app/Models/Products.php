@@ -23,7 +23,6 @@ class Products extends Model
         'name' => 'required|string|max:255',
         'cost' => 'required|numeric|min:0',
         'stock_min' => 'required|numeric|min:0',
-        'expire' => 'required|date',
         'amount' => 'required|numeric|min:0',
         'id_unit' => 'required|numeric',
     ];

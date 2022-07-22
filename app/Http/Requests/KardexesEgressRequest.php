@@ -24,11 +24,11 @@ class KardexesEgressRequest extends FormRequest
     public function rules()
     {
         return  [
-            'created_at' => 'required|date',
             'detail' => 'required',
             'products' => 'required|array',
             'products.*.product_id' => 'required|exists:products,id',
             'products.*.quantity' => 'required|integer|min:1',
+            'products.*.lote' => 'required',
         ];
     }
 }

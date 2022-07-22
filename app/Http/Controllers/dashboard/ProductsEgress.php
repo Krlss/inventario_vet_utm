@@ -5,9 +5,11 @@ namespace App\Http\Controllers\dashboard;
 use App\Http\Controllers\Controller;
 use App\Models\kardexes;
 use App\Models\Products;
+use App\Models\Lote;
 use App\Http\Requests\KardexesEgressRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class ProductsEgress extends Controller
 {
@@ -61,7 +63,7 @@ class ProductsEgress extends Controller
             DB::beginTransaction();
 
             $kardex = kardexes::create([
-                'created_at' => $request->created_at,
+                'created_at' => Carbon::now(),
                 'detail' => $request->detail,
                 'type' => 'egress',
             ]);
@@ -69,7 +71,9 @@ class ProductsEgress extends Controller
             foreach ($request->products as $product) {
                 $product_id = $product['product_id'];
                 $quantity = $product['quantity'];
+                $id_lote = $product['lote'];
                 $product = Products::find($product_id);
+                $lote = Lote::find($id_lote)->delete();
                 $stock_diff = 0;
 
                 if ($product->amount > 0) {

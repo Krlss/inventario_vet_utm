@@ -24,7 +24,6 @@ class KardexesIngressRequest extends FormRequest
     public function rules()
     {
         return [
-            'created_at' => 'required|date',
             'detail' => 'required',
             'products' => 'required|array',
             'products.*.product_id' => 'required|exists:products,id',

@@ -38,7 +38,12 @@ class InventoryController extends Controller
                 })
                 ->editColumn('unit', function (Products $product) {
                     return $product->unit ? $product->unit->name : '';
-                })
+                })->addColumn(
+                    'actions',
+                    function ($product) {
+                        return view('dashboard.inventory.partials.actions', compact('product'));      
+                    }
+                )
                 ->make();
         } else {
             $products = [];
@@ -77,7 +82,12 @@ class InventoryController extends Controller
 
     public function destroy($id)
     {
-        //
+        try {
+          $id = $id;
+
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
     }
 
     public function LoadData()

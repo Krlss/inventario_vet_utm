@@ -9,6 +9,7 @@ use App\Models\Products;
 use App\Models\Lote;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class ProductsIngress extends Controller
 {
@@ -62,7 +63,7 @@ class ProductsIngress extends Controller
             DB::beginTransaction();
 
             $kardex = kardexes::create([
-                'created_at' => $request->created_at,
+                'created_at' => Carbon::now(),
                 'detail' => $request->detail,
                 'type' => 'ingress',
             ]);
@@ -95,8 +96,8 @@ class ProductsIngress extends Controller
                 } else {
                     $stock_diff = $quantity;
                     $product->stock += $quantity;
+                
                 }
-
                 $product->save();
                 $kardex->products()->attach($product_id, ['quantity' => $quantity, 'stock_diff' => $stock_diff]);
             }
