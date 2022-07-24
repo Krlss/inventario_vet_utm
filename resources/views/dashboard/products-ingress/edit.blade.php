@@ -3,8 +3,8 @@
 @section('content_header')
 <div class="flex flex-col justify-between md:items-center items-start md:flex-row gap-2">
     <div class="flex flex-col">
-        <div class="text-2xl font-extrabold">{{ __('Product revenue') }}</div>
-        <span class="text-bold">{{__('Register an entry order for your products')}}</span>
+        <div class="text-2xl font-extrabold">{{ __('Edit product revenue') }}</div>
+        <span class="text-bold">{{__('Edit an entry order for your products')}}</span>
     </div>
 
     <div>
@@ -23,14 +23,11 @@
 @endsection
 
 @section('content')
-<form id="form-kardex" class="md:mb-0 mb-10" action="{{ route('dashboard.products-ingress.store') }}" method="POST">
 
-    <x-flash-messages />
-    @csrf
-    <x-card-kardex id="{{$count}}" readonly={{false}} kardex="{{ $kardex }}" />
-
-    @livewire('products-kardexes', ['products' => old('products') ? old('products') : [], 'type' => 'ingress'])
-
-</form>
+{!! Form::model($kardex, ['route' => ['dashboard.products-ingress.update', $kardex], 'autocomplete' => 'off', 'method' => 'put', 'id' => 'form-kardex', 'class' => 'md:mb-0 mb-10']) !!}
+<x-flash-messages />
+<x-card-kardex id="{{$count}}" readonly={{false}} :kardex=$kardex />
+@livewire('products-kardexes', ['products' => $products ?? old('products'), 'type' => 'ingress'])
+{!! Form::close() !!}
 
 @endsection

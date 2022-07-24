@@ -31,9 +31,9 @@ class ProductsIngress extends Controller
                     $date = date_create($kardexes->created_at);
                     return date_format($date, "d/m/Y H:i:s");
                 })
-                ->addColumn('link', function ($kardexes) {
-                    return '<a class="text-black" href="' . route('dashboard.products-ingress.show', $kardexes) . '"><svg width="20px" height="20px" viewBox="0 0 20 20"><path fill="currentColor" d="M7.75 17.5a.75.75 0 0 1 0-1.5H14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2H7.75a.75.75 0 0 1 0-1.5H14A3.5 3.5 0 0 1 17.5 6v8a3.5 3.5 0 0 1-3.5 3.5H7.75ZM7.741 6.199a.75.75 0 0 1 1.06.042l3 3.25a.75.75 0 0 1 0 1.018l-3 3.25A.75.75 0 1 1 7.7 12.74l1.838-1.991H1.75a.75.75 0 0 1 0-1.5h7.787l-1.838-1.99a.75.75 0 0 1 .042-1.06Z"/></svg></a>';
-                })->rawColumns(['link'])
+                ->addColumn('actions', function (kardexes $kardex) {
+                    return view('dashboard.products-ingress.partials.actions', compact('kardex'));
+                })
                 ->make(true);
         } else {
             $kardexes = [];
@@ -52,8 +52,9 @@ class ProductsIngress extends Controller
     {
         $last_id = kardexes::orderBy('id', 'desc')->first();
         $count = $last_id ? $last_id->id + 1 : 1;
+        $kardex = null;
 
-        return view('dashboard.products-ingress.create', compact('count'));
+        return view('dashboard.products-ingress.create', compact('count', 'kardex'));
     }
 
     function store(KardexesIngressRequest $request)
@@ -78,36 +79,117 @@ class ProductsIngress extends Controller
 
 
                 $lote_existe = Lote::where('lote', $_lote)->where('products_id', intval($product_id))->first();
-                   
 
-                if(!$lote_existe){ 
+
+                if (!$lote_existe && $_lote) {
                     $lote = Lote::create([
                         'products_id' => $product_id,
                         'lote' => $_lote,
                         'expire' =>  date('Y/m/d h:i:s', strtotime($expire)),
-    
+
                     ]);
                     $lote->save();
                 }
 
                 if ($product->amount > 0) {
                     $stock_diff = $quantity * $product->amount;
+                    $stock_current = $product->stock + $stock_diff;
                     $product->stock += $stock_diff;
                 } else {
                     $stock_diff = $quantity;
+                    $stock_current = $product->stock + $stock_diff;
                     $product->stock += $quantity;
-                
                 }
                 $product->save();
-                $kardex->products()->attach($product_id, ['quantity' => $quantity, 'stock_diff' => $stock_diff]);
+                $kardex->products()->attach($product_id, ['quantity' => $quantity, 'stock_diff' => $stock_diff, 'stock_current' => $stock_current]);
             }
 
             DB::commit();
 
             return redirect()->route('dashboard.products-ingress.show', $kardex)->with('success', __('The entry of products has been registered'));
         } catch (\Exception $e) {
-            return redirect()->route('dashboard.products-ingress.create')->with('error', __('Unable to register product entry'));
+            return redirect()->route('dashboard.products-ingress.create')->with('error', __('Unable to register product entry'))->withInput();
         }
     }
-}
 
+    public function edit($id)
+    {
+        $kardex = kardexes::find($id);
+        $count = $kardex->id;
+
+        $products = [];
+
+        foreach ($kardex->products as $product) {
+            $lote = Lote::where('products_id', $product->id)->select('lote', 'expire')->first();
+            $products[] = [
+                'product_id' => $product->id,
+                'quantity' => $product->pivot->quantity,
+                'lote' => $lote->lote,
+                'expire' => date('Y-m-d', strtotime($lote->expire)),
+                'lotes' => []
+            ];
+        }
+
+        return view('dashboard.products-ingress.edit', compact('kardex', 'count', 'products'));
+    }
+
+    public function update(KardexesIngressRequest $request, Products $product)
+    {
+        try {
+
+            DB::beginTransaction();
+
+            $kardex = kardexes::find($request->id);
+            $kardex->detail = $request->detail;
+            $kardex->save();
+
+            $kardex->products()->detach();
+
+            foreach ($request->products as $product) {
+                $product_id = $product['product_id'];
+                $quantity = $product['quantity'];
+                $_lote = $product['lote'];
+                $expire = $product['expire'];
+                $product = Products::find($product_id);
+                $stock_diff = 0;
+
+                $lote_existe = Lote::where('lote', $_lote)->where('products_id', intval($product_id))->first();
+
+                if (!$lote_existe && $_lote) {
+                    $lote = Lote::create([
+                        'products_id' => $product_id,
+                        'lote' => $_lote,
+                        'expire' =>  date('Y/m/d h:i:s', strtotime($expire)),
+
+                    ]);
+                    $lote->save();
+                }
+
+                if ($product->amount > 0) {
+                    $stock_diff = $quantity * $product->amount;
+                    $stock_current = $product->stock + $stock_diff;
+                    $product->stock += $stock_diff;
+                } else {
+                    $stock_diff = $quantity;
+                    $stock_current = $product->stock + $stock_diff;
+                    $product->stock += $quantity;
+                }
+                $product->save();
+                $kardex->products()->attach($product_id, ['quantity' => $quantity, 'stock_diff' => $stock_diff, 'stock_current' => $stock_current]);
+            }
+
+            DB::commit();
+
+            return redirect()->route('dashboard.products-ingress.show', $kardex)->with('success', __('The entry of products has been registered'));
+        } catch (\Exception $e) {
+            return redirect()->route('dashboard.products-ingress.edit', $product)->with('error', __('Unable to register product entry'))->withInput();
+        }
+    }
+
+    public function destroy($id)
+    {
+        $kardex = kardexes::find($id);
+        $kardex->delete();
+        return redirect()->route('dashboard.products-ingress.index')->with('success', __('The entry of products has been deleted'));
+    }
+}

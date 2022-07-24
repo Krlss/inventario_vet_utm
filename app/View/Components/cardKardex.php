@@ -7,16 +7,14 @@ use Illuminate\View\Component;
 class cardKardex extends Component
 {
     public $id;
-    public $date;
-    public $detail;
     public $readonly;
+    public $kardex;
 
-    public function __construct($id, $date, $detail, $readonly)
+    public function __construct($id, $readonly, $kardex = null)
     {
         $this->id = $id;
-        $this->date = $date;
-        $this->detail = $detail;
         $this->readonly = $readonly;
+        $this->kardex = $kardex;
     }
 
     /**

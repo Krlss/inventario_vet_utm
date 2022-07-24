@@ -28,6 +28,7 @@ class KardexesIngressRequest extends FormRequest
             'products' => 'required|array',
             'products.*.product_id' => 'required|exists:products,id',
             'products.*.quantity' => 'required|integer|min:1',
+            'products.*.expire' => 'required|date|before_or_equal:today|date_format:Y-m-d',
         ];
     }
 }

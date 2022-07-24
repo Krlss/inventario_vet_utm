@@ -148,6 +148,12 @@ return [
             'integer'  => 'La cantidad debe ser un número entero.',
             'min'      => 'La cantidad debe ser mayor a 0.',
         ],
+        'products.*.expire' => [
+            'required' => 'Debe ingresar una fecha de expiración.',
+            'date'  => 'Este valor debe ser una fecha válida',
+            'before_or_equal' => 'La fecha de expiración debe ser anterior o igual a la fecha actual.',
+            'date_format' => 'La fecha de expiración debe tener el formato :format.',
+        ],
         'name' => [
             'required' => 'Debe ingresar un nombre.',
             'unique'   => 'El nombre ya ha sido registrado.',

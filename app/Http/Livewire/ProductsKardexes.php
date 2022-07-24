@@ -37,18 +37,18 @@ class ProductsKardexes extends Component
             if (count($products) > 0) {
                 foreach ($products as $index => $product) {
                     $this->products[$index] = [
-                        'product_id' => $product['product_id'],
-                        'quantity' => $product['quantity'],
-                        'lote' => $product['lote'],
-                        'lotes' => [],
-                        'expire' => ''
+                        'product_id' =>  $product['product_id'],
+                        'quantity' =>   $product['quantity'],
+                        'lote' =>  $product['lote'],
+                        'lotes' =>  $product['lotes'],
+                        'expire' => $product['expire']
                     ];
                 }
             } else {
                 $this->products = [['product_id' => '', 'quantity' => 1, 'lote' => '', 'lotes' => [], 'expire' => '']];
             }
         } catch (\Throwable $th) {
-            $error = $th;
+            dd($th);
         }
     }
     public function addProduct()
@@ -62,11 +62,10 @@ class ProductsKardexes extends Component
         $this->products = array_values($this->products);
     }
 
-    public function changeProducts($value)
+    public function changeProducts($value, $index)
     {
-        $lote = Lote::where('products_id', $value)->get();
-        $key = array_search($value, array_column($this->products, 'product_id'));
-        $this->products[$key]['lotes'] = $lote;
+        $lote = Lote::where('products_id', intval($value) ?? '')->get();
+        $this->products[$index]['lotes'] = $lote;
     }
     public function render()
     {

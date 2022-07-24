@@ -47,7 +47,7 @@
                     <th>{{__('Date/Time')}}</th>
                     <th>{{__('Reason')}}</th>
                     <th>{{__('N° Products')}}</th>
-                    <th>{{__('View Log')}}</th>
+                    <th>{{__('Actions')}}</th>
                 </tr>
             </thead>
             <tbody></tbody>
@@ -110,7 +110,7 @@
                     }
                 },
                 {
-                    data: 'link'
+                    data: 'actions'
                 }
             ]
         });
