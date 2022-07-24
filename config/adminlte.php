@@ -103,7 +103,7 @@ return [
     */
 
     'classes_auth_card' => 'card-outline card-primary',
-    'classes_auth_header' => 'bg-yellow-navbar',
+    'classes_auth_header' => 'bg-yellow',
     'classes_auth_body' => '',
     'classes_auth_footer' => '',
     'classes_auth_icon' => '',

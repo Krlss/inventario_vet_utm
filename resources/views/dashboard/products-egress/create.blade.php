@@ -8,7 +8,7 @@
     </div>
 
     <div>
-        <button form="form-kardex" class="bg-green-1000 text-white py-2 px-4 hover:bg-green-900 rounded-md font-medium" type="submit">{{__('Save')}}</button>
+        <button form="form-kardex" class="bg-green-page text-white py-2 px-4 hover:bg-green-900 rounded-md font-medium" type="submit">{{__('Save')}}</button>
 
         <a href="{{route('dashboard.products-egress.index')}}">
             <button class="bg-red-700 py-2 px-4 hover:bg-red-800 rounded-md text-white font-medium">
@@ -32,7 +32,7 @@
     @csrf
     <x-card-kardex id="{{$count}}" date="{{ old('created_at') ?? date('Y-m-d') }}" detail="{{ old('detail') ?? '' }}" readonly={{false}} />
 
-    @livewire('products-kardexes', ['products' =>  old('products') ? old('products') : [], 'type' => 'egress', 'expire'=> false])
+    @livewire('products-kardexes', ['products' => old('products') ? old('products') : [], 'type' => 'egress', 'expire'=> false])
 
 </form>
 

@@ -14,7 +14,7 @@
     </div>
 
     <div class="flex items-center justify-center gap-1">
-        <a href="{{route('dashboard.products-ingress.create')}}" class="bg-green-1000 py-2 px-4 hover:bg-green-900 rounded-md text-white font-medium hover:no-underline">
+        <a href="{{route('dashboard.products-ingress.create')}}" class="bg-green-page py-2 px-4 hover:bg-green-900 rounded-md text-white font-medium hover:no-underline">
             {{__('New Income')}}
         </a>
         <a href="{{route('dashboard.products-ingress.index')}}" class="bg-red-700 text-white py-2 px-4 hover:bg-red-800 rounded-md font-medium hover:no-underline">{{__('Back')}}</a>

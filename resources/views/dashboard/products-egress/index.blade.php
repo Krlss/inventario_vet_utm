@@ -33,7 +33,7 @@
 
             <div class="flex xs:items-end items-start justify-between w-full xs:flex-row flex-col gap-2">
                 <x-input-date label="Fecha" element="date" />
-                <a href="{{ route('dashboard.products-egress.create') }}" class="bg-green-1000 text-white py-2 px-4 hover:bg-green-900 rounded-md font-medium hover:no-underline">
+                <a href="{{ route('dashboard.products-egress.create') }}" class="bg-green-page text-white py-2 px-4 hover:bg-green-900 rounded-md font-medium hover:no-underline">
                     {{__('New Expenses')}}
                 </a>
             </div>

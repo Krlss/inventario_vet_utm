@@ -1,4 +1,4 @@
-<a href="{{$route}}" class="w-full bg-green-1000 rounded-md py-2 px-4 text-white mb-2 hover:bg-green-900">
+<a href="{{$route}}" class="w-full bg-green-page rounded-md py-2 px-4 text-white mb-2 hover:bg-green-900">
     <div class="flex items-center justify-between space-x-2">
         <div class="flex flex-col overflow-hidden">
             <span class="font-bold text-lg truncate">{{$name}}</span>

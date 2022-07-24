@@ -4,7 +4,7 @@
             <x-jet-authentication-card-logo />
         </x-slot> -->
         <div class="w-full mb-4 text-center">
-            <h1 class="font-bold text-green-1000 leading-none text-base ">SISTEMA DE INVENTARIO Y FARMACIA <br>CLINICA VETERINARIA UTM</h1>
+            <h1 class="font-bold text-green-page leading-none text-base ">SISTEMA DE INVENTARIO Y FARMACIA <br>CLINICA VETERINARIA UTM</h1>
         </div>
 
         <x-jet-validation-errors class="mb-4 px-5" />
@@ -36,7 +36,7 @@
             </div>
 
             <div class="w-full mt-4 px-5">
-                <button type="submit" class="w-full h-8 bg-green-1000 text-white rounded-md font-bold hover:bg-green-900">
+                <button type="submit" class="w-full h-8 bg-green-page text-white rounded-md font-bold hover:bg-green-900">
                     INGRESAR
                 </button>
             </div>

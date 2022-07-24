@@ -8,7 +8,12 @@ module.exports = {
     "./resources/**/*.vue",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'yellow-page': '#ffff3a',
+        'green-page': '#016831',
+      },
+    },
     screens: {
       'xs': '475px',
       ...defaultTheme.screens,

@@ -9,18 +9,6 @@ input:-webkit-autofill:active {
     transition: background-color 5000s ease-in-out 0s;
 }
 
-.bg-green-1000 {
-    background: #016831;
-}
-
-.border-green-1000 {
-    border-color: #016831;
-}
-
-.text-green-1000 {
-    color: #016831;
-}
-
 .bg-yellow-navbar {
     background: rgba(255, 255, 58, 1);
 }

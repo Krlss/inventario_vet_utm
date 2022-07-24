@@ -27,7 +27,7 @@
                     <input type="hidden" name="button_action" id="button_action" value="insert" />
                     <input type="hidden" name="modal_class" id="modal_class" value="" />
                     <input type="hidden" name="submit" value="" />
-                    <button type="submit" class="bg-green-1000 hover:bg-green-900 shadow-sm p-2 px-4 mt-2 rounded-md text-whire font-medium text-white save">{{__('Save')}}</button>
+                    <button type="submit" class="bg-green-page hover:bg-green-900 shadow-sm p-2 px-4 mt-2 rounded-md text-whire font-medium text-white save">{{__('Save')}}</button>
                 </div>
             </form>
         </div>

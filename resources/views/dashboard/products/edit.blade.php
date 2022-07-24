@@ -33,7 +33,7 @@
                 <h4 class="font-bold leading-none">Editando un producto</h4>
             </div>
             <div class="flex items-center md:justify-center justify-start gap-2">
-                <button form="edit_product" type="submit" class="bg-green-1000 hover:bg-green-900 px-3 py-1 rounded text-white shadow-sm">Guardar</button>
+                <button form="edit_product" type="submit" class="bg-green-page hover:bg-green-900 px-3 py-1 rounded text-white shadow-sm">Guardar</button>
                 <button type="button" class="bg-red-700 hover:bg-red-800 px-3 py-1 rounded text-white shadow-sm clear">Cancelar</button>
             </div>
         </div>

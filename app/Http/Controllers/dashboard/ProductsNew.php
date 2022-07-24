@@ -23,15 +23,19 @@ class ProductsNew extends Controller
 
     public function create()
     {
-        $types = Types::all();
+        $types = Types::pluck('name', 'id');
 
-        $categories = Categories::all();
+        $categories = Categories::pluck('name', 'id');
 
-        $units = Unit::all();
+        $units = Unit::pluck('name', 'id');
 
         $product = null;
 
-        return view('dashboard.products.create', compact('types', 'categories', 'units', 'product'));
+        $typesSelected = null;
+
+        $categoriesSelected = null;
+
+        return view('dashboard.products.create', compact('types', 'categories', 'units', 'product', 'typesSelected', 'categoriesSelected'));
     }
 
     public function store(CreateNewProduct $request)
