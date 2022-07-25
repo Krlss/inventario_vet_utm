@@ -180,16 +180,20 @@ class ProductsIngress extends Controller
 
             DB::commit();
 
-            return redirect()->route('dashboard.products-ingress.show', $kardex)->with('success', __('The entry of products has been registered'));
+            return redirect()->route('dashboard.products-ingress.show', $kardex)->with('success', __('The entry of products has been updated'));
         } catch (\Exception $e) {
-            return redirect()->route('dashboard.products-ingress.edit', $product)->with('error', __('Unable to register product entry'))->withInput();
+            return redirect()->route('dashboard.products-ingress.edit', $product)->with('error', __('Unable to update product entry'))->withInput();
         }
     }
 
     public function destroy($id)
     {
-        $kardex = kardexes::find($id);
-        $kardex->delete();
-        return redirect()->route('dashboard.products-ingress.index')->with('success', __('The entry of products has been deleted'));
+        try {
+            $kardex = kardexes::find($id);
+            $kardex->delete();
+            return redirect()->route('dashboard.products-ingress.index')->with('success', __('The entry of products has been deleted'));
+        } catch (\Exception $e) {
+            return redirect()->route('dashboard.products-ingress.index')->with('error', __('Unable to delete product entry'))->withInput();
+        }
     }
 }
