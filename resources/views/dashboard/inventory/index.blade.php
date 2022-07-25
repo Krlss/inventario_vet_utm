@@ -49,7 +49,6 @@
                     <th>{{ __('Cost') }}</th>
                     <th>{{ __('Types') }}</th>
                     <th>{{ __('Categories') }}</th>
-                    <th>{{ __('Expire') }}</th>
                     <th>{{ __('Action') }}</th>
                 </tr>
             </thead>
@@ -72,19 +71,6 @@
         search: ''
     });
 
-    /*  function submit() {
-         console.log('hola')
-         var t = Swal.fire({
-             title: "¿Estás seguro de eliminar este producto?",
-             type: "error",
-             confirmButtonText: "Ok",
-             showCancelButton: true,
-         }).then((result) => {
-             return result;
-         });
-         console.log(t)
-     } */
-
     function fetch_data(params) {
         $('#table').DataTable({
             processing: true,
@@ -93,15 +79,12 @@
             responsive: true,
             autoWidth: false,
             lengthChange: false,
+            dataType: 'json',
+            dom: 'lrtip',
+            language: len,
             order: [
                 [0, "desc"]
             ],
-            "dom": 'lrtip',
-            columnDefs: [{
-                orderable: false,
-                targets: -1,
-            }],
-            language: len,
             ajax: {
                 url: "{{ route('dashboard.inventory.index') }}",
                 data: {
@@ -111,52 +94,63 @@
                 }
             },
             columns: [{
-                    data: 'id'
+                    data: 'id',
+                    name: 'id'
                 },
                 {
                     data: 'name',
+                    name: 'name'
                 },
                 {
                     data: 'stock',
+                    name: 'stock',
+                    searchable: false,
                 },
                 {
-                    data: 'unit',
+                    data: 'unit.name',
+                    name: 'unit.name',
+                    searchable: false,
                 },
                 {
                     data: 'amount',
+                    name: 'amount',
+                    searchable: false,
                 },
                 {
                     data: 'cost',
+                    name: 'cost',
+                    searchable: false,
                 },
                 {
-                    data: 'types',
+                    data: 'types[].name',
+                    name: 'types[].name',
                     orderable: false,
                     render: function(data, type, row, meta) {
                         var small = '';
                         data.forEach(e => {
                             small +=
-                                `<span class='badge badge-primary truncate max-w-100px text-left'>${e.name}</span><br>`;
+                                `<span class='badge badge-primary truncate max-w-100px text-left'>${e}</span><br>`;
                         })
                         return small;
                     }
                 },
                 {
-                    data: 'categories',
+                    data: 'categories[].name',
+                    name: 'categories[].name',
                     orderable: false,
                     render: function(data, type, row, meta) {
                         var small = '';
                         data.forEach(e => {
                             small +=
-                                `<span class='badge badge-primary truncate max-w-100px text-left'>${e.name}</span><br>`;
+                                `<span class='badge badge-primary truncate max-w-100px text-left'>${e}</span><br>`;
                         })
                         return small;
                     }
-                },
-                {
-                    data: 'expire',
                 },
                 {
                     data: 'actions',
+                    orderable: false,
+                    searchable: false,
                 },
 
             ]
@@ -175,7 +169,7 @@
             type: type_id
         })
     });
-    // dropdown
+
     $('.filter-select').change(function() {
         var type_id = $('#type').val();
         var category_id = $('#category').val();

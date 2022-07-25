@@ -29,22 +29,11 @@ class InventoryController extends Controller
                 })
                 ->when($request->search, function ($query) use ($request) {
                     $query->where('name', 'LIKE', '%' .  ucwords(strtolower($request->search)) . '%');
-                })
-                ->get();
+                })->get();
             return datatables()->of($data)
-                ->editColumn('expire', function (Products $product) {
-                    $date = date_create($product->expire);
-                    return date_format($date, "d/m/Y");
-                })
-                ->editColumn('unit', function (Products $product) {
-                    return $product->unit ? $product->unit->name : '';
-                })->addColumn(
-                    'actions',
-                    function (Products $product) {
-                        return view('dashboard.inventory.partials.actions', compact('product'));
-                    }
-                )
-                ->make();
+                ->addColumn('actions', function (Products $product) {
+                    return view('dashboard.inventory.partials.actions', compact('product'));
+                })->make(true);
         } else {
             $products = [];
 

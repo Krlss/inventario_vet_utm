@@ -21,6 +21,9 @@
                 </tr>
             </thead>
             <tbody id='body'>
+                @if ($errors->has('products'))
+                <span class="text-red-500 text-xs ">{{ $errors->first('products') }}</span>
+                @endif
                 @foreach ($products as $index => $product)
                 <tr>
                     <td>
@@ -34,10 +37,6 @@
                             </option>
                             @endforeach
                         </select>
-
-                        @if ($errors->has('products'))
-                        <span class="text-red-500 text-xs ">{{ $errors->first('products') }}</span>
-                        @endif
 
                         @if ($errors->has('products.' . $index . '.product_id'))
                         <span class="text-red-500 text-xs ">{{ $errors->first('products.' . $index . '.product_id') }}</span>
@@ -57,18 +56,20 @@
                         <span class="text-red-500 text-xs  ">{{ $errors->first('products.' . $index . '.lote') }}</span>
                         @endif
                         @else
-                        <select wire:model="products.{{ $index }}.lote" name="products[{{ $index }}][lote]" class="form-control">
+                        <select wire:model="products.{{ $index }}.lote" name="products[{{ $index }}][lote]" class="form-control" required>
                             <option value="">{{ __('Choose a lote') }}</option>
                             @if ($products[$index]['lotes'])
                             @foreach ($products[$index]['lotes'] as $lote)
-                            <option value="{{ $lote['id'] }}">
+                            <option value="{{ $lote['lote'] }}" @if($products[$index]['lote']==$lote['lote']) selected @endif>
                                 {{ $lote['lote'] }}
                             </option>
                             @endforeach
                             @endif
                         </select>
                         @endif
-
+                        @if ($errors->has('products.' . $index . '.lote'))
+                        <span class="text-red-500 text-xs ">{{ $errors->first('products.' . $index . '.lote') }}</span>
+                        @endif
                     </td>
                     @if ($expire)
                     <td>

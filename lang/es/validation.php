@@ -154,6 +154,9 @@ return [
             'before_or_equal' => 'La fecha de expiración debe ser anterior o igual a la fecha actual.',
             'date_format' => 'La fecha de expiración debe tener el formato :format.',
         ],
+        'products.*.lote' => [
+            'required' => 'Debe ingresar un número de lote',
+        ],
         'name' => [
             'required' => 'Debe ingresar un nombre.',
             'unique'   => 'El nombre ya ha sido registrado.',

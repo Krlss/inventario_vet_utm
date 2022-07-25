@@ -40,8 +40,8 @@ class ProductsKardexes extends Component
                         'product_id' =>  $product['product_id'],
                         'quantity' =>   $product['quantity'],
                         'lote' =>  $product['lote'],
-                        'lotes' =>  isset($product['lotes']) ? $product['lotes'] : [],
-                        'expire' => $product['expire']
+                        'lotes' =>  isset($product['lotes']) ? $product['lotes'] :  [],
+                        'expire' => isset($product['expire']) ? $product['expire'] : null,
                     ];
                 }
             } else {

@@ -24,7 +24,7 @@
 
 @section('content')
 
-<x-card-kardex id="{{$kardex->id}}" date="{{$kardex->created_at}}" detail="{{$kardex->detail}}" readonly={{true}} />
+<x-card-kardex id="{{$kardex->id}}" :kardex=$kardex readonly={{true}} />
 
 <x-flash-messages />
 
@@ -35,6 +35,7 @@
             <th>{{__('Name')}}</th>
             <th>{{__('Unit')}}</th>
             <th>{{__('Amount')}}</th>
+            <th>{{__('Amount Expense')}}</th>
             <th>- {{__('Stock')}}</th>
             <th>{{__('Stock')}}</th>
             <th>{{__('Type')}}</th>
@@ -49,8 +50,9 @@
             <td>{{$product->name}}</td>
             <td>{{$product->unit->name}}</td>
             <td>{{$product->amount}}</td>
+            <td class="text-red-400">-{{$product->pivot->quantity}}</td>
             <td class="text-red-400">-{{$product->pivot->stock_diff}}</td>
-            <td>{{$product->stock}}</td>
+            <td>{{$product->pivot->stock_current ?? '0'}}</td>
 
             <td>
                 @forelse ($product->types as $type)

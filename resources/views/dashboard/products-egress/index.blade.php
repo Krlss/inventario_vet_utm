@@ -41,6 +41,7 @@
 
         </div>
 
+        <x-flash-messages />
         <table id="table" class="table table-hover table-striped">
             <thead class="bg-black text-white">
                 <tr>
@@ -48,7 +49,7 @@
                     <th>{{__('Date/Time')}}</th>
                     <th>{{__('Reason')}}</th>
                     <th>{{__('N° Products')}}</th>
-                    <th>{{__('View Log')}}</th>
+                    <th>{{__('Actions')}}</th>
                 </tr>
             </thead>
             <tbody></tbody>
@@ -82,10 +83,7 @@
                 [0, "desc"]
             ],
             "dom": 'lrtip',
-            columnDefs: [{
-                orderable: false,
-                targets: -1,
-            }],
+            dataType: 'json',
             language: len,
             ajax: {
                 url: "{{ route('dashboard.products-egress.index') }}",
@@ -93,25 +91,29 @@
                     search: params.search,
                     date: params.date
                 },
-                type: 'GET'
             },
             columns: [{
                     data: 'id',
+                    name: 'id'
                 },
                 {
-                    data: 'created_at'
+                    data: 'created_at',
+                    name: 'created_at'
                 },
                 {
                     data: 'detail',
+                    name: 'detail'
                 },
                 {
-                    data: 'products',
+                    data: 'products[]',
                     render: function(data, type, row, meta) {
                         return data.length
                     }
                 },
                 {
-                    data: 'link'
+                    data: 'actions',
+                    orderable: false,
+                    searchable: false
                 }
             ]
         });

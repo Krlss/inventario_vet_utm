@@ -40,6 +40,7 @@
 
         </div>
 
+        <x-flash-messages />
         <table id="table" class="table table-hover table-striped">
             <thead class="bg-black text-white">
                 <tr>
@@ -77,14 +78,11 @@
             responsive: true,
             autoWidth: false,
             lengthChange: false,
+            dataType: 'json',
             order: [
                 [0, "desc"]
             ],
             "dom": 'lrtip',
-            columnDefs: [{
-                orderable: false,
-                targets: -1,
-            }],
             language: len,
             ajax: {
                 url: "{{ route('dashboard.products-ingress.index') }}",
@@ -92,25 +90,31 @@
                     search: params.search,
                     date: params.date
                 },
-                type: 'GET'
             },
             columns: [{
                     data: 'id',
+                    name: 'id'
                 },
                 {
-                    data: 'created_at'
+                    data: 'created_at',
+                    name: 'created_at'
                 },
                 {
                     data: 'detail',
+                    name: 'detail'
                 },
                 {
-                    data: 'products',
+                    data: 'products[]',
+                    name: 'products[]',
                     render: function(data, type, row, meta) {
-                        return data.length
+                        return data.length;
                     }
+
                 },
                 {
-                    data: 'actions'
+                    data: 'actions',
+                    searchable: false,
+                    orderable: false,
                 }
             ]
         });

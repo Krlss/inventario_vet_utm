@@ -3,8 +3,8 @@
 @section('content_header')
 <div class="flex flex-col justify-between md:items-center items-start md:flex-row gap-2">
     <div class="flex flex-col">
-        <div class="text-2xl font-extrabold">{{ __('Output of products') }}</div>
-        <span class="text-bold">{{__('Register a release order for your products')}}</span>
+        <div class="text-2xl font-extrabold">{{ __('Edit output of products') }}</div>
+        <span class="text-bold">{{__('Edit a release order for your products')}}</span>
     </div>
 
     <div>
@@ -24,16 +24,10 @@
 
 @section('content')
 
-
-<form id="form-kardex" class="md:mb-0 mb-10" action="{{ route('dashboard.products-egress.store') }}" method="POST">
-
-    <x-flash-messages />
-
-    @csrf
-    <x-card-kardex id="{{$count}}" readonly={{false}} />
-
-    @livewire('products-kardexes', ['products' => old('products') ? old('products') : [], 'type' => 'egress', 'expire'=> false])
-
-</form>
+{!! Form::model($kardex, ['route' => ['dashboard.products-egress.update', $kardex], 'autocomplete' => 'off', 'method' => 'put', 'id' => 'form-kardex', 'class' => 'md:mb-0 mb-10']) !!}
+<x-flash-messages />
+<x-card-kardex id="{{$count}}" readonly={{false}} :kardex=$kardex />
+@livewire('products-kardexes', ['products' => old('products') ?? $products , 'type' => 'egress'])
+{!! Form::close() !!}
 
 @endsection
