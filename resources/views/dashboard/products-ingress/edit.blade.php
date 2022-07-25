@@ -27,7 +27,7 @@
 {!! Form::model($kardex, ['route' => ['dashboard.products-ingress.update', $kardex], 'autocomplete' => 'off', 'method' => 'put', 'id' => 'form-kardex', 'class' => 'md:mb-0 mb-10']) !!}
 <x-flash-messages />
 <x-card-kardex id="{{$count}}" readonly={{false}} :kardex=$kardex />
-@livewire('products-kardexes', ['products' => $products ?? old('products'), 'type' => 'ingress'])
+@livewire('products-kardexes', ['products' => old('products') ?? $products , 'type' => 'ingress'])
 {!! Form::close() !!}
 
 @endsection
