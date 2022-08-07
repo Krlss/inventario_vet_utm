@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('lotes', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->string('lote');
             $table->unsignedInteger('products_id');
 
