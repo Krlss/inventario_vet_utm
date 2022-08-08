@@ -74,19 +74,6 @@
         </div>
     </div>
 
-
-    <div class="grid md:grid-cols-3 grid-cols-1 gap-2">
-
-
-        <div>
-        </div>
-        <div>
-        </div>
-    </div>
-    {{-- <div class="grid grid-cols-1 gap-2">
-
-    </div> --}}
-
 </div>
 
 @push('js')

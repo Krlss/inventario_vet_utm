@@ -7,9 +7,12 @@ use App\Models\kardexes;
 use App\Models\Products;
 use App\Models\Lote;
 use App\Http\Requests\KardexesEgressRequest;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SendNotifyMinStock;
 
 class ProductsEgress extends Controller
 {
@@ -68,6 +71,8 @@ class ProductsEgress extends Controller
                 'type' => 'egress',
             ]);
 
+            $productsStockMin = [];
+
             foreach ($request->products as $product) {
                 $product_id = $product['product_id'];
                 $quantity = $product['quantity'];
@@ -86,11 +91,27 @@ class ProductsEgress extends Controller
 
                 if ($product->stock < 0) {
                     $product->stock = 0;
-                    Lote::find($id_lote)->delete();
+                    $lote = Lote::where('lote', $id_lote)
+                        ->where('products_id', $product_id)
+                        ->first();
+                    if ($lote) {
+                        $lote->delete();
+                    }
+                }
+
+                if ($product->stock < $product->stock_min) {
+                    $productsStockMin[] = $product;
                 }
 
                 $product->save();
                 $kardex->products()->attach($product_id, ['quantity' => $quantity, 'stock_diff' => $stock_diff, 'stock_current' => $stock_current <= 0 ? 0 : $stock_current]);
+            }
+
+            if (count($productsStockMin) > 0) {
+                $users = User::with(['roles' => function ($query) {
+                    $query->where('name', 'Administrador');
+                }])->pluck('email')->toArray();
+                Mail::to($users)->send(new SendNotifyMinStock($productsStockMin));
             }
 
             DB::commit();

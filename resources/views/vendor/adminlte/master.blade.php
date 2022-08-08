@@ -33,7 +33,7 @@
     <link rel="stylesheet" href="{{ asset('vendor/adminlte/dist/css/adminlte.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     @else
-    <link rel="stylesheet" href="{{ mix(config('adminlte.laravel_mix_css_path', 'css/app.css')) }}">
+    @vite(['resources/css/app.css'])
     @endif
 
     {{-- Livewire Styles --}}
@@ -89,7 +89,7 @@
 
     <script src="{{ asset('vendor/adminlte/dist/js/adminlte.min.js') }}"></script>
     @else
-    <script src="{{ mix(config('adminlte.laravel_mix_js_path', 'js/app.js')) }}"></script>
+    @vite(['resources/js/app.js'])
     @endif
 
     {{-- Livewire Script --}}

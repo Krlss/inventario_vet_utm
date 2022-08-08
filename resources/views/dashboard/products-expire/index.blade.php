@@ -16,10 +16,10 @@
 
 @section('content')
 <ul class="nav nav-pills  nav-justified mb-3" id="pills-tab" role="tablist">
-    <li class="nav-item" role="presentation">
+    <li class="nav-item custom-item" role="presentation">
         <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Productos por Caducar</a>
     </li>
-    <li class="nav-item" role="presentation">
+    <li class="nav-item custom-item " role="presentation">
         <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Productos con poco Stock </a>
     </li>
 
@@ -83,7 +83,7 @@
         month: '',
         year: ''
     })
-   
+
 
     function fetch_data_stock(params) {
         $('#tablestock').DataTable({
@@ -197,8 +197,8 @@
                         const {
                             expire
                         } = row;
-                        if (moment(expire).diff(moment(), 'days') <= 0)  return '<span class="badge badge-danger">Producto caducado</span>';
-                        return  `<span class="badge badge-success">${moment(expire).toNow(true)}</span>`;
+                        if (moment(expire).diff(moment(), 'days') <= 0) return '<span class="badge badge-danger">Producto caducado</span>';
+                        return `<span class="badge badge-success">${moment(expire).toNow(true)}</span>`;
                     }
                 },
 
@@ -226,13 +226,13 @@
         'Septiembre': '09',
         'Octubre': '10',
         'Noviembre': '11',
-        'Diciembre': '12'        
+        'Diciembre': '12'
     }
     $('#search-expire').on('change', function() {
         var search = $('#search-expire').val();
         var month = '';
         var year = '';
-        if( search !== 0) {
+        if (search !== 0) {
             month = search.split(' ')[1];
             year = search.split(' ')[0];
         };
@@ -240,7 +240,7 @@
         $('#tablesexpire').DataTable().clear().draw();
         $('#tablesexpire').DataTable().destroy();
         fetch_data_expire({
-            month:  month_name[month], 
+            month: month_name[month],
             year: year
         })
     });
