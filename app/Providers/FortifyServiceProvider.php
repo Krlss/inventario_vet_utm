@@ -55,7 +55,7 @@ class FortifyServiceProvider extends ServiceProvider
                         return null;
                     }
                     if ($output["state"] == "success") {
-                        $user = User::where('email', $request->email)->first();
+                       /*  $user = User::where('email', $request->email)->first(); */
                         /* No existe usuario utm en base de datos? */
 
                         $usuario_utm = $output["value"];

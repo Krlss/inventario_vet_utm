@@ -11,9 +11,10 @@ class ProductsKardexes extends Component
 
     public $products = [];
     public $allProducts = [];
+    public $allLotes = [];
     public $expire = true;
     public $type = "";
-
+    protected $prod_all = [];
     public function mount($products, $type, $expire = true)
     {
         $this->expire = $expire;
@@ -21,8 +22,10 @@ class ProductsKardexes extends Component
 
         if ($type == 'egress') {
             $this->allProducts = Products::where('stock', '>', 0)->orderBy('name', 'asc')->get();
+            $this->allLotes = Lote::pluck('id', 'lote');
         } elseif ($type == 'ingress') {
-            $this->allProducts = Products::orderBy('name', 'asc')->get();
+            $this->prod_all = Products::latest()->get();
+            $this->allProducts = collect($this->prod_all->items());
         } else {
             $this->allProducts = [];
         }
@@ -54,6 +57,8 @@ class ProductsKardexes extends Component
     public function addProduct()
     {
         $this->products[] = ['product_id' => '', 'quantity' => 1, 'lote' => '', 'lotes' => [], 'expire' => ''];
+    /*     $this->set('products', $this->allProducts); */
+       // $this->emit('add_Product', ['products' => $this->prod_all]);
     }
 
     public function removeProduct($index)
@@ -64,8 +69,10 @@ class ProductsKardexes extends Component
 
     public function changeProducts($value, $index)
     {
-        $lote = Lote::where('products_id', intval($value) ?? '')->get();
-        $this->products[$index]['lotes'] = $lote;
+       /*  $lote = Lote::where('products_id', intval($value) ?? '')->get(); */
+        $this->products[$index]['lotes'] = array_filter($this->allLotes, function ($lote) use ($value) {
+            return $lote->products_id == intval($value);
+        });
     }
     public function render()
     {
