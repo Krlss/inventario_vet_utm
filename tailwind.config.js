@@ -12,6 +12,7 @@ module.exports = {
       colors: {
         'yellow-page': '#ffff3a',
         'green-page': '#016831',
+        'white-page': '#fafafa',
       },
     },
     screens: {

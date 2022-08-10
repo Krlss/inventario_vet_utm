@@ -12,6 +12,7 @@ use App\Http\Controllers\dashboard\ProductsIngress;
 use App\Http\Controllers\dashboard\ProductsMinStock;
 use App\Http\Controllers\dashboard\TypeController;
 use App\Http\Controllers\dashboard\UnitController;
+use App\Http\Controllers\dashboard\Report;
 use Illuminate\Support\Facades\Route;
 
 require_once __DIR__ . '/jetstream.php';
@@ -32,6 +33,7 @@ Route::middleware([
     Route::resource('/products-ingress', ProductsIngress::class)->names('dashboard.products-ingress');
     Route::resource('/products-egress', ProductsEgress::class)->names('dashboard.products-egress');
     Route::resource('/products', ProductsNew::class)->names('dashboard.products');
+    Route::resource('report', Report::class)->names('dashboard.report');
 
     Route::resource('/products-expires', ProductsExpire::class)->names('dashboard.products-expires');
 

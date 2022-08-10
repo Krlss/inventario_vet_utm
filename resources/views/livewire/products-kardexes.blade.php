@@ -27,7 +27,7 @@
                 @foreach ($products as $index => $product)
                     <tr>
                         <td>
-                            <select name="products[{{ $index }}][product_id]" class="select"
+                            <select name="products[{{ $index }}][product_id]" class="select2 form-control"
                                 id="product_input{{ $index }}"
                                 wire:model="products.{{ $index }}.product_id"
                                 @if ($type == 'egress') wire:change="changeProducts($event.target.value,{{ $index }})" @endif
@@ -66,7 +66,7 @@
                                 @endif
                             @else
                                 <select wire:model="products.{{ $index }}.lote"
-                                    name="products[{{ $index }}][lote]" class="form-control" required>
+                                    name="products[{{ $index }}][lote]" class="form-control select2" required>
                                     <option value="">{{ __('Choose a lote') }}</option>
                                     @if ($products[$index]['lotes'])
                                         @foreach ($products[$index]['lotes'] as $lote)
@@ -108,24 +108,43 @@
 
         <div class="row">
             <div class="col-md-12">
-                <button class="btn btn-sm btn-secondary" wire:click.prevent="addProduct">+
+                <button class="btn btn-sm btn-secondary add" wire:click.prevent="addProduct">+
                     {{ __('Add Another Product') }}</button>
             </div>
         </div>
     </div>
 </div>
-@push('js')
+{{-- @push('js')
+    <script src="{{ asset('plugins/select2/select2.min.js') }}"></script>
     <script>
         $(document).ready(function() {
-            
-            window.livewire.on('add_Product', (products) => {
-               /*  products.splice(index, 1);
-                window.livewire.set('products', products); */
-                console.log(products)
+            var products = [];
+            $('button.add').on('click', function() {
+                console.log(products);
+            })
+
+            window.livewire.on('add_Product', function() {
+                $("select.select").map(function(index, value) {
+                    console.log(value);
+                    value.select2({
+                        ajax: {
+                            url: 'https://api.github.com/search/repositories',
+                            data: function(params) {
+                                var query = {
+                                    search: params.term,
+                                    page: params.page || 1
+                                }
+
+                                return query;
+                            }
+                        }
+                    });
+                })
+
             });
 
-        })
-        /* var lit = document.querySelectorAll("select.select");
-        console.log(lit) */
+        });
+
+       
     </script>
-@endpush
+@endpush --}}

@@ -12,7 +12,7 @@
             <div class="text-2xl font-bold mb-4">{{ __('Modules') }}</div>
             <div class="flex flex-col gap-2">
                 <x-link-module name="{{__('Inventory')}}" desc="{{__('Manage products and equipment')}}" route="{{ route('dashboard.inventory.index') }}" />
-                <x-link-module name="{{__('Reports')}}" desc="{{ __('Information for decision making')}}" route="#" />
+                <x-link-module name="{{__('Reports')}}" desc="{{ __('Information for decision making')}}" route="{{ route('dashboard.report.index')}}" />
             </div>
         </div>
 
