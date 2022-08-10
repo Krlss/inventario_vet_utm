@@ -15,19 +15,19 @@
                     <th>{{ __('Quantity') }}*</th>
                     <th>{{ __('Lote') }}</th>
                     @if ($expire)
-                        <th>{{ __('Expire') }}*</th>
+                    <th>{{ __('Expire') }}*</th>
                     @endif
                     <th></th>
                 </tr>
             </thead>
             <tbody id='body'>
                 @if ($errors->has('products'))
-                    <span class="text-red-500 text-xs ">{{ $errors->first('products') }}</span>
+                <span class="text-red-500 text-xs ">{{ $errors->first('products') }}</span>
                 @endif
                 @foreach ($products as $index => $product)
                     <tr>
                         <td>
-                            <select name="products[{{ $index }}][product_id]" class="select2 form-control"
+                            <select name="products[{{ $index }}][product_id]" class="select"
                                 id="product_input{{ $index }}"
                                 wire:model="products.{{ $index }}.product_id"
                                 @if ($type == 'egress') wire:change="changeProducts($event.target.value,{{ $index }})" @endif
@@ -66,7 +66,7 @@
                                 @endif
                             @else
                                 <select wire:model="products.{{ $index }}.lote"
-                                    name="products[{{ $index }}][lote]" class="form-control select2" required>
+                                    name="products[{{ $index }}][lote]" class="form-control" required>
                                     <option value="">{{ __('Choose a lote') }}</option>
                                     @if ($products[$index]['lotes'])
                                         @foreach ($products[$index]['lotes'] as $lote)
@@ -115,36 +115,15 @@
     </div>
 </div>
 {{-- @push('js')
-    <script src="{{ asset('plugins/select2/select2.min.js') }}"></script>
     <script>
         $(document).ready(function() {
-            var products = [];
-            $('button.add').on('click', function() {
-                console.log(products);
-            })
-
-            window.livewire.on('add_Product', function() {
-                $("select.select").map(function(index, value) {
-                    console.log(value);
-                    value.select2({
-                        ajax: {
-                            url: 'https://api.github.com/search/repositories',
-                            data: function(params) {
-                                var query = {
-                                    search: params.term,
-                                    page: params.page || 1
-                                }
-
-                                return query;
-                            }
-                        }
-                    });
-                })
-
+            
+            window.livewire.on('add_Product', (products) => {
+              
+                console.log(products)
             });
 
-        });
-
-       
+        })
+      
     </script>
 @endpush --}}

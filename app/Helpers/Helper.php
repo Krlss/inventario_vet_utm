@@ -15,3 +15,15 @@ function flashMessage($message, $type = 'success')
 
     return '<div class="alert alert-' . $type . ' alert-dismissible fade show" role="alert">' . $message . '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
 }
+
+function shortenNumber($number, $precision = 2)
+{
+    if ($number < 1000) {
+        return $number;
+    }
+
+    $suffixes = array('', 'k', 'm', 'b', 't');
+    $exponent = floor(log($number) / log(1000));
+
+    return round($number / pow(1000, $exponent), $precision) . $suffixes[$exponent];
+}

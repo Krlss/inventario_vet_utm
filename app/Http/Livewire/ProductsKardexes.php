@@ -24,7 +24,8 @@ class ProductsKardexes extends Component
             $this->allProducts = Products::where('stock', '>', 0)->orderBy('name', 'asc')->get();
             $this->allLotes = Lote::pluck('id', 'lote');
         } elseif ($type == 'ingress') {
-            $this->allProducts = Products::latest()->get();
+
+            $this->allProducts = Products::orderBy('name', 'asc')->get();
         } else {
             $this->allProducts = [];
         }
@@ -57,7 +58,6 @@ class ProductsKardexes extends Component
     {
         $this->products[] = ['product_id' => '', 'quantity' => 1, 'lote' => '', 'lotes' => [], 'expire' => ''];
         /*     $this->set('products', $this->allProducts); */
-        /* $this->emit('add_Product',  $this->allProducts); */
     }
 
     public function removeProduct($index)
