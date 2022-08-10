@@ -67,16 +67,6 @@
 <script src="{{ asset('plugins/datatable/dataTables.responsive.min.js') }}"></script>
 <script src="{{ asset('plugins/datatable/responsive.bootstrap4.min.js') }}"></script>
 
-
-<script type="text/javascript" language="javascript" src="{{ asset('plugins/datatable/jquery.dataTables2.min.js') }}"></script>
-<script type="text/javascript" language="javascript" src="{{ asset('plugins/datatable/dataTables.buttons.min.js') }} "></script>
-<script type="text/javascript" language="javascript" src="{{ asset('plugins/datatable/jszip.min.js') }}"></script>
-<script type="text/javascript" language="javascript" src="{{ asset('plugins/datatable/pdfmake.min.js') }}"></script>
-<script type="text/javascript" language="javascript" src="{{ asset('plugins/datatable/vfs_fonts.js') }}"></script>
-<script type="text/javascript" language="javascript" src="{{ asset('plugins/datatable/buttons.html5.min.js') }}"></script>
-<script type="text/javascript" language="javascript" src="{{ asset('plugins/datatable/buttons.print.min.js') }}"></script>
-
-
 <script src="{{ asset('json/table.json') }}"></script>
 <script type="text/javascript">
     fetch_data({
@@ -92,7 +82,7 @@
             searching: false,
             responsive: true,
             dataType: 'json',
-            dom: 'Bfrtip',
+            dom: 'lfrtip',
             language: len,
             order: [
                 [0, "desc"]
@@ -105,9 +95,6 @@
                     search: params.search
                 }
             },
-            buttons: [
-                'excel', 'pdf', 'print'
-            ],
             columns: [{
                     data: 'id',
                     name: 'id'
