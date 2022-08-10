@@ -10,7 +10,7 @@ class cardKardex extends Component
     public $readonly;
     public $kardex;
 
-    public function __construct($id, $readonly, $kardex = null)
+    public function __construct($id, $readonly, $kardex)
     {
         $this->id = $id;
         $this->readonly = $readonly;
