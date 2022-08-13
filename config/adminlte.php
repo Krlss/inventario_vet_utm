@@ -275,6 +275,12 @@ return [
                     'icon' => 'fa fa-list',
                     'active'    => ['units*'],
                 ],
+                [
+                    'text'      => 'Permisos de la pág.',
+                    'icon'      => 'fas fa-list-alt',
+                    'active'    => ['permissions/*'],
+                    'route'         => 'dashboard.permissions.index',
+                ],
             ]
         ],
     ],

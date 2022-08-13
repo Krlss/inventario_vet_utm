@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\dashboard\PermissionController;
 use App\Http\Controllers\dashboard\CategoryController;
 use App\Http\Controllers\dashboard\HomeController;
 use App\Http\Controllers\dashboard\InventoryController;
@@ -51,4 +52,8 @@ Route::middleware([
     Route::get('ajaxdata/fetchdata', [Controller::class, 'fetchdata'])->name('ajaxdata.fetchdata');
 
     //Route::get('dataTableProducts', [InventoryController::class, 'dataTable'])->name('dataTableProducts');
+
+    Route::resource('permissions', PermissionController::class)->names('dashboard.permissions');
+    Route::post('permissions/revoke-permission-to-role', [PermissionController::class, 'revokePermissionToRole']);
+    Route::post('permissions/give-permission-to-role', [PermissionController::class, 'givePermissionToRole']);
 });
