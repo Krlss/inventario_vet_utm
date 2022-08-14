@@ -18,7 +18,7 @@ class ProductExpires extends Controller
                 $query->where('stock', '!=', 0);
             }])->when($request->year, function ($query) use ($request) {
                 $query->whereYear('expire', strtolower($request->year));
-            })->when($request->month, function($query) use ($request){
+            })->when($request->month, function ($query) use ($request) {
                 $query->whereMonth('expire', strtolower($request->month));
             })->get();
 

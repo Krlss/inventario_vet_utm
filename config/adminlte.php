@@ -244,42 +244,49 @@ return [
             'text' => 'Menú',
             'icon' => 'fa fa-home',
             'route' => 'dashboard',
-            'active' => ['']
+            'active' => [''],
+            'can' => 'inventory.home'
         ],
         [
             'text' => 'Productos por expirar',
             'icon' => 'fa fa-info-circle',
             'route' => 'dashboard.products-expires.index',
-            'active' => ['dashboard.products-expires.*']
+            'active' => ['dashboard.products-expires.*'],
+            'can' => ['inventory.expires-products.index', 'inventory.expires-stock-products.index']
         ],
         [
             'text' => 'Adm. de la pág.',
             'icon'      => 'fas fa-cogs',
             'active'    => ['units*', 'categories*', 'types*'],
+            'can' => ['inventory.units.index', 'inventory.categories.index', 'inventory.types.index', 'inventory.permissions'],
             'submenu' => [
                 [
                     'text' => 'Categorías',
                     'route' => 'categories.index',
                     'icon' => 'fa fa-tag',
                     'active'    => ['categories*'],
+                    'can' => 'inventory.categories.index'
                 ],
                 [
                     'text' => 'Tipos',
                     'route' => 'types.index',
                     'icon' => 'fa fa-bookmark',
                     'active'    => ['types*'],
+                    'can' => 'inventory.types.index'
                 ],
                 [
                     'text' => 'Unidades de medida',
                     'route' => 'units.index',
                     'icon' => 'fa fa-list',
                     'active'    => ['units*'],
+                    'can' => 'inventory.units.index'
                 ],
                 [
                     'text'      => 'Permisos de la pág.',
                     'icon'      => 'fas fa-list-alt',
                     'active'    => ['permissions/*'],
-                    'route'         => 'dashboard.permissions.index',
+                    'route' => 'dashboard.permissions.index',
+                    'can' => 'inventory.permissions'
                 ],
             ]
         ],

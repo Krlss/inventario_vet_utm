@@ -13,14 +13,24 @@
 @section('content')
 
 <div class="card">
+    @canany(['inventory.products.index', 'inventory.ingress-products.index', 'inventory.egress-products.index', 'inventory.products.create'])
     <div class="card-head">
         <ul class="flex md:flex-row flex-col border-b">
+            @can('inventory.products.index')
             <x-tabs routeTo='dashboard.inventory.index' routeCurrent='inventory*' title='Busqueda' />
+            @endcan
+            @can('inventory.ingress-products.index')
             <x-tabs routeTo='dashboard.products-ingress.index' routeCurrent='products-ingress*' title='Ingreso Productos' />
+            @endcan
+            @can('inventory.egress-products.index')
             <x-tabs routeTo='dashboard.products-egress.index' routeCurrent='products-egress*' title='Egreso Productos' />
+            @endcan
+            @can('inventory.products.create')
             <x-tabs routeTo='dashboard.products.create' routeCurrent='products/*' title='Crear Producto' />
+            @endcan
         </ul>
     </div>
+    @endcanany
     <div class="card-body pt-0 mt-0">
 
         <div class="text-center">
@@ -33,9 +43,11 @@
 
             <div class="flex xs:items-end items-start justify-between w-full xs:flex-row flex-col gap-2">
                 <x-input-date label="Fecha" element="date" />
+                @can('inventory.egress-products.create')
                 <a href="{{ route('dashboard.products-egress.create') }}" class="bg-green-page text-white py-2 px-4 hover:bg-green-900 rounded-md font-medium hover:no-underline">
                     {{__('New Expenses')}}
                 </a>
+                @endcan
             </div>
 
 
