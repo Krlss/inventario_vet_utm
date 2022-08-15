@@ -54,7 +54,6 @@ Route::middleware([
 
     //Route::get('dataTableProducts', [InventoryController::class, 'dataTable'])->name('dataTableProducts');
 
-    Route::resource('lotes', LoteController::class)->names('dashboard.lotes');
     Route::resource('permissions', PermissionController::class)->names('dashboard.permissions');
     Route::post('permissions/revoke-permission-to-role', [PermissionController::class, 'revokePermissionToRole']);
     Route::post('permissions/give-permission-to-role', [PermissionController::class, 'givePermissionToRole']);
