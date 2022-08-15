@@ -5,7 +5,6 @@ use App\Http\Controllers\dashboard\PermissionController;
 use App\Http\Controllers\dashboard\CategoryController;
 use App\Http\Controllers\dashboard\HomeController;
 use App\Http\Controllers\dashboard\InventoryController;
-use App\Http\Controllers\dashboard\LoteController;
 use App\Http\Controllers\dashboard\ProductExpires;
 use App\Http\Controllers\dashboard\ProductsNew;
 use App\Http\Controllers\dashboard\ProductsEgress;
