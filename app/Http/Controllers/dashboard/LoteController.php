@@ -19,6 +19,8 @@ class LoteController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
+
+            //Agrupar por el nombre del lote para que no se repitan los nombres
             $data = Lote::orderBy('created_at')->get();
 
             return datatables()->of($data)
@@ -50,6 +52,7 @@ class LoteController extends Controller
         ]);
 
         $loteCurrent = Lote::where('lote', $lote->lote)->get();
+        // Ver la forma de actualizar el lote
 
         if ($loteCurrent->count() > 0) {
             $loteCurrent->each(function ($lote) use ($request) {
