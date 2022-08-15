@@ -282,6 +282,13 @@ return [
                     'can' => 'inventory.units.index'
                 ],
                 [
+                    'text' => 'Lotes',
+                    'route' => 'dashboard.lotes.index',
+                    'icon' => 'fa fa-list',
+                    'active'    => ['lotes*'],
+                    'can' => 'inventory.lotes.index'
+                ],
+                [
                     'text'      => 'Permisos de la pág.',
                     'icon'      => 'fas fa-list-alt',
                     'active'    => ['permissions/*'],

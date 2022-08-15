@@ -5,6 +5,7 @@ use App\Http\Controllers\dashboard\PermissionController;
 use App\Http\Controllers\dashboard\CategoryController;
 use App\Http\Controllers\dashboard\HomeController;
 use App\Http\Controllers\dashboard\InventoryController;
+use App\Http\Controllers\dashboard\LoteController;
 use App\Http\Controllers\dashboard\ProductExpires;
 use App\Http\Controllers\dashboard\ProductsNew;
 use App\Http\Controllers\dashboard\ProductsEgress;
@@ -53,6 +54,7 @@ Route::middleware([
 
     //Route::get('dataTableProducts', [InventoryController::class, 'dataTable'])->name('dataTableProducts');
 
+    Route::resource('lotes', LoteController::class)->names('dashboard.lotes');
     Route::resource('permissions', PermissionController::class)->names('dashboard.permissions');
     Route::post('permissions/revoke-permission-to-role', [PermissionController::class, 'revokePermissionToRole']);
     Route::post('permissions/give-permission-to-role', [PermissionController::class, 'givePermissionToRole']);

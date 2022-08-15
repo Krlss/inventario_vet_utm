@@ -869,6 +869,8 @@
     "Yearly": "Anual",
     "Yemen": "Yemen",
     "Yes": "Sí",
+    "Lotes registered in the system": "Lotes registrados en el sistema",
+    "Editing a lote": "Editando un lote",
     "You are already subscribed.": "Usted ya está suscrito.",
     "You are currently within your free trial period. Your trial will expire on :date.": "Actualmente se encuentra dentro de su período de prueba gratuito. Su prueba vencerá el :date.",
     "You are logged in!": "¡Usted está conectado!",
@@ -925,5 +927,10 @@
     "inventory.units.create": "Crear una unidad",
     "inventory.units.edit": "Editar una unidad",
     "inventory.units.destroy": "Eliminar una unidad",
-    "inventory.reports": "Reportes"
+    "inventory.reports": "Reportes",
+    "inventory.lotes.index": "Lista de lotes",
+    "inventory.lotes.show": "Ver detalles de un lote",
+    "inventory.lotes.create": "Crear un lote",
+    "inventory.lotes.edit": "Editar un lote",
+    "inventory.lotes.destroy": "Eliminar un lote"
 }

@@ -73,7 +73,7 @@
                     </td>
                     @if ($expire)
                     <td>
-                        <input type="date" name="products[{{ $index }}][expire]" class="form-control" wire:model="products.{{ $index }}.expire" required max="{{ date('Y-m-d') }}" />
+                        <input type="date" name="products[{{ $index }}][expire]" class="form-control" wire:model="products.{{ $index }}.expire" required />
                         @if ($errors->has('products.' . $index . '.expire'))
                         <span class="text-red-500 text-xs ">{{ $errors->first('products.' . $index . '.expire') }}</span>
                         @endif
