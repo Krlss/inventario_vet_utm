@@ -29,6 +29,7 @@ Route::middleware([
     Route::get('/products_expire', [ProductExpires::class, 'index'])->name("dashboard.products-expire");
     Route::post('/products', [ProductsNew::class, 'store']);
 
+
     Route::resource('/inventory', InventoryController::class)->names('dashboard.inventory');
     Route::resource('/products-ingress', ProductsIngress::class)->names('dashboard.products-ingress');
     Route::resource('/products-egress', ProductsEgress::class)->names('dashboard.products-egress');
@@ -54,3 +55,5 @@ Route::middleware([
 
     //Route::get('dataTableProducts', [InventoryController::class, 'dataTable'])->name('dataTableProducts');
 });
+
+Route::get('/report-egress-by-day', [Report::class, 'egressByDayMes']);
