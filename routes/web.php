@@ -55,7 +55,8 @@ Route::middleware([
     Route::get('ajaxdata/fetchdata', [Controller::class, 'fetchdata'])->name('ajaxdata.fetchdata');
 
     //Route::get('dataTableProducts', [InventoryController::class, 'dataTable'])->name('dataTableProducts');
-
+    Route::get('/egressByDayMes',[ Report::class, 'egressByDayMes'])->name('egressByDayMes');
+    Route::get('/ingressByDayMes',[ Report::class, 'ingressByDayMes'])->name('ingressByDayMes');
     Route::resource('permissions', PermissionController::class)->names('dashboard.permissions');
     Route::post('permissions/revoke-permission-to-role', [PermissionController::class, 'revokePermissionToRole']);
     Route::post('permissions/give-permission-to-role', [PermissionController::class, 'givePermissionToRole']);

@@ -40,10 +40,19 @@ class Report extends Controller
         }
         return response()->json($egress_by_day);
     }
-    /* cantidad de productos egresados por dia */
-    /* public function egressByDay()
+    public function ingressByDayMes()
     {
-        $egressByDay = kardexes::where('type', 'egress')->selectRaw('count(*) as quantity, created_at')->groupBy('created_at')->get();
-        return response()->json($egressByDay);
-    } */
+        $date = Carbon::now();
+        $date->subDays(30);
+        $ingress = kardexes::where('type', 'ingress')->whereMonth('created_at', $date->month)->whereYear('created_at', $date->year)->get();
+        $ingress_by_day = [];
+        foreach ($ingress as $item) {
+            $date = date_create($item->created_at);
+            $day = date_format($date, "d");
+            $ingress_by_day[$day] = $ingress_by_day[$day] ?? 0;
+            $ingress_by_day[$day] += $item->products->count();
+        }
+        return response()->json($ingress_by_day);
+    }
+   
 }

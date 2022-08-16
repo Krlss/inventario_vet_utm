@@ -60,10 +60,6 @@ class Permissions extends Seeder
 
         Permission::create(['name' => 'inventory.reports']);
 
-        Permission::create(['name' => 'inventory.lotes.index']);
-        Permission::create(['name' => 'inventory.lotes.show']);
-        Permission::create(['name' => 'inventory.lotes.create']);
-        Permission::create(['name' => 'inventory.lotes.edit']);
-        Permission::create(['name' => 'inventory.lotes.destroy']);
+       
     }
 }
