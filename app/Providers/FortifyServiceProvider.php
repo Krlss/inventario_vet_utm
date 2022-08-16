@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\ServiceProvider;
 use App\Models\User;
 use Laravel\Fortify\Fortify;
+use Illuminate\Validation\ValidationException;
 
 class FortifyServiceProvider extends ServiceProvider
 {
@@ -55,7 +56,7 @@ class FortifyServiceProvider extends ServiceProvider
                         return null;
                     }
                     if ($output["state"] == "success") {
-                       /*  $user = User::where('email', $request->email)->first(); */
+                        /*  $user = User::where('email', $request->email)->first(); */
                         /* No existe usuario utm en base de datos? */
 
                         $usuario_utm = $output["value"];
@@ -84,7 +85,7 @@ class FortifyServiceProvider extends ServiceProvider
                             'api_token' => Str::random(25),
                             'profile_photo_path' => $PhotoPath,
                         ]);
-                        return $new_user;
+                        throw ValidationException::withMessages([__('Your account dont have access to the system')]);
                     } else {
                         return null;
                     }
@@ -92,10 +93,10 @@ class FortifyServiceProvider extends ServiceProvider
                     return null;
                 }
             } else {
-                if (
-                    $user &&
-                    Hash::check($request->password, $user->password)
-                ) {
+                if ($user &&   Hash::check($request->password, $user->password)) {
+                    if (!$user->canLogin()) {
+                        throw ValidationException::withMessages([__('Your account dont have access to the system')]);
+                    }
                     return $user;
                 }
             }

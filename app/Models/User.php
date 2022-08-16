@@ -107,4 +107,10 @@ class User extends Authenticatable
             $user->assignRole(config('role.auth.default'));
         });
     }
+
+    public function canLogin()
+    {
+        $permissionsUser = $this->getAllPermissions()->toArray();
+        return is_numeric(array_search('inventory.home', array_column($permissionsUser, 'name')));
+    }
 }
