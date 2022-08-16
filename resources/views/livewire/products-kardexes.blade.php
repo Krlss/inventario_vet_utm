@@ -94,14 +94,26 @@
                                 @endif
                             </td>
                         @endif
-                        <td>
-                            <a href="#" wire:click.prevent="removeProduct({{ $index }})">
-                                <div
-                                    class="text-red rotate-45 text-lg flex items-center justify-center hover:font-bold">
-                                    +</div>
-                            </a>
-                        </td>
-                    </tr>
+
+                        @if ($errors->has('products.' . $index . '.lote'))
+                        <span class="text-red-500 text-xs ">{{ $errors->first('products.' . $index . '.lote') }}</span>
+                        @endif
+                    </td>
+                    @if ($expire)
+                    <td>
+                        <input type="date" name="products[{{ $index }}][expire]" class="form-control" wire:model="products.{{ $index }}.expire" required />
+                        @if ($errors->has('products.' . $index . '.expire'))
+                        <span class="text-red-500 text-xs ">{{ $errors->first('products.' . $index . '.expire') }}</span>
+                        @endif
+                    </td>
+                    @endif
+                    <td>
+                        <a href="#" wire:click.prevent="removeProduct({{ $index }})">
+                            <div class="text-red rotate-45 text-lg flex items-center justify-center hover:font-bold">
+                                +</div>
+                        </a>
+                    </td>
+                </tr>
                 @endforeach
             </tbody>
         </table>

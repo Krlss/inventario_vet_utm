@@ -4707,6 +4707,17 @@ input[type="button"].btn-block {
   color: #fff;
 }
 
+.nav-pills .custom-item.active,
+.nav-pills .show>.custom-item {
+  color: #fff;
+  background: #016831;
+}
+
+.nav-pills .custom-item:not(.active):hover {
+  color: #fff;
+  background: #bbb;
+}
+
 .nav-fill>.nav-link,
 .nav-fill .nav-item {
   -ms-flex: 1 1 auto;

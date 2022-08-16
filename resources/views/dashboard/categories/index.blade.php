@@ -17,7 +17,9 @@
 
         <div class="mt-2 mb-4 flex md:flex-row flex-col md:items-center items-start justify-between gap-2">
             <span class="font-bold text-lg">{{__('Categories registered in the system')}}</span>
+            @can('inventory.categories.create')
             <x-button-add-modal target="category" />
+            @endcan
         </div>
 
         <x-flash-messages />

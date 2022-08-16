@@ -16,10 +16,10 @@ class ProductsExpire extends Controller
         $lotes = Lote::all();
         $lotes = collect($lotes)->map(function ($lote) {
             $date = Carbon::parse($lote->expire);
-            return  $date->year. ' ' .ucwords($date->monthName);
+            return  $date->year . ' ' . ucwords($date->monthName);
         });
         $dates = $lotes->unique();
-        
+
         return view('dashboard.products-expire.index', compact('dates'));
     }
 

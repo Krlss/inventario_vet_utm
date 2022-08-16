@@ -65,7 +65,7 @@
                 <label for="unit">{{ __('Unit') }}*</label>
                 <x-button-modal target="unit" />
             </div>
-            {!! Form::select('id_unit', $units, $product->id_unit ?? null, ['class' => 'select2 form-control', 'required' => true]) !!}
+            {!! Form::select('id_unit', $units, $product->id_unit ?? null, ['class' => 'select2 form-control', 'required' => true, 'id' => 'id_unit']) !!}
 
             @error('id_unit')
             <span class="text-danger">{{ $message }}</span>

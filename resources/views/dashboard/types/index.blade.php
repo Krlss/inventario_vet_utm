@@ -17,7 +17,9 @@
 
         <div class="mt-2 mb-4 flex md:flex-row flex-col md:items-center items-start justify-between gap-2">
             <span class="font-bold text-lg">{{__('Types registered in the system')}}</span>
+            @can('inventory.types.create')
             <x-button-add-modal target="type" />
+            @endcan
         </div>
 
         <x-flash-messages />

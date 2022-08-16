@@ -16,11 +16,11 @@
 
 @section('content')
 <ul class="nav nav-pills  nav-justified mb-3" id="pills-tab" role="tablist">
-    <li class="nav-item custom-item" role="presentation">
-        <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Productos por Caducar</a>
+    <li class="nav-item" role="presentation">
+        <a class="nav-link active custom-item" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Productos por Caducar</a>
     </li>
-    <li class="nav-item custom-item " role="presentation">
-        <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Productos con poco Stock </a>
+    <li class="nav-item" role="presentation">
+        <a class="nav-link custom-item" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Productos con poco Stock </a>
     </li>
 
 </ul>

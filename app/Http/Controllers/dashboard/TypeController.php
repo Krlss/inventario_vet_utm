@@ -11,6 +11,17 @@ use Illuminate\Support\Facades\Validator;
 class TypeController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('can:inventory.types.index')->only('index');
+        $this->middleware('can:inventory.types.show')->only('create');
+        $this->middleware('can:inventory.types.create')->only('store');
+        $this->middleware('can:inventory.types.edit')->only('edit');
+        $this->middleware('can:inventory.types.update')->only('update');
+        $this->middleware('can:inventory.types.destroy')->only('update');
+    }
+
+
     public function index(Request $request)
     {
         $types = [];
