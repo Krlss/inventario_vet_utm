@@ -4,8 +4,9 @@
 <link rel="stylesheet" href="{{ asset('plugins/datatable/bootstrap.css') }}">
 <link rel="stylesheet" href="{{ asset('plugins/datatable/dataTables.bootstrap4.min.css') }}">
 <link rel="stylesheet" href="{{ asset('plugins/datatable/responsive.bootstrap4.min.css') }}">
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css">
 
-<link rel="stylesheet" href="{{ asset('plugins/datatable/buttons.dataTables.min.css') }}">
+
 
 @endpush
 
@@ -76,6 +77,10 @@
 <script src="{{ asset('plugins/datatable/dataTables.bootstrap4.min.js') }}"></script>
 <script src="{{ asset('plugins/datatable/dataTables.responsive.min.js') }}"></script>
 <script src="{{ asset('plugins/datatable/responsive.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('plugins/datatable/pdfmake.min.js') }}"></script>
+<script src="{{ asset('plugins/datatable/jszip.min.js') }}"></script>
+<script src="{{ asset('plugins/datatable/dataTables.buttons.min.js') }}"></script>
+<script src="{{ asset('plugins/datatable/buttons.html5.min.js') }}"></script>
 
 <script src="{{ asset('json/table.json') }}"></script>
 <script type="text/javascript">
@@ -92,7 +97,24 @@
             searching: false,
             responsive: true,
             dataType: 'json',
-            dom: 'lfrtip',
+            dom: "<'row'<'col-sm-4'B><'col-sm-4'><'col-sm-2'><'col-sm-2'l>>" +
+          "<'row'<'col-sm-12'tr>>" +
+          "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+            buttons: [{
+                extend: 'collection',
+                className: 'exportButton',
+                text: 'Exportar',
+                buttons: [
+                    { 
+                        extend: 'excel',
+                        text: 'Excel',     
+                        title: 'Reporte de productos '+new Date().toLocaleDateString(),              
+                    },{
+                        extend: 'csv',
+                        text: 'CSV',
+                        title: 'Reporte de productos '+new Date().toLocaleDateString(),    
+                    }]
+                }],
             language: len,
             order: [
                 [0, "desc"]
