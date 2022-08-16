@@ -25,79 +25,64 @@
                 <span class="text-red-500 text-xs ">{{ $errors->first('products') }}</span>
                 @endif
                 @foreach ($products as $index => $product)
-                    <tr>
-                        <td>
-                            <select name="products[{{ $index }}][product_id]" class="select"
-                                id="product_input{{ $index }}"
-                                wire:model="products.{{ $index }}.product_id"
-                                @if ($type == 'egress') wire:change="changeProducts($event.target.value,{{ $index }})" @endif
-                                class="form-control" required>
-                                <option value="">{{ __('Choose a product') }}</option>
-                                @foreach ($allProducts as $product)
-                                    <option value="{{ $product->id }}">
-                                        {{ $product->name }}, {{ $product->stock }},
-                                        {{ $product->unit->name }},
-                                        {{ $product->amount }}
-                                    </option>
-                                @endforeach
-                            </select>
+                <tr>
+                    <td>
+                        <select name="products[{{ $index }}][product_id]" class="select form-control" id="product_input{{ $index }}" wire:model="products.{{ $index }}.product_id" @if ($type=='egress' ) wire:change="changeProducts($event.target.value,{{ $index }})" @endif required>
+                            <option value="">{{ __('Choose a product') }}</option>
+                            @foreach ($allProducts as $product)
+                            <option value="{{ $product->id }}">
+                                {{ $product->name }}, {{ $product->stock }},
+                                {{ $product->unit->name }},
+                                {{ $product->amount }}
+                            </option>
+                            @endforeach
+                        </select>
 
-                            @if ($errors->has('products.' . $index . '.product_id'))
-                                <span
-                                    class="text-red-500 text-xs ">{{ $errors->first('products.' . $index . '.product_id') }}</span>
-                            @endif
-
-                        </td>
-                        <td>
-                            <input type="number" min='1' name="products[{{ $index }}][quantity]"
-                                class="form-control" wire:model="products.{{ $index }}.quantity" required />
-                            @if ($errors->has('products.' . $index . '.quantity'))
-                                <span
-                                    class="text-red-500 text-xs ">{{ $errors->first('products.' . $index . '.quantity') }}</span>
-                            @endif
-                        </td>
-                        <td>
-                            @if ($type == 'ingress')
-                                <input type="text" name="products[{{ $index }}][lote]" class="form-control"
-                                    wire:model="products.{{ $index }}.lote" />
-                                @if ($errors->has('products.' . $index . '.lote'))
-                                    <span
-                                        class="text-red-500 text-xs  ">{{ $errors->first('products.' . $index . '.lote') }}</span>
-                                @endif
-                            @else
-                                <select wire:model="products.{{ $index }}.lote"
-                                    name="products[{{ $index }}][lote]" class="form-control" required>
-                                    <option value="">{{ __('Choose a lote') }}</option>
-                                    @if ($products[$index]['lotes'])
-                                        @foreach ($products[$index]['lotes'] as $lote)
-                                            <option value="{{ $lote['lote'] }}"
-                                                @if ($products[$index]['lote'] == $lote['lote']) selected @endif>
-                                                {{ $lote['lote'] }}
-                                            </option>
-                                        @endforeach
-                                    @endif
-                                </select>
-                            @endif
-                            @if ($errors->has('products.' . $index . '.lote'))
-                                <span
-                                    class="text-red-500 text-xs ">{{ $errors->first('products.' . $index . '.lote') }}</span>
-                            @endif
-                        </td>
-                        @if ($expire)
-                            <td>
-                                <input type="date" name="products[{{ $index }}][expire]" class="form-control"
-                                    wire:model="products.{{ $index }}.expire" required
-                                    max="{{ date('Y-m-d') }}" />
-                                @if ($errors->has('products.' . $index . '.expire'))
-                                    <span
-                                        class="text-red-500 text-xs ">{{ $errors->first('products.' . $index . '.expire') }}</span>
-                                @endif
-                            </td>
+                        @if ($errors->has('products.' . $index . '.product_id'))
+                        <span class="text-red-500 text-xs ">{{ $errors->first('products.' . $index . '.product_id') }}</span>
                         @endif
 
+                    </td>
+                    <td>
+                        <input type="number" min='1' name="products[{{ $index }}][quantity]" class="form-control" wire:model="products.{{ $index }}.quantity" required />
+                        @if ($errors->has('products.' . $index . '.quantity'))
+                        <span class="text-red-500 text-xs ">{{ $errors->first('products.' . $index . '.quantity') }}</span>
+                        @endif
+                    </td>
+                    <td>
+                        @if ($type == 'ingress')
+                        <input type="text" name="products[{{ $index }}][lote]" class="form-control" wire:model="products.{{ $index }}.lote" />
+                        @if ($errors->has('products.' . $index . '.lote'))
+                        <span class="text-red-500 text-xs  ">{{ $errors->first('products.' . $index . '.lote') }}</span>
+                        @endif
+                        @else
+                        <select wire:model="products.{{ $index }}.lote" name="products[{{ $index }}][lote]" class="form-control" required>
+                            <option value="">{{ __('Choose a lote') }}</option>
+                            @if ($products[$index]['lotes'])
+                            @foreach ($products[$index]['lotes'] as $lote)
+                            <option value="{{ $lote['lote'] }}" @if ($products[$index]['lote']==$lote['lote']) selected @endif>
+                                {{ $lote['lote'] }}
+                            </option>
+                            @endforeach
+                            @endif
+                        </select>
+                        @endif
                         @if ($errors->has('products.' . $index . '.lote'))
                         <span class="text-red-500 text-xs ">{{ $errors->first('products.' . $index . '.lote') }}</span>
                         @endif
+                    </td>
+                    @if ($expire)
+                    <td>
+                        <input type="date" name="products[{{ $index }}][expire]" class="form-control" wire:model="products.{{ $index }}.expire" required max="{{ date('Y-m-d') }}" />
+                        @if ($errors->has('products.' . $index . '.expire'))
+                        <span class="text-red-500 text-xs ">{{ $errors->first('products.' . $index . '.expire') }}</span>
+                        @endif
+                    </td>
+                    @endif
+
+                    @if ($errors->has('products.' . $index . '.lote'))
+                    <span class="text-red-500 text-xs ">{{ $errors->first('products.' . $index . '.lote') }}</span>
+                    @endif
                     </td>
                     @if ($expire)
                     <td>
