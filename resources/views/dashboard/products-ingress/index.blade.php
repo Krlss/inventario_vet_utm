@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="{{ asset('plugins/datatable/bootstrap.css') }}">
 <link rel="stylesheet" href="{{ asset('plugins/datatable/dataTables.bootstrap4.min.css') }}">
 <link rel="stylesheet" href="{{ asset('plugins/datatable/responsive.bootstrap4.min.css') }}">
-<link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css">
+<link rel="stylesheet" href="{{ asset('plugins/datatable/buttons.dataTables.min.css') }}">
 @endpush
 
 @section('content_header')
@@ -72,117 +72,5 @@
 @endsection
 
 @push('js')
-<script src="{{ asset('plugins/datatable/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('plugins/datatable/dataTables.bootstrap4.min.js') }}"></script>
-<script src="{{ asset('plugins/datatable/dataTables.responsive.min.js') }}"></script>
-<script src="{{ asset('plugins/datatable/responsive.bootstrap4.min.js') }}"></script>
-<script src="{{ asset('plugins/datatable/pdfmake.min.js') }}"></script>
-<script src="{{ asset('plugins/datatable/jszip.min.js') }}"></script>
-<script src="{{ asset('plugins/datatable/dataTables.buttons.min.js') }}"></script>
-<script src="{{ asset('plugins/datatable/buttons.html5.min.js') }}"></script>
-
-
-<script src="{{ asset('json/table.json') }}"></script>
-<script type="text/javascript">
-    fetch_data({
-        search: '',
-        date: null
-    });
-
-    function fetch_data(params) {
-        $('#table').DataTable({
-            processing: true,
-            serverSide: true,
-            searching: false,
-            responsive: true,
-            autoWidth: false,
-            dataType: 'json',
-            order: [
-                [0, "desc"]
-            ],
-            dom: "<'row'<'col-sm-4'B><'col-sm-4'><'col-sm-2'><'col-sm-2'l>>" +
-          "<'row'<'col-sm-12'tr>>" +
-          "<'row'<'col-sm-5'i><'col-sm-7'p>>",
-            buttons: [{
-                extend: 'collection',
-                className: 'exportButton',
-                text: 'Exportar',
-                buttons: [
-                    { 
-                        extend: 'excel',
-                        text: 'Excel',    
-                        title: 'Reporte de ingreso de productos '+new Date().toLocaleDateString(),        
-                        exportOptions: {
-                            columns: [0,1,2,3]
-                        }            
-                    },{
-                        extend: 'csv',
-                        text: 'CSV',
-                        title: 'Reporte de ingreso de productos '+new Date().toLocaleDateString(),
-                        exportOptions: {
-                            columns: [0,1,2,3]
-                        }  
-                    }]
-                }],
-            language: len,
-            ajax: {
-                url: "{{ route('dashboard.products-ingress.index') }}",
-                data: {
-                    search: params.search,
-                    date: params.date
-                },
-            },
-            columns: [{
-                    data: 'id',
-                    name: 'id'
-                },
-                {
-                    data: 'created_at',
-                    name: 'created_at'
-                },
-                {
-                    data: 'detail',
-                    name: 'detail'
-                },
-                {
-                    data: 'products[]',
-                    name: 'products[]',
-                    render: function(data, type, row, meta) {
-                        return data.length;
-                    }
-
-                },
-                {
-                    data: 'actions',
-                    searchable: false,
-                    orderable: false,
-                }
-            ]
-        });
-    }
-
-    $('.filter-input').keyup(function() {
-        var search = $('#search').val();
-        var date = $('#date').val();
-        $('#table').DataTable().clear().draw();
-        $('#table').DataTable().destroy();
-        fetch_data({
-            search,
-            date
-        })
-    });
-
-
-    $('.filter-select').change(function() {
-        var search = $('#search').val();
-        var date = $('#date').val();
-        console.log(date)
-        $('#table').DataTable().clear().draw();
-        $('#table').DataTable().destroy();
-        fetch_data({
-            search,
-            date
-        })
-    });
-</script>
+@include('dashboard.products-ingress.scripts')
 @endpush
