@@ -30,7 +30,7 @@ class Report extends Controller
     {
         $date = Carbon::now();
         $date->subDays(30);
-        $egress = kardexes::where('type', 'egress')->whereMonth('created_at', $date->month)->whereYear('created_at', $date->year)->get();
+        $egress = kardexes::where('type', 'egress')->whereDate('created_at', '>=', date('Y-m-d', strtotime('-30 days')))->get();
         $egress_by_day = [];
         foreach ($egress as $item) {
             $date = date_create($item->created_at);
@@ -43,8 +43,10 @@ class Report extends Controller
     public function ingressByDayMes()
     {
         $date = Carbon::now();
+
+        // last ingress in 30 days
         $date->subDays(30);
-        $ingress = kardexes::where('type', 'ingress')->whereMonth('created_at', $date->month)->whereYear('created_at', $date->year)->get();
+        $ingress = kardexes::where('type', 'ingress')->whereDate('created_at', '>=', date('Y-m-d', strtotime('-30 days')))->get();
         $ingress_by_day = [];
         foreach ($ingress as $item) {
             $date = date_create($item->created_at);
@@ -54,5 +56,4 @@ class Report extends Controller
         }
         return response()->json($ingress_by_day);
     }
-   
 }
