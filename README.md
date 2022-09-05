@@ -12,7 +12,6 @@ Para este apartado se necesitará que se tenga instalado:
 Una vez instalado lo anterior mencionado, se procede a clonar el repositorio de GitLab.
 
 - Clonar con SSH:
-
     <code>
 
         git clone gt@gitlab.com:utmdag7/inventario_vet_utm.git 
@@ -21,7 +20,6 @@ Una vez instalado lo anterior mencionado, se procede a clonar el repositorio de 
   
 
 - Clonar con HTTS:
-
     <code>
 
          git clone ttps://gitlab.com/utmdag7/inventario_vet_utm.git
@@ -29,7 +27,6 @@ Una vez instalado lo anterior mencionado, se procede a clonar el repositorio de 
     </code> 
 
 Se procede a entrar en la carpeta del repositorio clonado y en la consola se coloca el siguiente comando: 
-
 <code>
 
     compser install 
@@ -37,7 +34,6 @@ Se procede a entrar en la carpeta del repositorio clonado y en la consola se col
 </code>
 
 Se hacen las mgraciones correspondientes para la base de datos:
- 
 <code>
 
     php artisa migrate 
@@ -45,7 +41,6 @@ Se hacen las mgraciones correspondientes para la base de datos:
 </code>
 
 Se actualizan os seed de la base de datos:
-
 <code>
 
     php artisa db:seed 
@@ -53,7 +48,6 @@ Se actualizan os seed de la base de datos:
 </code>
 
 Luego de esto a puede ejecutar la aplicación web en modo desarrollo con el siguiente comando: 
- 
  <code>
 
     php artisa serve 
@@ -73,7 +67,6 @@ Para ello, es necesario intalar:
 - npm (Node Package Manager) 
 
 Dentro del seridor, deben posicionarse en la ruta
-
 <code>
 
     cd /var/www 
@@ -97,7 +90,6 @@ Luego de esto se ingresa al directorio del proyecto, para este caso:
 
 
 Ahora se procede a instalar las dependencias necesarias para ejecutar el aplicativo:
-
 <code>
 
     composer install
@@ -107,15 +99,12 @@ Ahora se procede a instalar las dependencias necesarias para ejecutar el aplicat
 
 
 Es necesario, además, un archivo de configuración para las variables de entorno, el cual se debe crear con el comando touch: 
-
 <code>
 
     touch .env
-
 </code>
 
 En el archivo .env colocar el siguiente código: 
-
 <code> 
         
         APP_NAME=
@@ -175,7 +164,6 @@ En el archivo .env colocar el siguiente código:
 En el archivo .env debe actualizar los parámetros de configuración para la conexión con la base de datos.
 
 Se hacen las mgraciones correspondientes para la base de datos:
- 
 <code>
 
     php artisa migrate 
@@ -183,7 +171,6 @@ Se hacen las mgraciones correspondientes para la base de datos:
 </code>
 
 Se actualizan os seed de la base de datos:
-
 <code>
 
     php artisa db:seed 
@@ -191,7 +178,6 @@ Se actualizan os seed de la base de datos:
 </code>
 
 luego de esto a puede ejecutar la aplicación web con el siguiente comando: 
- 
  <code>
 
     php artisa serve 
