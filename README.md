@@ -1,64 +1,199 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# **Sistema de Inventario de la Clinica de Veterinaria**
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Este Sistema está diseñado para controlar y gestionar el inventario de la Clinica Veterianaria. 
 
-## About Laravel
+## **Clonar sistema en Modo Desarrollo**
+Para este apartado se necesitará que se tenga instalado: 
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- [PHP (Hypertext Preprocessor)](https://www.php.net/downloads.php)
+- [Composer](https://getcomposer.org/download/)  
+- [Git](https://git-scm.com/downloads)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Una vez instalado lo anterior mencionado, se procede a clonar el repositorio de GitLab.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- Clonar con SSH:
 
-## Learning Laravel
+    <code>
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+        git clone gt@gitlab.com:utmdag7/inventario_vet_utm.git 
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+    </code>
+  
 
-## Laravel Sponsors
+- Clonar con HTTS:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+    <code>
 
-### Premium Partners
+         git clone ttps://gitlab.com/utmdag7/inventario_vet_utm.git
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+    </code> 
 
-## Contributing
+Se procede a entrar en la carpeta del repositorio clonado y en la consola se coloca el siguiente comando: 
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+<code>
 
-## Code of Conduct
+    compser install 
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+</code>
 
-## Security Vulnerabilities
+Se hacen las mgraciones correspondientes para la base de datos:
+ 
+<code>
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+    php artisa migrate 
 
-## License
+</code>
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Se actualizan os seed de la base de datos:
+
+<code>
+
+    php artisa db:seed 
+
+</code>
+
+Luego de esto a puede ejecutar la aplicación web en modo desarrollo con el siguiente comando: 
+ 
+ <code>
+
+    php artisa serve 
+
+</code>
+
+
+## **Clonar sistema en Modo Producción**
+
+Para este caso se debe tener en cuenta el tipo de distribución Linux en la qe esté corriendo vuestro servidor: 
+
+Para ello, es necesario intalar: 
+
+- PHP - last version
+- Composer
+- Git
+- npm (Node Package Manager) 
+
+Dentro del seridor, deben posicionarse en la ruta
+
+<code>
+
+    cd /var/www 
+
+</code>
+
+En la carpeta e debe clonar el repositorio de GitLab
+<code>
+
+    git clone htps://gitlab.com/utmdag7/inventario_vet_utm.git
+
+</code>
+
+
+Luego de esto se ingresa al directorio del proyecto, para este caso: 
+<code>
+
+    cd invntaio_vet_utm 
+
+</code>
+
+
+Ahora se procede a instalar las dependencias necesarias para ejecutar el aplicativo:
+
+<code>
+
+    composer install
+    npm install
+
+</code>
+
+
+Es necesario, además, un archivo de configuración para las variables de entorno, el cual se debe crear con el comando touch: 
+
+<code>
+
+    touch .env
+
+</code>
+
+En el archivo .env colocar el siguiente código: 
+
+<code> 
+        
+        APP_NAME=
+        APP_ENV=production
+        APP_KEY=base64:7mOB49JobliFt9alcq1ljqjqGokuAlncs9/4irVDvZI=
+        APP_DEBUG=false
+        APP_URL=<url page>
+
+        LOG_CHANNEL=stack
+        LOG_DEPRECATIONS_CHANNEL=null
+        LOG_LEVEL=debug
+
+        DB_CONNECTION=psql
+        DB_HOST= host de la base de datos
+        DB_PORT= puerto de la base de datos
+        DB_DATABASE= nombre de la base de datos
+        DB_USERNAME= usuario
+        DB_PASSWORD= contraseña
+
+        BROADCAST_DRIVER=log
+        CACHE_DRIVER=file
+        FILESYSTEM_DISK=local
+        QUEUE_CONNECTION=sync
+        SESSION_DRIVER=database
+        SESSION_LIFETIME=120 
+
+        MAIL_MAILER=smtp
+        MAIL_HOST=smtp.googlemail.com
+        MAIL_PORT=465
+        MAIL_USERNAME= correo
+        MAIL_PASSWORD= contraseña
+        MAIL_ENCRYPTION=ssl
+        MAIL_FROM_ADDRESS= correo
+        MAIL_FROM_NAME="${APP_NAME}"
+
+        MEMCACHED_HOST=127.0.0.1
+
+        REDIS_HOST=127.0.0.1
+        REDIS_PASSWORD=null
+        REDIS_PORT=6379
+
+        AWS_ACCESS_KEY_ID=
+        AWS_SECRET_ACCESS_KEY=
+        AWS_DEFAULT_REGION=us-east-1
+        AWS_BUCKET=
+        AWS_USE_PATH_STYLE_ENDPOINT=false
+
+        PUSHER_APP_ID=
+        PUSHER_APP_KEY=
+        PUSHER_APP_SECRET=
+        PUSHER_APP_CLUSTER=mt1
+
+        VITE_PUSHER_APP_KEY="${PUSHER_APP_KEY}"
+        VITE_PUSHER_APP_CLUSTER="${PUSHER_APP_CLUSTER}"
+</code>
+
+En el archivo .env debe actualizar los parámetros de configuración para la conexión con la base de datos.
+
+Se hacen las mgraciones correspondientes para la base de datos:
+ 
+<code>
+
+    php artisa migrate 
+
+</code>
+
+Se actualizan os seed de la base de datos:
+
+<code>
+
+    php artisa db:seed 
+
+</code>
+
+luego de esto a puede ejecutar la aplicación web con el siguiente comando: 
+ 
+ <code>
+
+    php artisa serve 
+
+</code>

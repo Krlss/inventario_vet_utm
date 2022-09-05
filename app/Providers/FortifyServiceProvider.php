@@ -59,9 +59,9 @@ class FortifyServiceProvider extends ServiceProvider
                 $response = Http::withHeaders([
                     'X-API-KEY' => '3ecbcb4e62a00d2bc58080218a4376f24a8079e1',
                     'accept' => 'application/json'
-                ])->post('https://app.utm.edu.ec/becas/api/publico/IniciaSesion', [
+                ])->withOptions(['verify'=> false])->post('https://app.utm.edu.ec/becas/api/publico/IniciaSesion', [
                     'usuario' => $request->email,
-                        'clave' => $request->password,
+                    'clave' => $request->password,
                 ]);
                 $output = $response->json();
             } catch (\Throwable $th) {
