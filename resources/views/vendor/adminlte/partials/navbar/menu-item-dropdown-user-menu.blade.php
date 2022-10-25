@@ -65,6 +65,7 @@
             {{ __('adminlte::menu.profile') }}
         </a>
         @endif
+        <span class="d-flex justify-content-center p-4">ROL: {{Auth::user()->roles[0]->name ?? 'Sin ROL'}}</span>
         <a class="btn btn-default btn-flat float-right @if(!$profile_url) btn-block @endif" style="display: flex; align-items: center; justify-content: center;" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
             {{ __('adminlte::adminlte.log_out') }}
             <x-icon icon="logout" width=20 height=20 viewBox="24 24" strokeWidth=0 fill="#c81919cc" />
