@@ -17,11 +17,11 @@ class ProductsIngress extends Controller
     public function __construct()
     {
         $this->middleware('can:inventory.ingress-products.index')->only('index');
-        $this->middleware('can:inventory.ingress-products.show')->only('create');
+        $this->middleware('can:inventory.ingress-products.show')->only('show');
         $this->middleware('can:inventory.ingress-products.create')->only('store');
         $this->middleware('can:inventory.ingress-products.edit')->only('edit');
-        $this->middleware('can:inventory.ingress-products.update')->only('update');
-        $this->middleware('can:inventory.ingress-products.destroy')->only('update');
+        $this->middleware('can:inventory.ingress-products.edit')->only('update');
+        $this->middleware('can:inventory.ingress-products.destroy')->only('destroy');
     }
 
     function index(Request $request)

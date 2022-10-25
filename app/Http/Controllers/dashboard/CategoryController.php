@@ -14,11 +14,11 @@ class CategoryController extends Controller
     public function __construct()
     {
         $this->middleware('can:inventory.categories.index')->only('index');
-        $this->middleware('can:inventory.categories.show')->only('create');
+        $this->middleware('can:inventory.categories.show')->only('show');
         $this->middleware('can:inventory.categories.create')->only('store');
         $this->middleware('can:inventory.categories.edit')->only('edit');
-        $this->middleware('can:inventory.categories.update')->only('update');
-        $this->middleware('can:inventory.categories.destroy')->only('update');
+        $this->middleware('can:inventory.categories.edit')->only('update');
+        $this->middleware('can:inventory.categories.destroy')->only('destroy');
     }
 
     public function index(Request $request)

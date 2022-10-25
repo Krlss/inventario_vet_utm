@@ -28,7 +28,7 @@
             <x-tabs routeTo='dashboard.products-egress.index' routeCurrent='products-egress*' title='Egreso Productos' />
             @endcan
             @can('inventory.products.create')
-            <x-tabs routeTo='dashboard.products.create' routeCurrent='products/*' title='Crear Producto' />
+            <x-tabs routeTo='dashboard.products.create' routeCurrent='products/create' title='Crear Producto' />
             @endcan
             @can('inventory.products.edit')
             <x-tabs routeTo='dashboard.products.edit' routeCurrent='products/*' title='Editar Producto' />

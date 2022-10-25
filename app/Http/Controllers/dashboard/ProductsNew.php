@@ -21,11 +21,11 @@ class ProductsNew extends Controller
     public function __construct()
     {
         $this->middleware('can:inventory.products.index')->only('index');
-        $this->middleware('can:inventory.products.show')->only('create');
+        $this->middleware('can:inventory.products.show')->only('show');
         $this->middleware('can:inventory.products.create')->only('store');
         $this->middleware('can:inventory.products.edit')->only('edit');
-        $this->middleware('can:inventory.products.update')->only('update');
-        $this->middleware('can:inventory.products.destroy')->only('update');
+        $this->middleware('can:inventory.products.edit')->only('update');
+        $this->middleware('can:inventory.products.destroy')->only('destroy');
     }
 
     public function index()

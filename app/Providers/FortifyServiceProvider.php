@@ -99,7 +99,7 @@ class FortifyServiceProvider extends ServiceProvider
                             $new_user->assignRole('Docente');
                             return $new_user;
                         }
-                        throw ValidationException::withMessages([__('Your account dont have access to the system')]);;
+                        throw ValidationException::withMessages([__('Your account dont have access to the system')]);
                     } else {
                         return null;
                     }

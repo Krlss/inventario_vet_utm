@@ -14,11 +14,11 @@ class UnitController extends Controller
     public function __construct()
     {
         $this->middleware('can:inventory.units.index')->only('index');
-        $this->middleware('can:inventory.units.show')->only('create');
+        $this->middleware('can:inventory.units.show')->only('show');
         $this->middleware('can:inventory.units.create')->only('store');
         $this->middleware('can:inventory.units.edit')->only('edit');
-        $this->middleware('can:inventory.units.update')->only('update');
-        $this->middleware('can:inventory.units.destroy')->only('update');
+        $this->middleware('can:inventory.units.edit')->only('update');
+        $this->middleware('can:inventory.units.destroy')->only('destroy');
     }
 
     public function index(Request $request)
